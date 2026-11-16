@@ -1,0 +1,329 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Protótipo</title>
+<style>:root{--bg-primary:#f5f5f7;--bg-secondary:#fff;--bg-tertiary:#e5e5e7;--border:#d1d1d6;--text-primary:#1d1d1f;--text-secondary:#86868b}body{margin:0;padding:32px;background:var(--bg-primary);color:var(--text-primary);font-family:system-ui,sans-serif}h2{margin:0 0 .5rem}.subtitle{color:var(--text-secondary);margin:0 0 1.5rem}#frame-content{margin:0 auto}</style></head><body><div id="frame-content">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,-25..0&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+
+<style>
+  #frame-content { max-width: 1380px; margin: 0 auto; }
+
+  /* ---------- controles fora da tela ---------- */
+  .np2-top { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; align-items: center; margin: 0 0 1rem; }
+  .seg { position: relative; display: inline-flex; background: var(--bg-tertiary); border-radius: 10px; padding: 3px; }
+  .seg button { position: relative; z-index: 1; display: flex; align-items: center; gap: 6px; border: 0; background: none; font: 500 .9rem/1 system-ui, sans-serif; color: var(--text-primary); padding: 8px 18px; cursor: pointer; width: 112px; justify-content: center; }
+  .seg-ind { position: absolute; top: 3px; bottom: 3px; left: 3px; width: 112px; border-radius: 8px; background: var(--bg-secondary); box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04); view-transition-name: seg-ind; }
+  .seg[data-value="dark"] .seg-ind { left: 115px; }
+  .acc { display: flex; align-items: center; gap: 10px; font: .85rem system-ui, sans-serif; color: var(--text-secondary); }
+  .acc button { width: 26px; height: 26px; border-radius: 50%; border: 0; background: var(--c); cursor: pointer; box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 3px transparent; transition: box-shadow .2s; }
+  .acc button.on { box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--c); }
+  .hint { font: .85rem system-ui, sans-serif; color: var(--text-secondary); }
+
+  .dev { background: #0b0b0c; padding: 14px; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.22); }
+  .dev-screen { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 6px; background: #000; }
+
+  /* ---------- tokens (inspirados no Apple HIG) ---------- */
+  .hu { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; overflow: hidden;
+        font-family: Inter, system-ui, sans-serif; font-optical-sizing: auto; -webkit-font-smoothing: antialiased;
+        background: var(--bg); color: var(--label); --b: .85; }
+  .hu * { box-sizing: border-box; }
+  .hu[data-theme="light"] { --bg:#F2F2F7; --surface:#FFFFFF; --label:#000000; --label-2:rgba(60,60,67,.6); --label-3:rgba(60,60,67,.3);
+        --sep:rgba(60,60,67,.16); --fill-3:rgba(118,118,128,.16); --material:rgba(255,255,255,.74); --shadow:0 1px 2px rgba(0,0,0,.03), 0 6px 20px rgba(0,0,0,.04); --accent:var(--a-l); }
+  .hu[data-theme="dark"]  { --bg:#000000; --surface:#1C1C1E; --label:#FFFFFF; --label-2:rgba(235,235,245,.6); --label-3:rgba(235,235,245,.3);
+        --sep:rgba(84,84,88,.55); --fill-3:rgba(118,118,128,.26); --material:rgba(28,28,30,.72); --shadow:none; --accent:var(--a-d); }
+  .hu[data-accent="orange"]   { --a-l:#F2620F; --a-d:#FF7A2E; }
+  .hu[data-accent="blue"]     { --a-l:#007AFF; --a-d:#0A84FF; }
+  .hu[data-accent="green"]    { --a-l:#248A3D; --a-d:#30D158; }
+  .hu[data-accent="graphite"] { --a-l:#3A3A3C; --a-d:#AEAEB2; }
+
+  .ms { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr; -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; user-select: none; }
+  .ms.f { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .hu :where(button) { border: 0; background: none; color: inherit; font: inherit; cursor: pointer; padding: 0; }
+
+  /* cantos contínuos (squircle) onde o navegador suporta */
+  @supports (corner-shape: superellipse(1.5)) { .sq { corner-shape: superellipse(1.5); } }
+
+  /* toque: encolhe e volta com mola */
+  .press { transition: transform .55s linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1); }
+  .press:active { transform: scale(.96); transition-duration: .12s; transition-timing-function: ease-out; }
+
+  .mat { background: var(--material); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: 0 2px 14px rgba(0,0,0,.08), 0 0 0 .5px var(--sep); }
+
+  /* ---------- mapa ---------- */
+  .map-wrap { position: absolute; left: 16px; top: 16px; bottom: 16px; width: 760px; border-radius: 30px; overflow: hidden; background: var(--surface); }
+  .mapgl { position: absolute; inset: 0; background: var(--surface); }
+  .hu[data-theme="light"] #map-d, .hu[data-theme="dark"] #map-l { opacity: 0; }
+  .hu .maplibregl-ctrl-attrib { font: 10px Inter, sans-serif; }
+  .hu .maplibregl-ctrl-attrib:not(:hover) .maplibregl-ctrl-attrib-inner { display: none; }
+  #map-d { filter: brightness(1.55) saturate(.85); }
+  .hu .maplibregl-ctrl-bottom-right { bottom: auto; top: 0; }
+  .puck { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; z-index: 500; }
+  .puck i { position: absolute; inset: 0; border-radius: 50%; background: #0A84FF; border: 3.5px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  .puck::before { content: ''; position: absolute; inset: -14px; border-radius: 50%; background: rgba(10,132,255,.22); animation: halo 2.4s ease-out infinite; }
+  @keyframes halo { 0% { transform: scale(.4); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+  .search { position: absolute; z-index: 600; left: 16px; top: 16px; width: 344px; height: 54px; border-radius: 27px; display: flex; align-items: center; gap: 12px; padding: 0 18px; font-size: 17px; color: var(--label-2); }
+  .search .ms { color: var(--label); }
+  .search .mic { margin-left: auto; }
+  .sugg { position: absolute; z-index: 600; left: 16px; bottom: 16px; width: 344px; border-radius: 24px; padding: 6px 0; }
+  .sugg .row { display: flex; align-items: center; gap: 14px; height: 66px; padding: 0 16px; position: relative; width: 100%; text-align: left; }
+  .sugg .row + .row::before { content: ''; position: absolute; left: 66px; right: 0; top: 0; height: .5px; background: var(--sep); }
+  .sugg .dot { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; flex-shrink: 0; }
+  .sugg .dot .ms { font-size: 21px; }
+  .sugg b { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+  .sugg small { display: block; font-size: 14px; color: var(--label-2); margin-top: 1px; }
+  .sugg .chev { margin-left: auto; color: var(--label-3); }
+  .recenter { position: absolute; z-index: 600; right: 16px; bottom: 16px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: var(--accent); }
+
+  /* ---------- coluna direita ---------- */
+  .side { position: absolute; left: 798px; right: 22px; top: 20px; bottom: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; }
+  .clock { font-size: 96px; font-weight: 300; letter-spacing: -.045em; line-height: .9; font-variant-numeric: tabular-nums; margin-left: -4px; }
+  .date { font-size: 17px; color: var(--label-2); margin-top: 10px; }
+  .st { display: flex; gap: 10px; color: var(--label); padding-top: 8px; }
+  .st .ms { font-size: 20px; }
+
+  .np { background: var(--surface); border-radius: 26px; padding: 18px 20px 14px; box-shadow: var(--shadow); cursor: pointer; }
+  .hu:not(.np-open) .np { view-transition-name: np-card; }
+  .np-row { display: flex; gap: 16px; align-items: center; }
+  .art { display: block; object-fit: cover; background: var(--fill-3); }
+  .mini-art { width: 80px; height: 80px; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .hu:not(.np-open) .mini-art { view-transition-name: np-art; }
+  .np-t { min-width: 0; flex: 1; }
+  .np-t b { display: block; font-size: 21px; font-weight: 600; letter-spacing: -.015em; }
+  .np-t span { display: block; font-size: 16px; color: var(--label-2); margin-top: 2px; }
+  .np-t em { display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 6px; }
+  .np-t em .ms { font-size: 16px; }
+  .bar { height: 6px; border-radius: 3px; background: var(--fill-3); margin-top: 16px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 37%; background: var(--label); border-radius: 3px; transition: width 1s linear; }
+  .times { display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; color: var(--label-2); margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .ctl { display: flex; justify-content: center; align-items: center; gap: 48px; margin-top: 2px; }
+  .ctl button { display: grid; place-items: center; width: 56px; height: 52px; border-radius: 14px; }
+  .ctl .ms { font-size: 36px; }
+  .ctl .pp .ms { font-size: 48px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { height: 100px; background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 500; }
+  .tile .ms { font-size: 28px; }
+
+  .pills { display: grid; gap: 10px; }
+  .pill { position: relative; height: 52px; border-radius: 26px; background: var(--fill-3); overflow: hidden; cursor: pointer; touch-action: none; --v: 50%; transition: transform .5s linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1); }
+  .pill.drag { transform: scaleY(1.08); }
+  .pill i { position: absolute; left: 0; top: 0; bottom: 0; width: var(--v); background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+  .pill .ms { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #fff; mix-blend-mode: difference; font-size: 24px; }
+
+  .dim { position: absolute; inset: 0; background: #000; opacity: calc((1 - var(--b)) * .7); pointer-events: none; z-index: 2000; }
+
+  /* ---------- tocando agora (tela cheia) ---------- */
+  .np-full { display: none; position: absolute; inset: 0; z-index: 1000; color: #fff; }
+  .hu.np-open .np-full { display: block; }
+  .np-bg { position: absolute; inset: 0; overflow: hidden; background: #1a1a1a; }
+  .hu.np-open .np-bg { view-transition-name: np-card; }
+  .np-bg::before { content: ''; position: absolute; inset: -20%; background: var(--art) center / cover; filter: blur(80px) saturate(1.6) brightness(.5); }
+  .close { position: absolute; left: 28px; top: 26px; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.14); }
+  .close .ms { font-size: 32px; }
+  .big-art { position: absolute; left: 112px; top: 150px; width: 420px; height: 420px; border-radius: 22px; box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+  .hu.np-open .big-art { view-transition-name: np-art; }
+  .np-info { position: absolute; left: 600px; right: 112px; top: 50%; transform: translateY(-50%); }
+  .np-src { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.6); }
+  .np-src .ms { font-size: 18px; }
+  .np-info h1 { font-size: 46px; font-weight: 700; letter-spacing: -.03em; margin: 10px 0 0; line-height: 1.05; }
+  .np-info p { font-size: 24px; color: rgba(255,255,255,.62); margin: 6px 0 0; }
+  .np-full .bar { height: 7px; margin-top: 40px; background: rgba(255,255,255,.22); }
+  .np-full .bar i { background: #fff; }
+  .np-full .times { color: rgba(255,255,255,.6); font-size: 14px; margin-top: 8px; }
+  .np-full .ctl { justify-content: space-between; padding: 0 30px; margin-top: 18px; }
+  .np-full .ctl button { width: 80px; height: 72px; }
+  .np-full .ctl .ms { font-size: 52px; }
+  .np-full .ctl .pp .ms { font-size: 72px; }
+  .np-full .pill { margin-top: 30px; height: 46px; background: rgba(255,255,255,.2); --label: #fff; }
+
+  /* ---------- transições (View Transitions + mola) ---------- */
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
+  ::view-transition-group(np-art), ::view-transition-group(np-card), ::view-transition-group(seg-ind) {
+    animation-duration: .62s;
+    animation-timing-function: linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1);
+  }
+  ::view-transition-old(np-card), ::view-transition-new(np-card) { height: 100%; animation-duration: .35s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hu *, .hu *::before { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<h2>C · Nórdico + Apple: protótipo clicável</h2>
+<p class="subtitle">Teste à vontade. Toque no card da música para abrir a tela cheia, arraste brilho e volume e troque Dia/Noite. As animações usam uma curva de mola parecida com a do iOS.</p>
+
+<div class="np2-top">
+  <div class="seg" id="seg" data-value="light">
+    <i class="seg-ind"></i>
+    <button data-v="light"><span class="ms">light_mode</span>Dia</button>
+    <button data-v="dark"><span class="ms">dark_mode</span>Noite</button>
+  </div>
+  <div class="acc" id="acc">
+    <span>Cor de destaque</span>
+    <button data-a="orange" class="on" style="--c:#F2620F" title="Laranja"></button>
+    <button data-a="blue" style="--c:#007AFF" title="Azul"></button>
+    <button data-a="green" style="--c:#30A14E" title="Verde"></button>
+    <button data-a="graphite" style="--c:#636366" title="Grafite"></button>
+  </div>
+</div>
+
+<div class="dev">
+  <div class="dev-screen" id="hu-screen">
+    <div class="hu" id="hu" data-theme="light" data-accent="orange">
+
+      <div class="map-wrap sq">
+        <div class="mapgl" id="map-l"></div><div class="mapgl" id="map-d"></div>
+        <div class="puck"><i></i></div>
+        <button class="search mat press"><span class="ms">search</span><span>Para onde?</span><span class="ms mic">mic</span></button>
+        <div class="sugg mat sq">
+          <button class="row press"><span class="dot"><span class="ms f">home</span></span><span><b>Casa</b><small>12 min · R. Augusta</small></span><span class="ms chev">chevron_right</span></button>
+          <button class="row press"><span class="dot"><span class="ms f">work</span></span><span><b>Trabalho</b><small>25 min · Av. Faria Lima</small></span><span class="ms chev">chevron_right</span></button>
+        </div>
+        <button class="recenter mat press"><span class="ms f">near_me</span></button>
+      </div>
+
+      <div class="side">
+        <header class="head">
+          <div><div class="clock" data-clock>14:32</div><div class="date" data-date>domingo, 15 de novembro · 27 °C</div></div>
+          <div class="st"><span class="ms">bluetooth</span><span class="ms">signal_cellular_alt</span><span class="ms">wifi</span></div>
+        </header>
+
+        <section class="np sq press" id="np-mini">
+          <div class="np-row">
+            <img class="art mini-art" src="https://picsum.photos/id/1015/400/400" alt="">
+            <div class="np-t"><b>Evidências</b><span>Chitãozinho &amp; Xororó</span><em><span class="ms">bluetooth</span>iPhone</em></div>
+          </div>
+          <div class="bar"><i data-prog></i></div>
+          <div class="times"><span data-cur>1:42</span><span data-rem>-2:56</span></div>
+          <div class="ctl">
+            <button class="press" data-act="prev"><span class="ms f">skip_previous</span></button>
+            <button class="press pp" data-act="pp"><span class="ms f" data-pp>pause</span></button>
+            <button class="press" data-act="next"><span class="ms f">skip_next</span></button>
+          </div>
+        </section>
+
+        <div class="tiles">
+          <button class="tile sq press"><span class="ms">call</span>Telefone</button>
+          <button class="tile sq press"><span class="ms">radio</span>Rádio</button>
+          <button class="tile sq press"><span class="ms">photo_camera</span>Câmera</button>
+          <button class="tile sq press"><span class="ms">apps</span>Apps</button>
+        </div>
+
+        <div class="pills">
+          <div class="pill" data-kind="bright" style="--v:85%"><i></i><span class="ms">light_mode</span></div>
+          <div class="pill" data-kind="vol" style="--v:45%"><i></i><span class="ms">volume_up</span></div>
+        </div>
+      </div>
+
+      <div class="np-full" style="--art:url('https://picsum.photos/id/1015/400/400')">
+        <div class="np-bg"></div>
+        <button class="close press" data-act="close" aria-label="Fechar"><span class="ms">keyboard_arrow_down</span></button>
+        <img class="art big-art" src="https://picsum.photos/id/1015/400/400" alt="">
+        <div class="np-info">
+          <div class="np-src"><span class="ms">bluetooth</span>iPhone · Bluetooth</div>
+          <h1>Evidências</h1>
+          <p>Chitãozinho &amp; Xororó</p>
+          <div class="bar"><i data-prog></i></div>
+          <div class="times"><span data-cur>1:42</span><span data-rem>-2:56</span></div>
+          <div class="ctl">
+            <button class="press" data-act="prev"><span class="ms f">skip_previous</span></button>
+            <button class="press pp" data-act="pp"><span class="ms f" data-pp>pause</span></button>
+            <button class="press" data-act="next"><span class="ms f">skip_next</span></button>
+          </div>
+          <div class="pill" data-kind="vol" style="--v:45%"><i></i><span class="ms">volume_up</span></div>
+        </div>
+      </div>
+
+      <div class="dim"></div>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:1.25rem">Mapa real (OpenStreetMap / OpenFreeMap) só para dar a sensação. No produto final ele vira o app de navegação que você usar.</p>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+  (function () {
+    var hu = document.getElementById('hu');
+    var screen = document.getElementById('hu-screen');
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SPRING = 'linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1)';
+    function vt(fn) { if (document.startViewTransition && !reduce) document.startViewTransition(fn); else fn(); }
+
+    function fit() { hu.style.transform = 'scale(' + (screen.clientWidth / 1280) + ')'; }
+    new ResizeObserver(fit).observe(screen); fit();
+
+    // relógio real
+    var clk = hu.querySelector('[data-clock]'), dt = hu.querySelector('[data-date]');
+    function tick() {
+      var d = new Date();
+      clk.textContent = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      dt.textContent = d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' · 27 °C';
+    }
+    tick(); setInterval(tick, 1000);
+
+    // dia / noite
+    var seg = document.getElementById('seg');
+    seg.querySelectorAll('button').forEach(function (b) {
+      b.onclick = function () { if (seg.dataset.value === b.dataset.v) return; vt(function () { hu.dataset.theme = b.dataset.v; seg.dataset.value = b.dataset.v; }); };
+    });
+
+    // cor de destaque
+    var acc = document.getElementById('acc');
+    acc.querySelectorAll('button').forEach(function (b) {
+      b.onclick = function () { vt(function () { hu.dataset.accent = b.dataset.a; acc.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); }); };
+    });
+
+    // player
+    var playing = true, pos = 102, dur = 278;
+    function fmt(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    function render() {
+      hu.querySelectorAll('[data-pp]').forEach(function (e) { e.textContent = playing ? 'pause' : 'play_arrow'; });
+      hu.querySelectorAll('[data-prog]').forEach(function (e) { e.style.width = (pos / dur * 100) + '%'; });
+      hu.querySelectorAll('[data-cur]').forEach(function (e) { e.textContent = fmt(pos); });
+      hu.querySelectorAll('[data-rem]').forEach(function (e) { e.textContent = '-' + fmt(dur - pos); });
+    }
+    render();
+    setInterval(function () { if (playing) { pos = (pos + 1) % dur; render(); } }, 1000);
+
+    hu.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]');
+      if (b) {
+        e.stopPropagation();
+        var a = b.dataset.act;
+        if (a === 'pp') {
+          playing = !playing; render();
+          if (!reduce) b.querySelector('.ms').animate([{ transform: 'scale(.7)', opacity: .4 }, { transform: 'scale(1)', opacity: 1 }], { duration: 550, easing: SPRING });
+        }
+        if (a === 'next' || a === 'prev') { pos = a === 'prev' ? 0 : 0; render(); }
+        if (a === 'close') vt(function () { hu.classList.remove('np-open'); });
+        return;
+      }
+      if (e.target.closest('#np-mini')) vt(function () { hu.classList.add('np-open'); });
+    });
+
+    // sliders estilo Central de Controle
+    hu.querySelectorAll('.pill').forEach(function (p) {
+      function set(e) {
+        var r = p.getBoundingClientRect();
+        var v = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        p.style.setProperty('--v', (v * 100) + '%');
+        if (p.dataset.kind === 'bright') hu.style.setProperty('--b', .35 + v * .65);
+        if (p.dataset.kind === 'vol') hu.querySelectorAll('.pill[data-kind="vol"]').forEach(function (o) { o.style.setProperty('--v', (v * 100) + '%'); });
+      }
+      p.addEventListener('pointerdown', function (e) { p.setPointerCapture(e.pointerId); p.classList.add('drag'); set(e); });
+      p.addEventListener('pointermove', function (e) { if (p.hasPointerCapture(e.pointerId)) set(e); });
+      p.addEventListener('pointerup', function () { p.classList.remove('drag'); });
+      p.addEventListener('pointercancel', function () { p.classList.remove('drag'); });
+    });
+
+    // mapa real vetorial (claro + escuro empilhados, troca pelo tema)
+    if (window.maplibregl) {
+      [['map-l', 'positron'], ['map-d', 'dark']].forEach(function (m) {
+        new maplibregl.Map({ container: m[0], style: 'https://tiles.openfreemap.org/styles/' + m[1], center: [-46.6558, -23.5614], zoom: 15.4, interactive: false, attributionControl: { compact: true } });
+      });
+    }
+  })();
+</script>
+</div></body></html>
