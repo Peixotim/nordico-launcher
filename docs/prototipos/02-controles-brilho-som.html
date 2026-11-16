@@ -1,0 +1,382 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Protótipo</title>
+<style>:root{--bg-primary:#f5f5f7;--bg-secondary:#fff;--bg-tertiary:#e5e5e7;--border:#d1d1d6;--text-primary:#1d1d1f;--text-secondary:#86868b}body{margin:0;padding:32px;background:var(--bg-primary);color:var(--text-primary);font-family:system-ui,sans-serif}h2{margin:0 0 .5rem}.subtitle{color:var(--text-secondary);margin:0 0 1.5rem}#frame-content{margin:0 auto}</style></head><body><div id="frame-content">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,-25..0&display=block" rel="stylesheet">
+
+<style>
+  #frame-content { max-width: 1500px; margin: 0 auto; }
+  .acc { display: flex; align-items: center; gap: 10px; font: .85rem system-ui, sans-serif; color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .acc button { width: 24px; height: 24px; border-radius: 50%; border: 0; background: var(--c); cursor: pointer; box-shadow: 0 0 0 2px var(--bg-primary); }
+  .acc button.on { box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--c); }
+
+  .vars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+  @media (max-width: 1100px) { .vars { grid-template-columns: 1fr; max-width: 520px; } }
+  .var-h { display: flex; align-items: baseline; gap: .5rem; margin-bottom: .6rem; font-family: system-ui, sans-serif; }
+  .var-h b { font-size: 1.05rem; }
+  .var-h span { font-size: .78rem; color: var(--text-secondary); }
+  .var-p { font: .85rem/1.45 system-ui, sans-serif; color: var(--text-secondary); margin-top: .7rem; }
+  .wheel { display: flex; align-items: center; gap: .5rem; margin-top: .7rem; font: .8rem system-ui, sans-serif; color: var(--text-secondary); }
+  .wheel button { border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); border-radius: 8px; padding: .35rem .8rem; font: 600 .8rem system-ui, sans-serif; cursor: pointer; }
+
+  .pv { position: relative; aspect-ratio: 504/720; border-radius: 18px; overflow: hidden; background: #0b0b0c; box-shadow: 0 18px 44px rgba(0,0,0,.2); }
+
+  /* ---------- tokens ---------- */
+  .th[data-theme="light"] { --bg:#F2F2F7; --surface:#FFFFFF; --label:#000; --label-2:rgba(60,60,67,.6); --label-3:rgba(60,60,67,.3);
+      --sep:rgba(60,60,67,.16); --fill-3:rgba(118,118,128,.14); --fill-2:rgba(118,118,128,.2); --material:rgba(255,255,255,.78); --shadow:0 1px 2px rgba(0,0,0,.03), 0 6px 20px rgba(0,0,0,.05); --seg-on:#FFFFFF; --accent:var(--a-l); }
+  .th[data-theme="dark"]  { --bg:#000; --surface:#1C1C1E; --label:#fff; --label-2:rgba(235,235,245,.6); --label-3:rgba(235,235,245,.3);
+      --sep:rgba(84,84,88,.55); --fill-3:rgba(118,118,128,.24); --fill-2:rgba(118,118,128,.32); --material:rgba(40,40,42,.78); --shadow:0 0 0 .5px rgba(255,255,255,.04); --seg-on:#48484A; --accent:var(--a-d); }
+  .th[data-accent="orange"]   { --a-l:#F2620F; --a-d:#FF7A2E; }
+  .th[data-accent="blue"]     { --a-l:#007AFF; --a-d:#0A84FF; }
+  .th[data-accent="green"]    { --a-l:#248A3D; --a-d:#30D158; }
+  .th[data-accent="graphite"] { --a-l:#3A3A3C; --a-d:#AEAEB2; }
+
+  .col { position: absolute; left: 0; top: 0; width: 504px; height: 720px; transform-origin: 0 0; padding: 20px 22px 16px 20px;
+         display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;
+         font-family: Inter, system-ui, sans-serif; font-optical-sizing: auto; -webkit-font-smoothing: antialiased;
+         background: var(--bg); color: var(--label); transition: background-color .45s ease, color .45s ease; }
+  .col * { box-sizing: border-box; }
+  .col :where(button) { border: 0; background: none; color: inherit; font: inherit; cursor: pointer; padding: 0; -webkit-tap-highlight-color: transparent; }
+  .ms { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; white-space: nowrap; font-feature-settings: 'liga'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; user-select: none; }
+  .ms.f { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  @supports (corner-shape: superellipse(1.5)) { .sq { corner-shape: superellipse(1.5); } }
+
+  .press { transition: transform .55s linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1), background-color .45s ease; }
+  .press:active { transform: scale(.94); transition-duration: .12s; transition-timing-function: ease-out; }
+  .card { background: var(--surface); box-shadow: var(--shadow); transition: background-color .45s ease, box-shadow .45s ease; }
+
+  /* base da coluna (igual ao protótipo aprovado) */
+  .head { display: flex; justify-content: space-between; align-items: flex-start; }
+  .clock { font-size: 96px; font-weight: 300; letter-spacing: -.045em; line-height: .9; font-variant-numeric: tabular-nums; margin-left: -4px; }
+  .date { font-size: 17px; color: var(--label-2); margin-top: 10px; }
+  .st { display: flex; gap: 10px; padding-top: 8px; }
+  .st .ms { font-size: 20px; }
+  .np { border-radius: 26px; padding: 18px 20px 12px; }
+  .np-row { display: flex; gap: 16px; align-items: center; }
+  .art { width: 80px; height: 80px; border-radius: 14px; object-fit: cover; background: var(--fill-3); box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .np-t b { display: block; font-size: 21px; font-weight: 600; letter-spacing: -.015em; }
+  .np-t span { display: block; font-size: 16px; color: var(--label-2); margin-top: 2px; }
+  .bar { height: 6px; border-radius: 3px; background: var(--fill-3); margin-top: 16px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 38%; background: var(--label); }
+  .ctl { display: flex; justify-content: center; gap: 48px; margin-top: 8px; }
+  .ctl .ms { font-size: 36px; }
+  .ctl .pp .ms { font-size: 46px; }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { height: 100px; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 500; }
+  .tile .ms { font-size: 28px; }
+  .tiles.tall .tile { height: 124px; }
+
+  /* números grandes */
+  .num { font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: -.02em; transition: color .3s; }
+  .muted .num { color: var(--label-3); }
+
+  /* ===== A · painel da montadora ===== */
+  .a-box { display: grid; gap: 10px; }
+  .a-vol { border-radius: 24px; padding: 10px; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; gap: 8px; }
+  .a-btn { width: 60px; height: 60px; border-radius: 18px; background: var(--fill-3); display: grid; place-items: center; touch-action: none; }
+  .a-btn .ms { font-size: 30px; }
+  .a-mid { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 2px; }
+  .a-top { display: flex; align-items: center; gap: 8px; }
+  .a-top .ms { font-size: 22px; color: var(--label-2); }
+  .a-top .num { font-size: 30px; line-height: 1; min-width: 40px; }
+  .meter { display: flex; gap: 2.5px; height: 8px; }
+  .meter i { width: 4px; border-radius: 1.5px; background: var(--fill-2); transition: background-color .15s; }
+  .meter i.on { background: var(--label); }
+  .muted .meter i.on { background: var(--label-3); }
+  .a-row { display: grid; grid-template-columns: 1fr 60px; gap: 10px; }
+  .segc { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); height: 60px; border-radius: 20px; padding: 4px; background: var(--fill-3); }
+  .segc .ind { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 3); border-radius: 16px; background: var(--seg-on); box-shadow: 0 1px 4px rgba(0,0,0,.12);
+               transition: transform .6s linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1), background-color .45s; }
+  .th[data-mode="dia"] .segc .ind { transform: translateX(100%); }
+  .th[data-mode="noite"] .segc .ind { transform: translateX(200%); }
+  .segc button { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 15px; font-weight: 500; color: var(--label-2); transition: color .3s; }
+  .segc button .ms { font-size: 20px; }
+  .segc button.on { color: var(--label); }
+  .offb { border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: 600; color: var(--label-2); height: 60px; }
+  .offb .ms { font-size: 22px; color: var(--label); }
+
+  /* ===== B · discreto ===== */
+  .b-dock { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; }
+  .b-vol { height: 64px; border-radius: 22px; display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; }
+  .b-vol .chev { height: 64px; display: grid; place-items: center; color: var(--label-2); touch-action: none; }
+  .b-vol .chev .ms { font-size: 30px; }
+  .b-mid { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .b-mid .ms { font-size: 24px; }
+  .b-mid .num { font-size: 24px; min-width: 30px; }
+  .b-chip { height: 64px; border-radius: 22px; padding: 0 18px; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
+  .b-chip .ms { font-size: 22px; }
+  .b-off { width: 64px; padding: 0; justify-content: center; }
+
+  /* ===== C · botão giratório ===== */
+  .c-box { display: grid; grid-template-columns: 196px 1fr; gap: 12px; }
+  .c-dial { position: relative; height: 196px; border-radius: 28px; touch-action: none; cursor: grab; }
+  .c-dial svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .c-dial .tk { stroke: var(--fill-2); stroke-width: 3.4; stroke-linecap: round; transition: stroke .15s; }
+  .c-dial .tk.on { stroke: var(--label); }
+  .muted .c-dial .tk.on { stroke: var(--label-3); }
+  .c-dial .knob { fill: var(--accent); transition: fill .3s; }
+  .c-center { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+  .c-center .num { font-size: 38px; line-height: 1; }
+  .c-center .ms { font-size: 18px; color: var(--label-2); margin-top: 4px; }
+  .c-list { border-radius: 28px; padding: 6px; display: grid; }
+  .c-list button { display: flex; align-items: center; gap: 12px; padding: 0 14px; height: 46px; border-radius: 16px; font-size: 15px; font-weight: 500; color: var(--label-2); text-align: left; position: relative; }
+  .c-list button .ms { font-size: 22px; }
+  .c-list button.on { color: var(--label); background: var(--fill-3); }
+  .c-list button.on::after { content: ''; position: absolute; right: 16px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .c-list hr { border: 0; height: .5px; background: var(--sep); margin: 2px 14px; }
+
+  /* ===== aviso do volante (HUD) ===== */
+  .hud { position: absolute; left: 50%; top: 18px; z-index: 50; display: flex; align-items: center; gap: 14px; height: 60px; padding: 0 22px 0 18px; border-radius: 30px;
+         background: var(--material); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+         box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 0 0 .5px var(--sep);
+         opacity: 0; transform: translate(-50%, -16px) scale(.94); pointer-events: none;
+         transition: opacity .22s ease, transform .6s linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1); }
+  .hud.show { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  .hud .ms { font-size: 24px; }
+  .hud .meter { height: 8px; }
+  .hud .meter i { width: 5px; }
+  .hud .num { font-size: 22px; min-width: 28px; text-align: right; }
+
+  /* ===== tela desligada ===== */
+  .off { position: absolute; inset: 0; z-index: 60; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+         opacity: 0; pointer-events: none; transition: opacity .5s ease; color: rgba(255,255,255,.22); font-family: Inter, sans-serif; }
+  .off.on { opacity: 1; pointer-events: auto; cursor: pointer; }
+  .off b { font-size: 64px; font-weight: 300; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+  .off span { font-size: 14px; }
+
+  @media (prefers-reduced-motion: reduce) { .col *, .hud, .off { transition: none !important; } }
+</style>
+
+<h2>Brilho e som com cara de montadora: 3 caminhos</h2>
+<p class="subtitle">Coluna direita da tela inicial, com o resto igual ao protótipo aprovado. Tudo funciona: toque, segure o − ou o +, arraste o botão giratório, toque no número para deixar mudo e use o botão Tela. Os botões "Volante" embaixo de cada opção simulam o comando de volume do volante.</p>
+
+<div class="acc" id="acc">
+  <span>Cor de destaque (ainda em aberto)</span>
+  <button data-a="orange" class="on" style="--c:#F2620F" title="Laranja"></button>
+  <button data-a="blue" style="--c:#007AFF" title="Azul"></button>
+  <button data-a="green" style="--c:#30A14E" title="Verde"></button>
+  <button data-a="graphite" style="--c:#636366" title="Grafite"></button>
+</div>
+
+<div class="th vars" id="th" data-theme="light" data-mode="auto" data-accent="orange">
+
+  <!-- ================= A ================= -->
+  <section>
+    <div class="var-h"><b>A · Painel da montadora</b><span>inspirado VW / Honda / Toyota</span></div>
+    <div class="pv"><div class="col" data-col>
+      <header class="head"><div><div class="clock" data-clock>14:32</div><div class="date" data-date></div></div><div class="st"><span class="ms">bluetooth</span><span class="ms">signal_cellular_alt</span><span class="ms">wifi</span></div></header>
+      <section class="card np sq"><div class="np-row"><img class="art" src="https://picsum.photos/id/1015/300/300" alt=""><div class="np-t"><b>Evidências</b><span>Chitãozinho &amp; Xororó</span></div></div><div class="bar"><i></i></div><div class="ctl"><button class="press"><span class="ms f">skip_previous</span></button><button class="press pp"><span class="ms f">pause</span></button><button class="press"><span class="ms f">skip_next</span></button></div></section>
+      <div class="tiles"><button class="tile card sq press"><span class="ms">call</span>Telefone</button><button class="tile card sq press"><span class="ms">radio</span>Rádio</button><button class="tile card sq press"><span class="ms">photo_camera</span>Câmera</button><button class="tile card sq press"><span class="ms">apps</span>Apps</button></div>
+
+      <div class="a-box" data-volbox>
+        <div class="a-vol card sq">
+          <button class="a-btn sq press" data-step="-1" aria-label="Diminuir volume"><span class="ms">remove</span></button>
+          <button class="a-mid" data-mute aria-label="Mudo">
+            <span class="a-top"><span class="ms f" data-volicon>volume_up</span><span class="num" data-volnum>18</span></span>
+            <span class="meter" data-meter="40"></span>
+          </button>
+          <button class="a-btn sq press" data-step="1" aria-label="Aumentar volume"><span class="ms">add</span></button>
+        </div>
+        <div class="a-row">
+          <div class="segc sq">
+            <i class="ind sq"></i>
+            <button data-mode-opt="auto"><span class="ms">brightness_auto</span>Auto</button>
+            <button data-mode-opt="dia"><span class="ms">light_mode</span>Dia</button>
+            <button data-mode-opt="noite"><span class="ms">dark_mode</span>Noite</button>
+          </div>
+          <button class="offb card sq press" data-off><span class="ms">power_settings_new</span>Tela</button>
+        </div>
+      </div>
+
+      <div class="hud" data-hud><span class="ms f" data-volicon>volume_up</span><span class="meter" data-meter="20"></span><span class="num" data-volnum>18</span></div>
+      <div class="off" data-offscreen><b data-clock>14:32</b><span>Toque para ligar a tela</span></div>
+    </div></div>
+    <div class="wheel"><span>Volante:</span><button data-wheel="-1">Vol −</button><button data-wheel="1">Vol +</button></div>
+    <p class="var-p">Volume com −/+ grandes, número e régua segmentada, como nas centrais VW e Honda. Abaixo ficam o modo da tela (Auto pelo farol, Dia, Noite) e o botão para desligar a tela, que toda montadora tem.</p>
+  </section>
+
+  <!-- ================= B ================= -->
+  <section>
+    <div class="var-h"><b>B · Discreto</b><span>inspirado Polestar / Tesla</span></div>
+    <div class="pv"><div class="col" data-col>
+      <header class="head"><div><div class="clock" data-clock>14:32</div><div class="date" data-date></div></div><div class="st"><span class="ms">bluetooth</span><span class="ms">signal_cellular_alt</span><span class="ms">wifi</span></div></header>
+      <section class="card np sq"><div class="np-row"><img class="art" src="https://picsum.photos/id/1015/300/300" alt=""><div class="np-t"><b>Evidências</b><span>Chitãozinho &amp; Xororó</span></div></div><div class="bar"><i></i></div><div class="ctl"><button class="press"><span class="ms f">skip_previous</span></button><button class="press pp"><span class="ms f">pause</span></button><button class="press"><span class="ms f">skip_next</span></button></div></section>
+      <div class="tiles tall"><button class="tile card sq press"><span class="ms">call</span>Telefone</button><button class="tile card sq press"><span class="ms">radio</span>Rádio</button><button class="tile card sq press"><span class="ms">photo_camera</span>Câmera</button><button class="tile card sq press"><span class="ms">apps</span>Apps</button></div>
+
+      <div class="b-dock" data-volbox>
+        <div class="b-vol card sq">
+          <button class="chev press" data-step="-1" aria-label="Diminuir volume"><span class="ms">chevron_left</span></button>
+          <button class="b-mid" data-mute aria-label="Mudo"><span class="ms f" data-volicon>volume_up</span><span class="num" data-volnum>18</span></button>
+          <button class="chev press" data-step="1" aria-label="Aumentar volume"><span class="ms">chevron_right</span></button>
+        </div>
+        <button class="b-chip card sq press" data-mode-cycle><span class="ms" data-modeicon>brightness_auto</span><span data-modelabel>Auto</span></button>
+        <button class="b-chip b-off card sq press" data-off aria-label="Desligar tela"><span class="ms">power_settings_new</span></button>
+      </div>
+
+      <div class="hud" data-hud><span class="ms f" data-volicon>volume_up</span><span class="meter" data-meter="20"></span><span class="num" data-volnum>18</span></div>
+      <div class="off" data-offscreen><b data-clock>14:32</b><span>Toque para ligar a tela</span></div>
+    </div></div>
+    <div class="wheel"><span>Volante:</span><button data-wheel="-1">Vol −</button><button data-wheel="1">Vol +</button></div>
+    <p class="var-p">Os controles viram uma faixa fina no rodapé e o espaço que sobra vai para atalhos maiores. O volume no dia a dia fica no volante (com o aviso no topo), e a tela só mostra o número.</p>
+  </section>
+
+  <!-- ================= C ================= -->
+  <section>
+    <div class="var-h"><b>C · Botão giratório</b><span>inspirado Mercedes / Porsche</span></div>
+    <div class="pv"><div class="col" data-col>
+      <header class="head"><div><div class="clock" data-clock>14:32</div><div class="date" data-date></div></div><div class="st"><span class="ms">bluetooth</span><span class="ms">signal_cellular_alt</span><span class="ms">wifi</span></div></header>
+      <section class="card np sq"><div class="np-row"><img class="art" src="https://picsum.photos/id/1015/300/300" alt=""><div class="np-t"><b>Evidências</b><span>Chitãozinho &amp; Xororó</span></div></div><div class="bar"><i></i></div><div class="ctl"><button class="press"><span class="ms f">skip_previous</span></button><button class="press pp"><span class="ms f">pause</span></button><button class="press"><span class="ms f">skip_next</span></button></div></section>
+      <div class="tiles"><button class="tile card sq press"><span class="ms">call</span>Telefone</button><button class="tile card sq press"><span class="ms">radio</span>Rádio</button><button class="tile card sq press"><span class="ms">photo_camera</span>Câmera</button><button class="tile card sq press"><span class="ms">apps</span>Apps</button></div>
+
+      <div class="c-box" data-volbox>
+        <div class="c-dial card sq" data-dial>
+          <svg viewBox="0 0 196 196" data-ticks></svg>
+          <button class="c-center" data-mute aria-label="Mudo"><span class="num" data-volnum>18</span><span class="ms f" data-volicon>volume_up</span></button>
+        </div>
+        <div class="c-list card sq">
+          <button data-mode-opt="auto"><span class="ms">brightness_auto</span>Auto (farol)</button>
+          <button data-mode-opt="dia"><span class="ms">light_mode</span>Dia</button>
+          <button data-mode-opt="noite"><span class="ms">dark_mode</span>Noite</button>
+          <hr>
+          <button data-off><span class="ms">power_settings_new</span>Desligar tela</button>
+        </div>
+      </div>
+
+      <div class="hud" data-hud><span class="ms f" data-volicon>volume_up</span><span class="meter" data-meter="20"></span><span class="num" data-volnum>18</span></div>
+      <div class="off" data-offscreen><b data-clock>14:32</b><span>Toque para ligar a tela</span></div>
+    </div></div>
+    <div class="wheel"><span>Volante:</span><button data-wheel="-1">Vol −</button><button data-wheel="1">Vol +</button></div>
+    <p class="var-p">Um dial com marcações, como o botão de volume físico que o Civic tinha. Você arrasta ao redor para mudar o volume e toca no centro para deixar mudo. Ao lado fica a lista do modo da tela, com indicador.</p>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var th = document.getElementById('th');
+    var MAX = 40, vol = 18, muted = false, mode = 'auto';
+    var SPRING = 'linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1)';
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+    // escala de cada prévia
+    function fit() { $$('.pv').forEach(function (p) { p.firstElementChild.style.transform = 'scale(' + (p.clientWidth / 504) + ')'; }); }
+    new ResizeObserver(fit).observe(th); fit();
+
+    // réguas segmentadas
+    $$('[data-meter]').forEach(function (m) { var n = +m.dataset.meter; for (var i = 0; i < n; i++) m.appendChild(document.createElement('i')); });
+
+    // marcações do dial (-135° a +135°)
+    var NS = 'http://www.w3.org/2000/svg';
+    $$('[data-ticks]').forEach(function (svg) {
+      for (var i = 0; i < MAX; i++) {
+        var a = (-135 + (i + .5) * 270 / MAX) * Math.PI / 180;
+        var l = document.createElementNS(NS, 'line');
+        l.setAttribute('x1', 98 + Math.sin(a) * 72); l.setAttribute('y1', 98 - Math.cos(a) * 72);
+        l.setAttribute('x2', 98 + Math.sin(a) * 84); l.setAttribute('y2', 98 - Math.cos(a) * 84);
+        l.setAttribute('class', 'tk'); svg.appendChild(l);
+      }
+      var k = document.createElementNS(NS, 'circle'); k.setAttribute('r', 5); k.setAttribute('class', 'knob'); svg.appendChild(k);
+    });
+
+    var MODES = { auto: ['brightness_auto', 'Auto'], dia: ['light_mode', 'Dia'], noite: ['dark_mode', 'Noite'] };
+    function themeFor(m) { if (m === 'dia') return 'light'; if (m === 'noite') return 'dark'; var h = new Date().getHours(); return (h >= 18 || h < 6) ? 'dark' : 'light'; }
+
+    function render() {
+      var icon = (muted || vol === 0) ? 'volume_off' : (vol < 14 ? 'volume_down' : 'volume_up');
+      $$('[data-volicon]').forEach(function (e) { e.textContent = icon; });
+      $$('[data-volnum]').forEach(function (e) { e.textContent = vol; });
+      $$('[data-volbox], [data-hud]').forEach(function (e) { e.classList.toggle('muted', muted); });
+      $$('[data-meter]').forEach(function (m) {
+        var n = +m.dataset.meter, lit = Math.round(vol / MAX * n);
+        $$('i', m).forEach(function (s, i) { s.classList.toggle('on', i < lit); });
+      });
+      $$('[data-ticks]').forEach(function (svg) {
+        $$('.tk', svg).forEach(function (t, i) { t.classList.toggle('on', i < vol); });
+        var a = (-135 + vol / MAX * 270) * Math.PI / 180, k = svg.querySelector('.knob');
+        k.setAttribute('cx', 98 + Math.sin(a) * 60); k.setAttribute('cy', 98 - Math.cos(a) * 60);
+      });
+      th.dataset.mode = mode;
+      th.dataset.theme = themeFor(mode);
+      $$('[data-mode-opt]').forEach(function (b) { b.classList.toggle('on', b.dataset.modeOpt === mode); });
+      $$('[data-modeicon]').forEach(function (e) { e.textContent = MODES[mode][0]; });
+      $$('[data-modelabel]').forEach(function (e) { e.textContent = MODES[mode][1]; });
+    }
+
+    function setVol(v) { v = Math.max(0, Math.min(MAX, v)); if (v !== vol) { vol = v; if (vol > 0) muted = false; render(); } }
+    function step(d) { if (muted && d > 0) muted = false; setVol(vol + d); render(); }
+    function pop(el) { if (!reduce && el) el.animate([{ transform: 'scale(.8)' }, { transform: 'scale(1)' }], { duration: 520, easing: SPRING }); }
+
+    // relógio
+    function tick() {
+      var d = new Date();
+      var t = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      $$('[data-clock]').forEach(function (e) { e.textContent = t; });
+      $$('[data-date]').forEach(function (e) { e.textContent = d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' · 27 °C'; });
+    }
+    tick(); setInterval(tick, 1000);
+
+    // −/+ com repetição ao segurar
+    $$('[data-step]').forEach(function (b) {
+      var t, iv;
+      function stop() { clearTimeout(t); clearInterval(iv); }
+      b.addEventListener('pointerdown', function (e) {
+        var d = +b.dataset.step; step(d);
+        t = setTimeout(function () { iv = setInterval(function () { step(d); }, 85); }, 380);
+      });
+      ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { b.addEventListener(ev, stop); });
+    });
+
+    // mudo
+    $$('[data-mute]').forEach(function (b) {
+      b.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+      b.addEventListener('click', function () { muted = !muted; render(); pop(b.querySelector('[data-volicon]')); });
+    });
+
+    // modo da tela
+    function setMode(m) { mode = m; render(); }
+    $$('[data-mode-opt]').forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.modeOpt); }); });
+    $$('[data-mode-cycle]').forEach(function (b) {
+      b.addEventListener('click', function () { setMode(mode === 'auto' ? 'dia' : mode === 'dia' ? 'noite' : 'auto'); pop(b.querySelector('.ms')); });
+    });
+
+    // desligar tela
+    $$('[data-off]').forEach(function (b) {
+      b.addEventListener('click', function () { b.closest('[data-col]').querySelector('[data-offscreen]').classList.add('on'); });
+    });
+    $$('[data-offscreen]').forEach(function (o) { o.addEventListener('click', function () { o.classList.remove('on'); }); });
+
+    // dial: arrastar ao redor
+    $$('[data-dial]').forEach(function (d) {
+      function fromPointer(e) {
+        var r = d.getBoundingClientRect();
+        var a = Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180 / Math.PI;
+        if (Math.abs(a) > 150) return;
+        a = Math.max(-135, Math.min(135, a));
+        setVol(Math.round((a + 135) / 270 * MAX));
+      }
+      d.addEventListener('pointerdown', function (e) { d.setPointerCapture(e.pointerId); d.style.cursor = 'grabbing'; fromPointer(e); });
+      d.addEventListener('pointermove', function (e) { if (d.hasPointerCapture(e.pointerId)) fromPointer(e); });
+      d.addEventListener('pointerup', function () { d.style.cursor = ''; });
+    });
+
+    // comando do volante → aviso no topo
+    $$('[data-wheel]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        step(+b.dataset.wheel);
+        var hud = b.closest('section').querySelector('[data-hud]');
+        hud.classList.add('show');
+        clearTimeout(hud._t); hud._t = setTimeout(function () { hud.classList.remove('show'); }, 1800);
+      });
+    });
+
+    // cor de destaque
+    var acc = document.getElementById('acc');
+    $$('button', acc).forEach(function (b) {
+      b.addEventListener('click', function () { th.dataset.accent = b.dataset.a; $$('button', acc).forEach(function (x) { x.classList.toggle('on', x === b); }); });
+    });
+
+    render();
+  })();
+</script>
+</div></body></html>
