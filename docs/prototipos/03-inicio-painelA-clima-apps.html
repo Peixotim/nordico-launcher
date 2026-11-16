@@ -1,0 +1,605 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Protótipo</title>
+<style>:root{--bg-primary:#f5f5f7;--bg-secondary:#fff;--bg-tertiary:#e5e5e7;--border:#d1d1d6;--text-primary:#1d1d1f;--text-secondary:#86868b}body{margin:0;padding:32px;background:var(--bg-primary);color:var(--text-primary);font-family:system-ui,sans-serif}h2{margin:0 0 .5rem}.subtitle{color:var(--text-secondary);margin:0 0 1.5rem}#frame-content{margin:0 auto}</style></head><body><div id="frame-content">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,-25..0&display=block" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+
+<style>
+  :root { --spring: linear(0, 0.0261, 0.0913, 0.1794, 0.2786, 0.3803, 0.4788, 0.5703, 0.6526, 0.7248, 0.7866, 0.8384, 0.881, 0.9154, 0.9426, 0.9636, 0.9794, 0.9911, 0.9993, 1.0048, 1.0083, 1.0102, 1.011, 1.011, 1.0105, 1.0096, 1.0085, 1.0074, 1.0063, 1.0052, 1.0043, 1.0034, 1.0027, 1.002, 1.0015, 1.0011, 1); }
+  #frame-content { max-width: 1380px; margin: 0 auto; }
+
+  /* ---------- fora da tela ---------- */
+  .sim { display: grid; gap: .6rem; margin-top: 1rem; font: .85rem system-ui, sans-serif; color: var(--text-secondary); }
+  .sim div { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+  .sim b { color: var(--text-primary); font-weight: 600; min-width: 150px; }
+  .sim button { border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); border-radius: 8px; padding: .35rem .7rem; font: 600 .8rem system-ui, sans-serif; cursor: pointer; }
+  .acc { display: flex; align-items: center; gap: 10px; }
+  .acc button { width: 22px; height: 22px; padding: 0; border-radius: 50%; border: 0; background: var(--c); box-shadow: 0 0 0 2px var(--bg-primary); }
+  .acc button.on { box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--c); }
+  .dev { background: #0b0b0c; padding: 14px; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.22); }
+  .dev-screen { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 6px; background: #000; }
+
+  /* ---------- tokens ---------- */
+  .hu { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; overflow: hidden;
+        font-family: Inter, system-ui, sans-serif; font-optical-sizing: auto; -webkit-font-smoothing: antialiased;
+        background: var(--bg); color: var(--label); transition: background-color .45s ease, color .45s ease; }
+  .hu * { box-sizing: border-box; }
+  .hu[data-theme="light"] { --bg:#F2F2F7; --surface:#FFFFFF; --label:#000; --label-2:rgba(60,60,67,.6); --label-3:rgba(60,60,67,.3); --sep:rgba(60,60,67,.16);
+        --fill-3:rgba(118,118,128,.14); --fill-2:rgba(118,118,128,.22); --material:rgba(255,255,255,.78); --seg-on:#fff; --shadow:0 1px 2px rgba(0,0,0,.03), 0 6px 20px rgba(0,0,0,.05); --accent:var(--a-l); }
+  .hu[data-theme="dark"]  { --bg:#000; --surface:#1C1C1E; --label:#fff; --label-2:rgba(235,235,245,.6); --label-3:rgba(235,235,245,.3); --sep:rgba(84,84,88,.55);
+        --fill-3:rgba(118,118,128,.24); --fill-2:rgba(118,118,128,.34); --material:rgba(40,40,42,.78); --seg-on:#48484A; --shadow:0 0 0 .5px rgba(255,255,255,.04); --accent:var(--a-d); }
+  .hu[data-accent="orange"]   { --a-l:#F2620F; --a-d:#FF7A2E; }
+  .hu[data-accent="blue"]     { --a-l:#007AFF; --a-d:#0A84FF; }
+  .hu[data-accent="green"]    { --a-l:#248A3D; --a-d:#30D158; }
+  .hu[data-accent="graphite"] { --a-l:#3A3A3C; --a-d:#AEAEB2; }
+  .hu :where(button) { border: 0; background: none; color: inherit; font: inherit; cursor: pointer; padding: 0; -webkit-tap-highlight-color: transparent; }
+  .ms { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; white-space: nowrap; font-feature-settings: 'liga'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; user-select: none; }
+  .ms.f { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  @supports (corner-shape: superellipse(1.5)) { .sq { corner-shape: superellipse(1.5); } }
+  .press { transition: transform .55s var(--spring), background-color .45s ease, color .3s ease; }
+  .press:active { transform: scale(.94); transition-duration: .12s; transition-timing-function: ease-out; }
+  .card { background: var(--surface); box-shadow: var(--shadow); transition: background-color .45s ease, box-shadow .45s ease; }
+  .mat { background: var(--material); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%); box-shadow: 0 2px 14px rgba(0,0,0,.08), 0 0 0 .5px var(--sep); }
+  .num { font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: -.02em; transition: color .3s; }
+  .badge { font-size: 12px; font-weight: 700; letter-spacing: .06em; padding: 4px 8px; border-radius: 7px; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+
+  /* ---------- mapa ---------- */
+  .map-wrap { position: absolute; left: 16px; top: 16px; bottom: 16px; width: 760px; border-radius: 30px; overflow: hidden; background: var(--surface); }
+  .mapgl { position: absolute; inset: 0; transition: opacity .45s ease; }
+  .hu[data-theme="light"] #map-d, .hu[data-theme="dark"] #map-l { opacity: 0; }
+  #map-d { filter: brightness(1.55) saturate(.85); }
+  .hu .maplibregl-ctrl-attrib { font: 10px Inter, sans-serif; }
+  .hu .maplibregl-ctrl-attrib:not(:hover) .maplibregl-ctrl-attrib-inner { display: none; }
+  .hu .maplibregl-ctrl-bottom-right { bottom: auto; top: 0; }
+  .puck { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; z-index: 5; }
+  .puck i { position: absolute; inset: 0; border-radius: 50%; background: #0A84FF; border: 3.5px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  .puck::before { content: ''; position: absolute; inset: -14px; border-radius: 50%; background: rgba(10,132,255,.22); animation: halo 2.4s ease-out infinite; }
+  @keyframes halo { 0% { transform: scale(.4); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+  .search-map { position: absolute; z-index: 6; left: 16px; top: 16px; width: 344px; height: 54px; border-radius: 27px; display: flex; align-items: center; gap: 12px; padding: 0 18px; font-size: 17px; color: var(--label-2); }
+  .search-map .ms { color: var(--label); }
+  .search-map .mic { margin-left: auto; }
+  .sugg { position: absolute; z-index: 6; left: 16px; bottom: 16px; width: 344px; border-radius: 24px; padding: 6px 0; }
+  .sugg .row { display: flex; align-items: center; gap: 14px; height: 66px; padding: 0 16px; position: relative; width: 100%; text-align: left; }
+  .sugg .row + .row::before { content: ''; position: absolute; left: 66px; right: 0; top: 0; height: .5px; background: var(--sep); }
+  .sugg .dot { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; flex-shrink: 0; }
+  .sugg .dot .ms { font-size: 21px; }
+  .sugg b { display: block; font-size: 17px; font-weight: 600; }
+  .sugg small { display: block; font-size: 14px; color: var(--label-2); margin-top: 1px; }
+  .sugg .chev { margin-left: auto; color: var(--label-3); }
+  .recenter { position: absolute; z-index: 6; right: 16px; bottom: 16px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: var(--accent); }
+
+  /* ---------- coluna direita ---------- */
+  .side { position: absolute; left: 798px; right: 22px; top: 20px; bottom: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; }
+  .clock { font-size: 88px; font-weight: 300; letter-spacing: -.045em; line-height: .9; font-variant-numeric: tabular-nums; margin-left: -4px; }
+  .date { font-size: 17px; color: var(--label-2); margin-top: 10px; }
+  .st { display: flex; gap: 10px; padding-top: 8px; }
+  .st .ms { font-size: 20px; }
+  .clima-chip { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 11px; margin-top: 12px; border-radius: 18px; background: var(--fill-3); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .clima-chip .ms { font-size: 20px; color: var(--accent); }
+  .clima-chip .chev { color: var(--label-3); font-size: 18px; margin-left: -2px; }
+  .hu[data-page="home"] .clima-chip { view-transition-name: sheet-clima; }
+
+  .np { border-radius: 26px; padding: 18px 20px 12px; cursor: pointer; }
+  .hu:not(.np-open)[data-page="home"] .np { view-transition-name: np-card; }
+  .np-row { display: flex; gap: 16px; align-items: center; }
+  .art { display: block; object-fit: cover; background: var(--fill-3); }
+  .mini-art { width: 80px; height: 80px; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .hu:not(.np-open)[data-page="home"] .mini-art { view-transition-name: np-art; }
+  .np-t b { display: block; font-size: 21px; font-weight: 600; letter-spacing: -.015em; }
+  .np-t span { display: block; font-size: 16px; color: var(--label-2); margin-top: 2px; }
+  .bar { height: 6px; border-radius: 3px; background: var(--fill-3); margin-top: 16px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 37%; background: var(--label); transition: width 1s linear; }
+  .ctl { display: flex; justify-content: center; align-items: center; gap: 48px; margin-top: 8px; }
+  .ctl button { display: grid; place-items: center; width: 56px; height: 50px; border-radius: 14px; }
+  .ctl .ms { font-size: 36px; }
+  .ctl .pp .ms { font-size: 46px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { height: 96px; border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 500; }
+  .tile .ms { font-size: 28px; }
+  .hu[data-page="home"] .tile-apps { view-transition-name: sheet-apps; }
+
+  /* painel A */
+  .a-box { display: grid; gap: 10px; }
+  .a-vol { border-radius: 24px; padding: 9px; display: grid; grid-template-columns: 58px 1fr 58px; align-items: center; gap: 8px; }
+  .a-btn { width: 58px; height: 58px; border-radius: 18px; background: var(--fill-3); display: grid; place-items: center; touch-action: none; }
+  .a-btn .ms { font-size: 30px; }
+  .a-mid { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .a-top { display: flex; align-items: center; gap: 8px; }
+  .a-top .ms { font-size: 22px; color: var(--label-2); }
+  .a-top .num { font-size: 28px; line-height: 1; min-width: 38px; }
+  .meter { display: flex; gap: 2.5px; height: 8px; }
+  .meter i { width: 4px; border-radius: 1.5px; background: var(--fill-2); transition: background-color .15s; }
+  .meter i.on { background: var(--label); }
+  .muted .num { color: var(--label-3); }
+  .muted .meter i.on { background: var(--label-3); }
+  .a-row { display: grid; grid-template-columns: 1fr 58px; gap: 10px; }
+  .segc { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); height: 58px; border-radius: 20px; padding: 4px; background: var(--fill-3); }
+  .segc .ind { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 3); border-radius: 16px; background: var(--seg-on); box-shadow: 0 1px 4px rgba(0,0,0,.12); transition: transform .6s var(--spring), background-color .45s; }
+  .hu[data-mode="dia"] .segc .ind { transform: translateX(100%); }
+  .hu[data-mode="noite"] .segc .ind { transform: translateX(200%); }
+  .segc button { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 15px; font-weight: 500; color: var(--label-2); transition: color .3s; }
+  .segc button .ms { font-size: 20px; }
+  .segc button.on { color: var(--label); }
+  .offb { border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: 600; color: var(--label-2); height: 58px; }
+  .offb .ms { font-size: 22px; color: var(--label); }
+
+  /* ---------- avisos (HUD) ---------- */
+  .hud { position: absolute; left: 50%; top: 18px; z-index: 1500; display: flex; align-items: center; gap: 14px; height: 60px; padding: 0 22px 0 18px; border-radius: 30px;
+         background: var(--material); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+         box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 0 0 .5px var(--sep); color: var(--label);
+         opacity: 0; transform: translate(-50%, -16px) scale(.94); pointer-events: none; transition: opacity .22s ease, transform .6s var(--spring); }
+  .hud.show { opacity: 1; transform: translate(-50%, 0) scale(1); pointer-events: auto; }
+  .hud .meter i { width: 5px; }
+  .hud .num { font-size: 22px; min-width: 28px; text-align: right; }
+  .hud-ac { height: 72px; border-radius: 36px; padding: 0 24px 0 22px; gap: 16px; cursor: pointer; }
+  .hud-ac .ms { font-size: 26px; }
+  .hud-ac .t { font-size: 32px; font-weight: 600; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .hud-ac .t small { font-size: 18px; color: var(--label-2); font-weight: 500; margin-left: 1px; }
+  .hud-ac .dv { width: .5px; height: 32px; background: var(--sep); }
+  .minibars { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+  .minibars i { width: 5px; border-radius: 1.5px; background: var(--fill-2); }
+  .minibars i.on { background: var(--label); }
+
+  /* ---------- páginas ---------- */
+  .page { position: absolute; inset: 0; z-index: 900; background: var(--bg); display: none; overflow: hidden; transition: background-color .45s ease; }
+  .hu[data-page="apps"] .page.apps, .hu[data-page="clima"] .page.clima { display: block; }
+  .hu[data-page="apps"] .page.apps { view-transition-name: sheet-apps; }
+  .hu[data-page="clima"] .page.clima { view-transition-name: sheet-clima; }
+  .pg-top { height: 96px; display: flex; align-items: center; gap: 16px; padding: 0 28px; }
+  .back { width: 48px; height: 48px; border-radius: 50%; background: var(--fill-3); display: grid; place-items: center; flex-shrink: 0; }
+  .back .ms { font-size: 30px; }
+  .pg-top h1 { font-size: 34px; font-weight: 700; letter-spacing: -.025em; margin: 0; }
+  .ro { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--label-2); }
+  .ro .ms { font-size: 18px; }
+
+  /* clima */
+  .cl-grid { position: absolute; top: 96px; left: 28px; right: 28px; bottom: 28px; display: grid; grid-template-columns: 560px 1fr 1fr; grid-template-rows: 1fr auto auto; gap: 16px;
+             grid-template-areas: "t f e" "t d d" "t s s"; }
+  .lbl { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--label-2); }
+  .lbl .ms { font-size: 20px; }
+  .cl-temp { grid-area: t; border-radius: 30px; padding: 28px 32px; display: flex; flex-direction: column; }
+  .cl-big { font-size: 176px; font-weight: 200; letter-spacing: -.06em; line-height: 1; margin-top: auto; font-variant-numeric: tabular-nums; }
+  .cl-big sup { font-size: 44px; font-weight: 300; letter-spacing: 0; vertical-align: top; position: relative; top: 24px; margin-left: 8px; color: var(--label-2); }
+  .cl-line { display: flex; gap: 10px; align-items: center; margin-top: 10px; font-size: 17px; color: var(--label-2); }
+  .tscale { display: flex; gap: 4px; height: 26px; margin-top: 40px; }
+  .tscale i { flex: 1; border-radius: 4px; background: var(--fill-2); transition: background-color .25s; }
+  .tscale[data-tone="cool"] i.on { background: #0A84FF; }
+  .tscale[data-tone="mid"]  i.on { background: var(--label); }
+  .tscale[data-tone="warm"] i.on { background: #FF9F0A; }
+  .tscale-l { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; color: var(--label-3); margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .cl-fan, .cl-ext { border-radius: 26px; padding: 22px 24px; display: flex; flex-direction: column; }
+  .cl-fan { grid-area: f; } .cl-ext { grid-area: e; }
+  .spin { animation: spin var(--spd, 1s) linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .fanbars { display: flex; align-items: flex-end; gap: 8px; height: 66px; margin-top: auto; }
+  .fanbars i { width: 24px; border-radius: 6px; background: var(--fill-2); transition: background-color .2s; }
+  .fanbars i.on { background: var(--label); }
+  .sub { font-size: 14px; color: var(--label-2); margin-top: 12px; }
+  .ext { font-size: 76px; font-weight: 300; letter-spacing: -.04em; line-height: 1; margin-top: auto; font-variant-numeric: tabular-nums; }
+  .cl-dir { grid-area: d; border-radius: 26px; padding: 20px 22px 16px; }
+  .dirs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+  .dirs > span, .chips > span { background: var(--fill-3); color: var(--label-2); transition: background-color .3s, color .3s; }
+  .dirs > span { height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 15px; font-weight: 500; }
+  .dirs > span.on, .chips > span.on { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); font-weight: 600; }
+  .cl-st { grid-area: s; border-radius: 26px; padding: 12px; }
+  .chips { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .chips > span { height: 86px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 600; }
+  .chips > span .ms { font-size: 26px; }
+
+  /* apps */
+  .search { margin-left: auto; width: 340px; height: 48px; border-radius: 24px; background: var(--fill-3); display: flex; align-items: center; gap: 10px; padding: 0 16px; color: var(--label-2); }
+  .search input { border: 0; background: none; outline: none; font: inherit; font-size: 17px; color: var(--label); flex: 1; min-width: 0; }
+  .search input::placeholder { color: var(--label-2); }
+  .edit { font-size: 17px; font-weight: 600; color: var(--accent); min-width: 92px; text-align: right; }
+  .apps-body { position: absolute; top: 96px; left: 0; right: 0; bottom: 0; overflow: auto; padding: 0 28px 28px; scrollbar-width: none; }
+  .sec { font-size: 15px; font-weight: 600; color: var(--label-2); margin: 6px 8px 8px; }
+  .grid { display: grid; grid-template-columns: repeat(8, 1fr); row-gap: 10px; margin-bottom: 18px; }
+  .app { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; padding: 8px 0 4px; }
+  .ico { width: 88px; height: 88px; border-radius: 24px; display: grid; place-items: center; background: var(--surface); box-shadow: var(--shadow); color: var(--label); transition: background-color .45s, opacity .3s; }
+  .ico .ms { font-size: 40px; }
+  .ico.brand { background: var(--c); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+  .nm { font-size: 14px; font-weight: 500; max-width: 130px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rm { position: absolute; top: 0; left: calc(50% - 54px); width: 28px; height: 28px; border-radius: 50%; background: rgba(120,120,128,.92); color: #fff; display: grid; place-items: center; transform: scale(0); transition: transform .45s var(--spring); }
+  .rm .ms { font-size: 20px; }
+  .hu.editing .rm { transform: scale(1); }
+  .hu.editing .app .ico { animation: wig .34s ease-in-out infinite; animation-delay: var(--d); }
+  @keyframes wig { 0%, 100% { rotate: -1.4deg; } 50% { rotate: 1.4deg; } }
+  .is-hidden .ico { opacity: .45; }
+
+  /* ---------- tocando agora ---------- */
+  .np-full { display: none; position: absolute; inset: 0; z-index: 1000; color: #fff; }
+  .hu.np-open .np-full { display: block; }
+  .np-bg { position: absolute; inset: 0; overflow: hidden; background: #1a1a1a; }
+  .hu.np-open .np-bg { view-transition-name: np-card; }
+  .np-bg::before { content: ''; position: absolute; inset: -20%; background: var(--art) center / cover; filter: blur(80px) saturate(1.6) brightness(.5); }
+  .close { position: absolute; left: 28px; top: 26px; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.14); }
+  .close .ms { font-size: 32px; }
+  .big-art { position: absolute; left: 112px; top: 150px; width: 420px; height: 420px; border-radius: 22px; box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+  .hu.np-open .big-art { view-transition-name: np-art; }
+  .np-info { position: absolute; left: 600px; right: 112px; top: 50%; transform: translateY(-50%); }
+  .np-src { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.6); }
+  .np-info h1 { font-size: 46px; font-weight: 700; letter-spacing: -.03em; margin: 10px 0 0; line-height: 1.05; }
+  .np-info p { font-size: 24px; color: rgba(255,255,255,.62); margin: 6px 0 0; }
+  .np-full .bar { height: 7px; margin-top: 40px; background: rgba(255,255,255,.22); }
+  .np-full .bar i { background: #fff; }
+  .np-full .ctl { justify-content: space-between; padding: 0 30px; margin-top: 26px; }
+  .np-full .ctl button { width: 80px; height: 72px; }
+  .np-full .ctl .ms { font-size: 52px; }
+  .np-full .ctl .pp .ms { font-size: 72px; }
+
+  /* ---------- tela desligada ---------- */
+  .off { position: absolute; inset: 0; z-index: 2500; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+         opacity: 0; pointer-events: none; transition: opacity .5s ease; color: rgba(255,255,255,.22); }
+  .off.on { opacity: 1; pointer-events: auto; cursor: pointer; }
+  .off b { font-size: 96px; font-weight: 300; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+
+  /* ---------- transições ---------- */
+  ::view-transition-group(*) { animation-duration: .58s; animation-timing-function: var(--spring); }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; }
+  ::view-transition-old(np-card), ::view-transition-new(np-card),
+  ::view-transition-old(sheet-apps), ::view-transition-new(sheet-apps),
+  ::view-transition-old(sheet-clima), ::view-transition-new(sheet-clima) { height: 100%; width: 100%; object-fit: cover; animation-duration: .32s; }
+
+  @media (prefers-reduced-motion: reduce) { .hu *, .hu *::before { transition: none !important; animation: none !important; } }
+</style>
+
+<h2>Protótipo v3: painel A, Clima e Apps</h2>
+<p class="subtitle">Para testar no Clima: toque no chip do ar (abaixo da data) ou use o "Painel do ar" logo abaixo da tela, que simula os botões do seu Civic. Fora da tela Clima, cada botão mostra um aviso no topo; tocar no aviso abre a tela. Para testar Apps: toque em Apps, segure um ícone ou toque em Editar para ocultar apps, e use a busca. O modo Dia/Noite fica no painel A, dentro da tela.</p>
+
+<div class="dev">
+  <div class="dev-screen" id="hu-screen">
+    <div class="hu" id="hu" data-theme="light" data-mode="auto" data-accent="orange" data-page="home">
+
+      <!-- ================= HOME ================= -->
+      <div class="map-wrap sq">
+        <div class="mapgl" id="map-l"></div><div class="mapgl" id="map-d"></div>
+        <div class="puck"><i></i></div>
+        <button class="search-map mat press"><span class="ms">search</span><span>Para onde?</span><span class="ms mic">mic</span></button>
+        <div class="sugg mat sq">
+          <button class="row press"><span class="dot"><span class="ms f">home</span></span><span><b>Casa</b><small>12 min · R. Augusta</small></span><span class="ms chev">chevron_right</span></button>
+          <button class="row press"><span class="dot"><span class="ms f">work</span></span><span><b>Trabalho</b><small>25 min · Av. Faria Lima</small></span><span class="ms chev">chevron_right</span></button>
+        </div>
+        <button class="recenter mat press"><span class="ms f">near_me</span></button>
+      </div>
+
+      <div class="side">
+        <header class="head">
+          <div>
+            <div class="clock" data-clock>14:32</div>
+            <div class="date" data-date>domingo, 15 de novembro · 27 °C</div>
+            <button class="clima-chip press" data-go="clima"><span class="ms f" data-ac-icon>ac_unit</span><span data-ac-short>22,5° · Auto</span><span class="ms chev">chevron_right</span></button>
+          </div>
+          <div class="st"><span class="ms">bluetooth</span><span class="ms">signal_cellular_alt</span><span class="ms">wifi</span></div>
+        </header>
+
+        <section class="np card sq" id="np-mini">
+          <div class="np-row"><img class="art mini-art" src="https://picsum.photos/id/1015/400/400" alt=""><div class="np-t"><b>Evidências</b><span>Chitãozinho &amp; Xororó</span></div></div>
+          <div class="bar"><i data-prog></i></div>
+          <div class="ctl">
+            <button class="press" data-act="prev"><span class="ms f">skip_previous</span></button>
+            <button class="press pp" data-act="pp"><span class="ms f" data-pp>pause</span></button>
+            <button class="press" data-act="next"><span class="ms f">skip_next</span></button>
+          </div>
+        </section>
+
+        <div class="tiles">
+          <button class="tile card sq press"><span class="ms">call</span>Telefone</button>
+          <button class="tile card sq press"><span class="ms">radio</span>Rádio</button>
+          <button class="tile card sq press"><span class="ms">photo_camera</span>Câmera</button>
+          <button class="tile tile-apps card sq press" data-go="apps"><span class="ms">apps</span>Apps</button>
+        </div>
+
+        <div class="a-box" data-volbox>
+          <div class="a-vol card sq">
+            <button class="a-btn sq press" data-step="-1" aria-label="Diminuir volume"><span class="ms">remove</span></button>
+            <button class="a-mid" data-mute aria-label="Mudo"><span class="a-top"><span class="ms f" data-volicon>volume_up</span><span class="num" data-volnum>18</span></span><span class="meter" data-meter="40"></span></button>
+            <button class="a-btn sq press" data-step="1" aria-label="Aumentar volume"><span class="ms">add</span></button>
+          </div>
+          <div class="a-row">
+            <div class="segc sq">
+              <i class="ind sq"></i>
+              <button data-mode-opt="auto"><span class="ms">brightness_auto</span>Auto</button>
+              <button data-mode-opt="dia"><span class="ms">light_mode</span>Dia</button>
+              <button data-mode-opt="noite"><span class="ms">dark_mode</span>Noite</button>
+            </div>
+            <button class="offb card sq press" data-off><span class="ms">power_settings_new</span>Tela</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= CLIMA ================= -->
+      <section class="page clima">
+        <header class="pg-top">
+          <button class="back press" data-go="home" aria-label="Voltar"><span class="ms">chevron_left</span></button>
+          <h1>Clima</h1>
+          <span class="ro"><span class="ms">info</span>Somente leitura · o ajuste continua nos botões do painel</span>
+        </header>
+        <div class="cl-grid">
+          <section class="cl-temp card sq">
+            <div class="lbl"><span class="ms">thermostat</span>Temperatura definida</div>
+            <div class="cl-big"><span data-temp>22,5</span><sup>°C</sup></div>
+            <div class="cl-line"><span class="badge" data-auto-badge>AUTO</span><span data-ac-state>A/C ligado</span></div>
+            <div class="tscale" data-tscale></div>
+            <div class="tscale-l"><span>18°</span><span>25°</span><span>32°</span></div>
+          </section>
+          <section class="cl-fan card sq">
+            <div class="lbl"><span class="ms spin" data-fanicon>mode_fan</span>Ventilação</div>
+            <div class="fanbars" data-fanbars></div>
+            <div class="sub" data-fantext>Automática · 3 de 7</div>
+          </section>
+          <section class="cl-ext card sq">
+            <div class="lbl"><span class="ms">device_thermostat</span>Externa</div>
+            <div class="ext">27°</div>
+            <div class="sub">Sensor do carro</div>
+          </section>
+          <section class="cl-dir card sq">
+            <div class="lbl"><span class="ms">air</span>Direção do ar</div>
+            <div class="dirs" data-dirs><span>Rosto</span><span>Rosto e pés</span><span>Pés</span><span>Pés e para-brisa</span></div>
+          </section>
+          <section class="cl-st card sq">
+            <div class="chips" data-chips>
+              <span data-k="auto"><span class="ms">hdr_auto</span>AUTO</span>
+              <span data-k="ac"><span class="ms">ac_unit</span>A/C</span>
+              <span data-k="recirc"><span class="ms">sync</span>Recircular</span>
+              <span data-k="defF"><span class="ms">windshield_defrost_front</span>Desemb. frontal</span>
+              <span data-k="defR"><span class="ms">windshield_defrost_rear</span>Desemb. traseiro</span>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ================= APPS ================= -->
+      <section class="page apps">
+        <header class="pg-top">
+          <button class="back press" data-go="home" aria-label="Voltar"><span class="ms">chevron_left</span></button>
+          <h1>Apps</h1>
+          <label class="search"><span class="ms">search</span><input data-q placeholder="Buscar" autocomplete="off"></label>
+          <button class="edit" data-edit>Editar</button>
+        </header>
+        <div class="apps-body" data-appsbody>
+          <h3 class="sec" data-sec="mine">Seus apps</h3><div class="grid" data-grid="mine"></div>
+          <h3 class="sec" data-sec="car">Do carro</h3><div class="grid" data-grid="car"></div>
+          <h3 class="sec" data-sec="hidden">Ocultos</h3><div class="grid" data-grid="hidden"></div>
+        </div>
+      </section>
+
+      <!-- ================= TOCANDO AGORA ================= -->
+      <div class="np-full" style="--art:url('https://picsum.photos/id/1015/400/400')">
+        <div class="np-bg"></div>
+        <button class="close press" data-act="close" aria-label="Fechar"><span class="ms">keyboard_arrow_down</span></button>
+        <img class="art big-art" src="https://picsum.photos/id/1015/400/400" alt="">
+        <div class="np-info">
+          <div class="np-src"><span class="ms">bluetooth</span>iPhone · Bluetooth</div>
+          <h1>Evidências</h1>
+          <p>Chitãozinho &amp; Xororó</p>
+          <div class="bar"><i data-prog></i></div>
+          <div class="ctl">
+            <button class="press" data-act="prev"><span class="ms f">skip_previous</span></button>
+            <button class="press pp" data-act="pp"><span class="ms f" data-pp>pause</span></button>
+            <button class="press" data-act="next"><span class="ms f">skip_next</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= AVISOS ================= -->
+      <div class="hud" data-hud-vol><span class="ms f" data-volicon>volume_up</span><span class="meter" data-meter="20"></span><span class="num" data-volnum>18</span></div>
+      <div class="hud hud-ac" data-hud-ac>
+        <span class="ms f" data-ac-icon style="color:var(--accent)">ac_unit</span>
+        <span class="t"><span data-temp>22,5</span><small>°C</small></span>
+        <i class="dv"></i>
+        <span class="ms">mode_fan</span><span class="minibars" data-minibars></span>
+        <i class="dv"></i>
+        <span class="badge" data-auto-badge>AUTO</span>
+      </div>
+      <div class="off" data-offscreen><b data-clock>14:32</b><span>Toque para ligar a tela</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="sim">
+  <div><b>Painel do ar (simulação)</b>
+    <button data-car="temp-">Temp −</button><button data-car="temp+">Temp +</button>
+    <button data-car="fan-">Vent −</button><button data-car="fan+">Vent +</button>
+    <button data-car="auto">AUTO</button><button data-car="ac">A/C</button><button data-car="dir">Direção</button>
+    <button data-car="recirc">Recircular</button><button data-car="defF">Desemb. frontal</button><button data-car="defR">Desemb. traseiro</button>
+  </div>
+  <div><b>Volante</b><button data-wheel="-1">Vol −</button><button data-wheel="1">Vol +</button></div>
+  <div class="acc" id="acc"><b>Cor de destaque</b>
+    <button data-a="orange" class="on" style="--c:#F2620F" title="Laranja"></button>
+    <button data-a="blue" style="--c:#007AFF" title="Azul"></button>
+    <button data-a="green" style="--c:#30A14E" title="Verde"></button>
+    <button data-a="graphite" style="--c:#636366" title="Grafite"></button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+  (function () {
+    var hu = document.getElementById('hu'), screen = document.getElementById('hu-screen');
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SPRING = getComputedStyle(document.documentElement).getPropertyValue('--spring').trim();
+    function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+    function vt(fn) { if (document.startViewTransition && !reduce) document.startViewTransition(fn); else fn(); }
+    function pop(el) { if (!reduce && el) el.animate([{ transform: 'scale(.8)' }, { transform: 'scale(1)' }], { duration: 520, easing: SPRING }); }
+    function fit() { hu.style.transform = 'scale(' + (screen.clientWidth / 1280) + ')'; }
+    new ResizeObserver(fit).observe(screen); fit();
+
+    var S = { vol: 18, muted: false, mode: 'auto', playing: true, pos: 102, dur: 278,
+              temp: 22.5, fan: 3, auto: true, ac: true, dir: 1, recirc: false, defF: false, defR: false,
+              edit: false, q: '', hidden: {} };
+
+    // ---------- relógio ----------
+    function tick() {
+      var d = new Date(), t = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      $$('[data-clock]').forEach(function (e) { e.textContent = t; });
+      $$('[data-date]').forEach(function (e) { e.textContent = d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }) + ' · 27 °C'; });
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ---------- navegação entre telas ----------
+    function go(p) { if (hu.dataset.page === p) return; vt(function () { hu.dataset.page = p; if (p !== 'apps' && S.edit) { S.edit = false; renderApps(); } }); }
+    $$('[data-go]').forEach(function (b) { b.addEventListener('click', function (e) { e.stopPropagation(); go(b.dataset.go); }); });
+
+    // ---------- volume (painel A + volante) ----------
+    $$('[data-meter]').forEach(function (m) { for (var i = 0; i < +m.dataset.meter; i++) m.appendChild(document.createElement('i')); });
+    function renderVol() {
+      var icon = (S.muted || S.vol === 0) ? 'volume_off' : (S.vol < 14 ? 'volume_down' : 'volume_up');
+      $$('[data-volicon]').forEach(function (e) { e.textContent = icon; });
+      $$('[data-volnum]').forEach(function (e) { e.textContent = S.vol; });
+      $$('[data-volbox], [data-hud-vol]').forEach(function (e) { e.classList.toggle('muted', S.muted); });
+      $$('[data-meter]').forEach(function (m) { var lit = Math.round(S.vol / 40 * +m.dataset.meter); $$('i', m).forEach(function (s, i) { s.classList.toggle('on', i < lit); }); });
+    }
+    function step(d) { if (S.muted && d > 0) S.muted = false; S.vol = Math.max(0, Math.min(40, S.vol + d)); renderVol(); }
+    $$('[data-step]').forEach(function (b) {
+      var t, iv; function stop() { clearTimeout(t); clearInterval(iv); }
+      b.addEventListener('pointerdown', function () { var d = +b.dataset.step; step(d); t = setTimeout(function () { iv = setInterval(function () { step(d); }, 85); }, 380); });
+      ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { b.addEventListener(ev, stop); });
+    });
+    $$('[data-mute]').forEach(function (b) { b.addEventListener('click', function () { S.muted = !S.muted; renderVol(); pop(b.querySelector('[data-volicon]')); }); });
+    function showHud(el, ms) { el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(function () { el.classList.remove('show'); }, ms); }
+    $$('[data-wheel]').forEach(function (b) { b.addEventListener('click', function () { step(+b.dataset.wheel); showHud(hu.querySelector('[data-hud-vol]'), 1800); }); });
+
+    // ---------- modo da tela ----------
+    function themeFor(m) { if (m === 'dia') return 'light'; if (m === 'noite') return 'dark'; var h = new Date().getHours(); return (h >= 18 || h < 6) ? 'dark' : 'light'; }
+    function renderMode() { hu.dataset.mode = S.mode; hu.dataset.theme = themeFor(S.mode); $$('[data-mode-opt]').forEach(function (b) { b.classList.toggle('on', b.dataset.modeOpt === S.mode); }); }
+    $$('[data-mode-opt]').forEach(function (b) { b.addEventListener('click', function () { S.mode = b.dataset.modeOpt; renderMode(); }); });
+    $$('[data-off]').forEach(function (b) { b.addEventListener('click', function () { hu.querySelector('[data-offscreen]').classList.add('on'); }); });
+    hu.querySelector('[data-offscreen]').addEventListener('click', function () { this.classList.remove('on'); });
+
+    // ---------- mídia ----------
+    function fmt(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    function renderMedia() {
+      $$('[data-pp]').forEach(function (e) { e.textContent = S.playing ? 'pause' : 'play_arrow'; });
+      $$('[data-prog]').forEach(function (e) { e.style.width = (S.pos / S.dur * 100) + '%'; });
+    }
+    setInterval(function () { if (S.playing) { S.pos = (S.pos + 1) % S.dur; renderMedia(); } }, 1000);
+    hu.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]');
+      if (b) {
+        e.stopPropagation();
+        var a = b.dataset.act;
+        if (a === 'pp') { S.playing = !S.playing; renderMedia(); pop(b.querySelector('.ms')); }
+        if (a === 'prev' || a === 'next') { S.pos = 0; renderMedia(); }
+        if (a === 'close') vt(function () { hu.classList.remove('np-open'); });
+        return;
+      }
+      if (e.target.closest('#np-mini')) vt(function () { hu.classList.add('np-open'); });
+    });
+
+    // ---------- clima ----------
+    var DIRS = ['Rosto', 'Rosto e pés', 'Pés', 'Pés e para-brisa'];
+    var tscale = hu.querySelector('[data-tscale]');
+    for (var i = 0; i < 29; i++) tscale.appendChild(document.createElement('i'));
+    [hu.querySelector('[data-fanbars]'), hu.querySelector('[data-minibars]')].forEach(function (box, k) {
+      for (var i = 0; i < 7; i++) { var b = document.createElement('i'); b.style.height = k ? (6 + i * 2.3) + 'px' : (16 + i * 8) + 'px'; box.appendChild(b); }
+    });
+    function fmtT(t) { return t.toFixed(1).replace('.', ','); }
+    function renderClima() {
+      $$('[data-temp]').forEach(function (e) { e.textContent = fmtT(S.temp); });
+      tscale.dataset.tone = S.temp < 21 ? 'cool' : S.temp > 25 ? 'warm' : 'mid';
+      $$('i', tscale).forEach(function (s, i) { s.classList.toggle('on', 18 + i * .5 <= S.temp); });
+      $$('[data-fanbars] i, [data-minibars] i').forEach(function (b) { b.classList.toggle('on', $$('i', b.parentNode).indexOf(b) < S.fan); });
+      hu.querySelector('[data-fanicon]').style.setProperty('--spd', (1.5 - S.fan * .17) + 's');
+      hu.querySelector('[data-fantext]').textContent = (S.auto ? 'Automática · ' : 'Manual · ') + S.fan + ' de 7';
+      $$('span', hu.querySelector('[data-dirs]')).forEach(function (s, i) { s.classList.toggle('on', i === S.dir); });
+      $$('[data-chips] [data-k]').forEach(function (c) { c.classList.toggle('on', !!S[c.dataset.k]); });
+      $$('[data-auto-badge]').forEach(function (b) { b.style.display = S.auto ? '' : 'none'; });
+      hu.querySelector('[data-ac-state]').textContent = S.ac ? 'A/C ligado' : 'A/C desligado';
+      $$('[data-ac-icon]').forEach(function (e) { e.textContent = S.ac ? 'ac_unit' : 'mode_fan'; });
+      hu.querySelector('[data-ac-short]').textContent = fmtT(S.temp) + '° · ' + (S.auto ? 'Auto' : 'Manual');
+    }
+    $$('[data-car]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.car;
+        if (k === 'temp-') S.temp = Math.max(18, S.temp - .5);
+        if (k === 'temp+') S.temp = Math.min(32, S.temp + .5);
+        if (k === 'fan-') { S.fan = Math.max(1, S.fan - 1); S.auto = false; }
+        if (k === 'fan+') { S.fan = Math.min(7, S.fan + 1); S.auto = false; }
+        if (k === 'auto') { S.auto = true; S.fan = 3; S.dir = 1; S.ac = true; }
+        if (k === 'ac') S.ac = !S.ac;
+        if (k === 'dir') { S.dir = (S.dir + 1) % 4; S.auto = false; }
+        if (k === 'recirc' || k === 'defF' || k === 'defR') S[k] = !S[k];
+        renderClima();
+        if (hu.dataset.page !== 'clima') showHud(hu.querySelector('[data-hud-ac]'), 2600);
+      });
+    });
+    hu.querySelector('[data-hud-ac]').addEventListener('click', function () { this.classList.remove('show'); go('clima'); });
+
+    // ---------- apps ----------
+    var APPS = [
+      { n: 'Spotify', g: 'music_note', c: '#1DB954', k: 'mine' },
+      { n: 'Waze', g: 'navigation', c: '#2BB3E8', k: 'mine' },
+      { n: 'Google Maps', g: 'map', c: '#4285F4', k: 'mine' },
+      { n: 'YouTube Music', g: 'play_circle', c: '#E62117', k: 'mine' },
+      { n: 'CarPlay / AA', g: 'cast', c: '#3A3A3C', k: 'mine' },
+      { n: 'iGO', g: 'explore', c: '#00897B', k: 'mine' },
+      { n: 'YouTube', g: 'smart_display', c: '#E62117', k: 'mine' },
+      { n: 'Play Store', g: 'shop', c: '#01875F', k: 'mine' },
+      { n: 'Rádio', g: 'radio', k: 'car' },
+      { n: 'Música', g: 'library_music', k: 'car' },
+      { n: 'Vídeos', g: 'movie', k: 'car' },
+      { n: 'Bluetooth', g: 'bluetooth', k: 'car' },
+      { n: 'Telefone', g: 'call', k: 'car' },
+      { n: 'Equalizador', g: 'equalizer', k: 'car' },
+      { n: 'Câmera 360', g: '360', k: 'car' },
+      { n: 'Clima', g: 'ac_unit', k: 'car', open: 'clima' },
+      { n: 'AUX / AV', g: 'input', k: 'car' },
+      { n: 'Voz', g: 'mic', k: 'car' },
+      { n: 'Arquivos', g: 'folder', k: 'car' },
+      { n: 'Galeria', g: 'photo_library', k: 'car' },
+      { n: 'Carro', g: 'directions_car', k: 'car' },
+      { n: 'Ajustes', g: 'settings', k: 'car' }
+    ];
+    var grids = {}; $$('[data-grid]').forEach(function (g) { grids[g.dataset.grid] = g; });
+    function norm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+    function appEl(a, i, hid) {
+      var b = document.createElement('button');
+      b.className = 'app press' + (hid ? ' is-hidden' : '');
+      b.dataset.i = i;
+      b.style.viewTransitionName = 'app-' + i;
+      b.style.setProperty('--d', (-(i * 37 % 10) / 30) + 's');
+      b.innerHTML = '<span class="ico sq' + (a.c ? ' brand" style="--c:' + a.c + '"' : '"') + '><span class="ms f">' + a.g + '</span></span>' +
+                    '<span class="nm">' + a.n + '</span><span class="rm"><span class="ms">' + (hid ? 'add' : 'remove') + '</span></span>';
+      return b;
+    }
+    function renderApps() {
+      var q = norm(S.q);
+      Object.keys(grids).forEach(function (k) { grids[k].innerHTML = ''; });
+      APPS.forEach(function (a, i) { if (q && norm(a.n).indexOf(q) < 0) return; var h = !!S.hidden[i]; grids[h ? 'hidden' : a.k].appendChild(appEl(a, i, h)); });
+      Object.keys(grids).forEach(function (k) { var show = grids[k].children.length > 0; grids[k].style.display = show ? '' : 'none'; hu.querySelector('[data-sec="' + k + '"]').style.display = show ? '' : 'none'; });
+      hu.classList.toggle('editing', S.edit);
+      hu.querySelector('[data-edit]').textContent = S.edit ? 'Concluir' : 'Editar';
+    }
+    var body = hu.querySelector('[data-appsbody]'), lp;
+    body.addEventListener('click', function (e) {
+      var b = e.target.closest('.app'); if (!b) return;
+      var i = +b.dataset.i;
+      if (S.edit) { vt(function () { S.hidden[i] = !S.hidden[i]; renderApps(); }); return; }
+      if (APPS[i].open) go(APPS[i].open);
+    });
+    body.addEventListener('pointerdown', function (e) {
+      if (S.edit || !e.target.closest('.app')) return;
+      lp = setTimeout(function () { vt(function () { S.edit = true; renderApps(); }); }, 550);
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { body.addEventListener(ev, function () { clearTimeout(lp); }); });
+    hu.querySelector('[data-edit]').addEventListener('click', function () { vt(function () { S.edit = !S.edit; renderApps(); }); });
+    hu.querySelector('[data-q]').addEventListener('input', function () { S.q = this.value; renderApps(); });
+
+    // ---------- cor de destaque ----------
+    var acc = document.getElementById('acc');
+    $$('button', acc).forEach(function (b) { b.addEventListener('click', function () { hu.dataset.accent = b.dataset.a; $$('button', acc).forEach(function (x) { x.classList.toggle('on', x === b); }); }); });
+
+    // ---------- mapa ----------
+    if (window.maplibregl) {
+      [['map-l', 'positron'], ['map-d', 'dark']].forEach(function (m) {
+        new maplibregl.Map({ container: m[0], style: 'https://tiles.openfreemap.org/styles/' + m[1], center: [-46.6558, -23.5614], zoom: 15.4, interactive: false, attributionControl: { compact: true } });
+      });
+    }
+
+    renderVol(); renderMode(); renderMedia(); renderClima(); renderApps();
+  })();
+</script>
+</div></body></html>
