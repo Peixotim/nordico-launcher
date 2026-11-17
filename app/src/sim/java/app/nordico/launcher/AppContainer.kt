@@ -12,12 +12,14 @@ import app.nordico.launcher.data.obd.ObdAdapter
 import app.nordico.launcher.data.obd.ObdRepository
 import app.nordico.launcher.data.obd.TcpTransport
 import app.nordico.launcher.data.prefs.PrefsRepository
+import app.nordico.launcher.data.radio.RadioRepository
 import app.nordico.launcher.data.status.StatusRepository
 import app.nordico.launcher.data.vehicle.VehicleRepository
 import app.nordico.launcher.sim.SimAppsRepository
 import app.nordico.launcher.sim.SimLocationRepository
 import app.nordico.launcher.sim.SimMediaRepository
 import app.nordico.launcher.sim.SimObdRepository
+import app.nordico.launcher.sim.SimRadioRepository
 import app.nordico.launcher.sim.SimPanel
 import app.nordico.launcher.sim.SimStatusRepository
 import app.nordico.launcher.sim.SimVehicleRepository
@@ -40,6 +42,7 @@ class AppContainer(context: Context) {
     val volume: VolumeRepository = simVolume
     val vehicle: VehicleRepository = simVehicle
     val obd: ObdRepository = obdOverTcp() ?: simObd
+    val radio: RadioRepository = SimRadioRepository()
     val status: StatusRepository = SimStatusRepository()
     val location: LocationRepository = SimLocationRepository()
     val prefs = PrefsRepository(context)
