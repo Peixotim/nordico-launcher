@@ -9,12 +9,14 @@ import java.io.IOException
 /** Transporte roteirizado: comando → resposta. Comando ausente = "?". */
 class FakeTransport(private val script: Map<String, String>) : ObdTransport {
     val sent = mutableListOf<String>()
+    val timeouts = mutableMapOf<String, Long>()
     var failWith: IOException? = null
 
     override suspend fun open() = Unit
 
-    override suspend fun send(cmd: String): String {
+    override suspend fun send(cmd: String, timeoutMs: Long): String {
         sent += cmd
+        timeouts[cmd] = timeoutMs
         failWith?.let { throw it }
         return script[cmd] ?: "?"
     }
@@ -47,6 +49,14 @@ class ObdSessionTest {
             listOf("ATZ", "ATE0", "ATL0", "ATS0", "ATH0", "ATSP0", "ATI", "ATDPN", "0100", "0120", "0140", "0160"),
             t.sent,
         )
+    }
+
+    @Test fun first_protocol_search_gets_a_long_timeout() = runTest {
+        // O ELM327 pode levar vários segundos em "SEARCHING..." na primeira consulta (protocolo automático).
+        val t = FakeTransport(healthy)
+        ObdSession(t).init()
+        assertTrue(t.timeouts.getValue("0100") >= 8_000)
+        assertTrue(t.timeouts.getValue("ATE0") <= 5_000)
     }
 
     @Test fun init_extracts_version_protocol_and_supported_pids() = runTest {
