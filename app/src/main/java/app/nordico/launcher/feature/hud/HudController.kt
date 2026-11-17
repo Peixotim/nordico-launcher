@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 enum class HudKind(val visibleMillis: Long) {
     Volume(1800),
     Climate(2600),
+    Alert(6000),
 }
 
 /** Um aviso por vez; um novo evento reinicia o tempo e outro tipo substitui o atual. */
