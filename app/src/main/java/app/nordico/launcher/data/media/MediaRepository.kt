@@ -17,7 +17,11 @@ interface MediaRepository {
     val nowPlaying: StateFlow<NowPlaying?>
     /** Acesso a notificações concedido (necessário para ler a mídia no Android). */
     val hasAccess: StateFlow<Boolean>
+    /** Ações extras que o app de música oferece agora (vazio quando nenhuma). */
+    val actions: StateFlow<List<MediaAction>>
     fun playPause()
     fun next()
     fun previous()
+    fun seekTo(ms: Long)
+    fun perform(id: String)
 }
