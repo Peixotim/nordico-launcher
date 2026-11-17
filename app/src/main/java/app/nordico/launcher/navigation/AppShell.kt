@@ -46,6 +46,7 @@ import app.nordico.launcher.feature.map.rememberMapHolder
 import app.nordico.launcher.data.apps.InternalRoute
 import app.nordico.launcher.feature.apps.AppsScreen
 import app.nordico.launcher.feature.climate.ClimateScreen
+import app.nordico.launcher.feature.hud.AlertHud
 import app.nordico.launcher.feature.hud.ClimateHud
 import app.nordico.launcher.feature.hud.HudKind
 import app.nordico.launcher.feature.hud.VolumeHud
@@ -128,8 +129,10 @@ private fun Huds(vm: AppViewModel, c: AppContainer) {
     val kind by vm.hud.visible.collectAsStateWithLifecycle()
     val volume by c.volume.state.collectAsStateWithLifecycle()
     val climate by c.vehicle.climate.collectAsStateWithLifecycle()
+    val alertText by vm.alertText.collectAsStateWithLifecycle()
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         VolumeHud(kind == HudKind.Volume, volume)
+        AlertHud(kind == HudKind.Alert, alertText)
         climate?.let { ClimateHud(kind == HudKind.Climate, it, onOpen = { vm.go(Screen.Climate) }) }
     }
 }
