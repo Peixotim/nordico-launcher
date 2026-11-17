@@ -6,6 +6,8 @@ import app.nordico.launcher.data.apps.AppsRepository
 import app.nordico.launcher.data.audio.VolumeRepository
 import app.nordico.launcher.data.location.LocationRepository
 import app.nordico.launcher.data.media.MediaRepository
+import app.nordico.launcher.data.obd.NoAdapterObdRepository
+import app.nordico.launcher.data.obd.ObdRepository
 import app.nordico.launcher.data.prefs.PrefsRepository
 import app.nordico.launcher.data.status.StatusRepository
 import app.nordico.launcher.data.vehicle.ClimateState
@@ -42,6 +44,9 @@ class AppContainer(context: Context) {
         override val headlightsOn: StateFlow<Boolean?> = MutableStateFlow(null)
         override val outsideTemp: StateFlow<Double?> = MutableStateFlow(null)
     }
+
+    // Trade-off: sem adaptador até o transporte real (Task 4 e 6 do plano da fase 2).
+    val obd: ObdRepository = NoAdapterObdRepository()
 
     val devPanel: (@Composable (onClose: () -> Unit) -> Unit)? = null
 
