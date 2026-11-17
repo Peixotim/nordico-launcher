@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Lista os adaptadores OBD já pareados (Android 12+). Não usamos busca, então sem BLUETOOTH_SCAN. -->
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
     <application>
         <service
             android:name=".device.MediaListenerService"
