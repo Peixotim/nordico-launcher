@@ -20,6 +20,8 @@ android {
         create("sim") {
             dimension = "target"
             applicationIdSuffix = ".sim"
+            // -PobdTcp=10.0.2.2:35000 liga o protocolo OBD real a um simulador de ELM327 no PC.
+            buildConfigField("String", "OBD_TCP", "\"${project.findProperty("obdTcp") ?: ""}\"")
         }
         create("device") {
             dimension = "target"
@@ -28,6 +30,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -41,6 +44,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.datastore.preferences)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
