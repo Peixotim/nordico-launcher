@@ -67,4 +67,5 @@ object FixedColors {
     val Puck = Color(0xFF0A84FF)
     val Cool = Color(0xFF0A84FF)
     val Warm = Color(0xFFFF9F0A)
+    val Danger = Color(0xFFFF3B30)
 }
