@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Protótipo 04: Veículo, Rádio e Tocando agora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,-25..0&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #e9e9ee; color: #1d1d1f; padding: 20px 24px 40px; }
+  h1 { font-size: 1.25rem; margin-bottom: .25rem; }
+  p.sub { color: #6e6e73; font-size: .9rem; margin-bottom: 1rem; max-width: 980px; line-height: 1.45; }
+  .bar { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: center; margin-bottom: 1rem; }
+  .grp { display: flex; gap: 4px; background: #d6d6dc; padding: 3px; border-radius: 10px; flex-wrap: wrap; }
+  .grp button { border: 0; background: none; padding: 7px 12px; border-radius: 8px; font: 600 .8rem system-ui; cursor: pointer; color: #1d1d1f; }
+  .grp button.on { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .dev { background: #0b0b0c; padding: 14px; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.22); max-width: 1380px; }
+  .scr { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 6px; }
+
+  /* ---------- tokens (iguais ao protótipo 03) ---------- */
+  .hu { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; overflow: hidden;
+        font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: var(--bg); color: var(--label); }
+  .hu * { box-sizing: border-box; }
+  .hu[data-theme="light"] { --bg:#F2F2F7; --surface:#fff; --label:#000; --label-2:rgba(60,60,67,.6); --label-3:rgba(60,60,67,.3); --sep:rgba(60,60,67,.16);
+        --fill-3:rgba(118,118,128,.14); --fill-2:rgba(118,118,128,.22); --material:rgba(255,255,255,.82); --seg-on:#fff; --shadow:0 1px 2px rgba(0,0,0,.03),0 6px 20px rgba(0,0,0,.05); --accent:#F2620F; }
+  .hu[data-theme="dark"]  { --bg:#000; --surface:#1C1C1E; --label:#fff; --label-2:rgba(235,235,245,.6); --label-3:rgba(235,235,245,.3); --sep:rgba(84,84,88,.55);
+        --fill-3:rgba(118,118,128,.24); --fill-2:rgba(118,118,128,.34); --material:rgba(40,40,42,.84); --seg-on:#48484A; --shadow:0 0 0 .5px rgba(255,255,255,.04); --accent:#FF7A2E; }
+  .hu { --danger:#FF3B30; --warm:#FF9F0A; --cool:#0A84FF; }
+  .ms { font-family: 'Material Symbols Rounded'; font-size: 24px; line-height: 1; font-feature-settings: 'liga'; font-variation-settings: 'FILL' 0,'wght' 400,'opsz' 24; white-space: nowrap; user-select: none; }
+  .ms.f { font-variation-settings: 'FILL' 1,'wght' 400,'opsz' 24; }
+  .card { background: var(--surface); border-radius: 26px; box-shadow: var(--shadow); }
+  .lbl { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--label-2); }
+  .lbl .ms { font-size: 20px; }
+  .num { font-variant-numeric: tabular-nums; letter-spacing: -.03em; font-weight: 300; }
+  .screen { display: none; position: absolute; inset: 0; }
+  .screen.on { display: block; }
+
+  .pg-top { height: 96px; display: flex; align-items: center; gap: 16px; padding: 0 28px; }
+  .back { width: 48px; height: 48px; border-radius: 50%; background: var(--fill-3); display: grid; place-items: center; }
+  .back .ms { font-size: 30px; }
+  .pg-top h1 { font-size: 34px; font-weight: 700; letter-spacing: -.025em; margin: 0; }
+  .pg-top .btn { margin-left: auto; }
+  .chip { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px 0 12px; border-radius: 19px; background: var(--fill-3); font-size: 15px; font-weight: 600; }
+  .chip .d { width: 9px; height: 9px; border-radius: 50%; background: #30D158; }
+  .chip.off .d { background: var(--label-3); }
+  .btn { height: 38px; padding: 0 16px; border-radius: 19px; background: var(--fill-3); display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
+  .btn .ms { font-size: 20px; }
+  .btn.acc { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+  .badge { font-size: 12px; font-weight: 700; letter-spacing: .06em; padding: 4px 8px; border-radius: 7px; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); }
+
+  /* ---------- veículo ---------- */
+  .v-grid { position: absolute; left: 28px; right: 28px; top: 96px; bottom: 28px; display: grid; grid-template-columns: 560px 1fr; gap: 16px; }
+  .v-speed { border-radius: 30px; position: relative; display: grid; place-items: center; }
+  .gauge { position: absolute; inset: 0; margin: auto; width: 480px; height: 480px; }
+  .v-speed .c { text-align: center; position: relative; margin-top: -8px; }
+  .v-speed .big { font-size: 176px; line-height: .9; }
+  .v-speed .u { font-size: 22px; font-weight: 500; color: var(--label-2); margin-top: 6px; }
+  .v-speed .rp { position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-size: 17px; color: var(--label-2); }
+  .v-speed .rp b { color: var(--label); font-weight: 600; }
+  .v-tiles { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 16px; }
+  .t { padding: 20px 24px; display: flex; flex-direction: column; border-radius: 26px; }
+  .t .val { font-size: 64px; line-height: 1; margin-top: auto; }
+  .t .val small { font-size: 24px; color: var(--label-2); font-weight: 400; letter-spacing: 0; margin-left: 4px; }
+  .t .sub { font-size: 14px; color: var(--label-2); margin-top: 8px; }
+  .zones { display: flex; gap: 3px; margin-top: 12px; height: 10px; }
+  .zones i { flex: 1; border-radius: 3px; background: var(--fill-2); }
+  .zones i.on { background: var(--label); }
+  .zones.warm i.on { background: var(--warm); }
+  .zones.hot i.on { background: var(--danger); }
+  .bar { height: 10px; border-radius: 5px; background: var(--fill-2); margin-top: 12px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--label); border-radius: 5px; }
+  .dash { color: var(--label-3); }
+
+  .empty { position: absolute; left: 28px; right: 28px; top: 96px; bottom: 28px; border-radius: 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; }
+  .empty .ms { font-size: 72px; color: var(--label-3); }
+  .empty h2 { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .empty p { font-size: 17px; color: var(--label-2); max-width: 520px; line-height: 1.4; }
+
+  .scrim { position: absolute; inset: 0; background: rgba(0,0,0,.38); }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; height: 470px; border-radius: 34px 34px 0 0; background: var(--surface); padding: 28px 40px; }
+  .sheet .grab { width: 44px; height: 5px; border-radius: 3px; background: var(--fill-2); margin: -14px auto 18px; }
+  .sheet h2 { font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 4px; }
+  .sheet .hint { font-size: 15px; color: var(--label-2); margin-bottom: 14px; }
+  .row { display: flex; align-items: center; gap: 16px; height: 76px; border-top: .5px solid var(--sep); }
+  .row .ic { width: 46px; height: 46px; border-radius: 14px; background: var(--fill-3); display: grid; place-items: center; }
+  .row b { display: block; font-size: 19px; font-weight: 600; }
+  .row span.s { font-size: 14px; color: var(--label-2); }
+  .row .end { margin-left: auto; color: var(--accent); }
+  .row .code { font-size: 22px; font-weight: 700; width: 92px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- rádio ---------- */
+  .r-wrap { position: absolute; left: 28px; right: 28px; top: 96px; bottom: 28px; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; }
+  .seg { display: inline-grid; grid-template-columns: 1fr 1fr; background: var(--fill-3); border-radius: 18px; padding: 4px; height: 52px; width: 240px; position: relative; }
+  .seg i { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 14px; background: var(--seg-on); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+  .seg.am i { left: calc(50%); }
+  .seg b { position: relative; display: grid; place-items: center; font-size: 17px; font-weight: 600; color: var(--label-2); }
+  .seg b.on { color: var(--label); }
+  .r-main { border-radius: 30px; display: grid; grid-template-columns: 1fr; padding: 30px 40px 24px; align-content: space-between; }
+  .r-freq { display: flex; align-items: flex-end; gap: 14px; }
+  .r-freq .f { font-size: 150px; line-height: .9; }
+  .r-freq .u { font-size: 30px; color: var(--label-2); font-weight: 500; margin-bottom: 12px; }
+  .r-freq .st { margin-left: auto; text-align: right; margin-bottom: 14px; }
+  .r-freq .st b { display: block; font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+  .r-freq .st span { font-size: 16px; color: var(--label-2); }
+  .dial { position: relative; height: 74px; margin-top: 8px; overflow: hidden; }
+  .dial .ticks { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; display: flex; align-items: flex-end; justify-content: space-between; }
+  .dial .ticks i { width: 2px; background: var(--fill-2); border-radius: 1px; height: 16px; }
+  .dial .ticks i.m { height: 30px; background: var(--label-3); }
+  .dial .ticks i.L { height: 46px; background: var(--label-2); }
+  .dial .needle { position: absolute; bottom: 0; width: 3px; height: 74px; background: var(--accent); border-radius: 2px; left: 50%; }
+  .dial .lab { position: absolute; top: 0; font-size: 14px; color: var(--label-2); font-weight: 500; transform: translateX(-50%); }
+  .r-ctl { display: flex; justify-content: center; gap: 22px; margin-top: 14px; }
+  .r-ctl .k { height: 64px; min-width: 120px; padding: 0 22px; border-radius: 22px; background: var(--fill-3); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; font-weight: 600; }
+  .r-ctl .k .ms { font-size: 30px; }
+  .r-ctl .k.sm { min-width: 72px; padding: 0; }
+  .pg { display: flex; justify-content: flex-end; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--label-2); margin-bottom: 8px; }
+  .pg i { width: 7px; height: 7px; border-radius: 50%; background: var(--fill-2); } .pg i.on { background: var(--accent); width: 20px; border-radius: 4px; }
+  .presets { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .p { height: 70px; border-radius: 20px; background: var(--surface); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; }
+  .p small { font-size: 12px; font-weight: 500; color: var(--label-2); margin-top: 1px; }
+  .p.on { background: var(--accent); color: #fff; } .p.on small { color: rgba(255,255,255,.78); }
+  .p.empty-p { color: var(--label-3); font-weight: 500; }
+  .p.empty-p .ms { font-size: 26px; }
+
+  /* ---------- tocando agora ---------- */
+  .np { position: absolute; inset: 0; color: #fff; background: #17324f; overflow: hidden; }
+  .np::before { content: ''; position: absolute; inset: -20%; background: linear-gradient(135deg,#1f6fb6,#0b2a52 55%,#6c4b1c); filter: blur(60px) saturate(1.5); opacity: .95; }
+  .np .close { position: absolute; left: 28px; top: 26px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.14); display: grid; place-items: center; }
+  .np .close .ms { font-size: 32px; }
+  .np .art { position: absolute; left: 112px; top: 150px; width: 420px; height: 420px; border-radius: 22px; background: linear-gradient(160deg,#79b8e8,#2d6aa3 45%,#c9b27a); box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+  .np .info { position: absolute; left: 600px; right: 112px; top: 50%; transform: translateY(-50%); }
+  .np .src { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.6); }
+  .np h1 { font-size: 46px; font-weight: 700; letter-spacing: -.03em; margin: 10px 0 0; line-height: 1.05; }
+  .np p { font-size: 24px; color: rgba(255,255,255,.62); margin: 6px 0 0; }
+  .np .track { position: relative; height: 7px; border-radius: 4px; background: rgba(255,255,255,.22); margin-top: 40px; }
+  .np .track i { position: absolute; left: 0; top: 0; bottom: 0; width: 41%; background: #fff; border-radius: 4px; }
+  .np .track b { position: absolute; left: 41%; top: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+  .np .times { display: flex; justify-content: space-between; font-size: 14px; color: rgba(255,255,255,.6); margin-top: 14px; font-variant-numeric: tabular-nums; }
+  .np .ctl { display: flex; justify-content: space-between; align-items: center; padding: 0 30px; margin-top: 12px; }
+  .np .ctl .ms { font-size: 52px; } .np .ctl .pp .ms { font-size: 72px; }
+  .np .acts { display: flex; justify-content: center; gap: 28px; margin-top: 18px; }
+  .np .acts .a { width: 64px; height: 64px; border-radius: 20px; background: rgba(255,255,255,.14); display: grid; place-items: center; }
+  .np .acts .a.on { background: rgba(255,255,255,.92); color: #0b2a52; }
+  .np .acts .a .ms { font-size: 30px; }
+
+  /* ---------- início (atalhos) ---------- */
+  .map { position: absolute; left: 16px; top: 16px; width: 760px; height: 688px; border-radius: 30px; background: repeating-linear-gradient(135deg, var(--fill-3) 0 2px, transparent 2px 60px), var(--surface); }
+  .map span { position: absolute; left: 26px; top: 26px; font-size: 15px; color: var(--label-3); }
+  .side { position: absolute; left: 798px; right: 22px; top: 20px; bottom: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+  .clock { font-size: 88px; font-weight: 300; letter-spacing: -.045em; line-height: .9; margin-left: -4px; }
+  .date { font-size: 17px; color: var(--label-2); margin-top: 10px; }
+  .np-mini { border-radius: 26px; padding: 18px 20px; height: 196px; }
+  .np-mini .r { display: flex; gap: 16px; align-items: center; }
+  .np-mini .a { width: 80px; height: 80px; border-radius: 14px; background: linear-gradient(160deg,#79b8e8,#2d6aa3 45%,#c9b27a); }
+  .np-mini b { font-size: 21px; font-weight: 600; display: block; } .np-mini span { font-size: 16px; color: var(--label-2); }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { height: 96px; border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 500; }
+  .tile .ms { font-size: 28px; }
+  .tile.new { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .vol { height: 142px; border-radius: 24px; background: var(--fill-3); display: grid; place-items: center; font-size: 15px; color: var(--label-3); }
+
+  /* ---------- aviso ---------- */
+  .hud { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); z-index: 50; display: none; align-items: center; gap: 14px; height: 60px; padding: 0 24px 0 20px; border-radius: 30px; background: var(--material); backdrop-filter: blur(24px) saturate(180%); box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 0 0 .5px var(--sep); font-size: 22px; font-weight: 600; }
+  .hud.on { display: flex; }
+  .hud .ms { color: var(--danger); font-size: 26px; }
+</style>
+</head>
+<body>
+<h1>Protótipo 04: Veículo, Rádio e Tocando agora</h1>
+<p class="sub">Telas novas da fase 2, na resolução real da central (1280×720). Escolha a tela e o modo abaixo. Nada aqui lê dados de verdade: os números são exemplos. Em Veículo, "sem dados" aparece como "—". O aviso de alerta usa o vermelho do sistema, nunca a cor de destaque.</p>
+
+<div class="bar">
+  <div class="grp" id="screens">
+    <button data-s="home">Início</button>
+    <button data-s="vehicle" class="on">Veículo</button>
+    <button data-s="vehicle-hot">Veículo (superaquecendo)</button>
+    <button data-s="vehicle-dash">Veículo (carro sem PIDs)</button>
+    <button data-s="vehicle-empty">Sem adaptador</button>
+    <button data-s="adapters">Escolher adaptador</button>
+    <button data-s="faults">Falhas</button>
+    <button data-s="faults-empty">Sem falhas</button>
+    <button data-s="radio-fm">Rádio FM</button>
+    <button data-s="radio-am">Rádio AM</button>
+    <button data-s="radio-off">Rádio indisponível</button>
+    <button data-s="np">Tocando agora</button>
+  </div>
+  <div class="grp" id="themes"><button data-t="light" class="on">Dia</button><button data-t="dark">Noite</button></div>
+  <div class="grp" id="alerts"><button data-a="0" class="on">Sem alerta</button><button data-a="1">Com alerta</button></div>
+</div>
+
+<div class="dev"><div class="scr" id="scr"><div class="hu" id="hu" data-theme="light">
+
+  <!-- INÍCIO -->
+  <section class="screen" data-id="home">
+    <div class="map"><span>mapa</span></div>
+    <div class="side">
+      <div><div class="clock">12:30</div><div class="date">terça-feira, 17 de novembro · 27 °C</div></div>
+      <div class="card np-mini"><div class="r"><div class="a"></div><div><b>Evidências</b><span>Chitãozinho &amp; Xororó</span></div></div></div>
+      <div class="tiles">
+        <div class="tile new"><span class="ms">radio</span>Rádio</div>
+        <div class="tile new"><span class="ms">speed</span>Veículo</div>
+        <div class="tile"><span class="ms">photo_camera</span>Câmera</div>
+        <div class="tile"><span class="ms">apps</span>Apps</div>
+      </div>
+      <div class="vol">painel A: volume e modo da tela (igual ao protótipo 03)</div>
+    </div>
+  </section>
+
+  <!-- VEÍCULO -->
+  <section class="screen" data-id="vehicle">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1>
+      <span class="btn"><span class="ms">report</span>Falhas</span>
+      <span class="chip" style="margin-left:0"><i class="d"></i>Conectado · ELM327 v1.5</span></div>
+    <div class="v-grid">
+      <div class="card v-speed">
+        <svg class="gauge" viewBox="0 0 480 480" id="g1"></svg>
+        <div class="c"><div class="big num">92</div><div class="u">km/h</div></div>
+        <div class="rp"><b>2.400</b> rpm</div>
+      </div>
+      <div class="v-tiles">
+        <div class="card t"><div class="lbl"><span class="ms">device_thermostat</span>Arrefecimento</div><div class="val num">90<small>°C</small></div><div class="zones" id="z1"></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">battery_charging_full</span>Bateria</div><div class="val num">14,2<small>V</small></div><div class="sub">Alternador carregando</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">local_gas_station</span>Combustível</div><div class="val num">62<small>%</small></div><div class="bar"><i style="width:62%"></i></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">speed</span>Carga do motor</div><div class="val num">45<small>%</small></div><div class="bar"><i style="width:45%"></i></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">tune</span>Acelerador</div><div class="val num">28<small>%</small></div><div class="bar"><i style="width:28%"></i></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">air</span>Ar de admissão</div><div class="val num">34<small>°C</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="vehicle-hot">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1>
+      <span class="btn"><span class="ms">report</span>Falhas</span>
+      <span class="chip" style="margin-left:0"><i class="d"></i>Conectado · ELM327 v1.5</span></div>
+    <div class="v-grid">
+      <div class="card v-speed">
+        <svg class="gauge" viewBox="0 0 480 480" id="g2"></svg>
+        <div class="c"><div class="big num">0</div><div class="u">km/h</div></div>
+        <div class="rp"><b>900</b> rpm</div>
+      </div>
+      <div class="v-tiles">
+        <div class="card t"><div class="lbl"><span class="ms">device_thermostat</span>Arrefecimento</div><div class="val num" style="color:var(--danger)">108<small>°C</small></div><div class="zones hot" id="z2"></div><div class="sub" style="color:var(--danger);font-weight:600">Temperatura alta</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">battery_charging_full</span>Bateria</div><div class="val num">14,1<small>V</small></div><div class="sub">Alternador carregando</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">local_gas_station</span>Combustível</div><div class="val num">62<small>%</small></div><div class="bar"><i style="width:62%"></i></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">speed</span>Carga do motor</div><div class="val num">22<small>%</small></div><div class="bar"><i style="width:22%"></i></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">tune</span>Acelerador</div><div class="val num">14<small>%</small></div><div class="bar"><i style="width:14%"></i></div></div>
+        <div class="card t"><div class="lbl"><span class="ms">air</span>Ar de admissão</div><div class="val num">41<small>°C</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="vehicle-dash">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1>
+      <span class="btn"><span class="ms">report</span>Falhas</span>
+      <span class="chip" style="margin-left:0"><i class="d"></i>Conectado · ELM327 v2.1</span></div>
+    <div class="v-grid">
+      <div class="card v-speed">
+        <svg class="gauge" viewBox="0 0 480 480" id="g3"></svg>
+        <div class="c"><div class="big num dash">—</div><div class="u">km/h</div></div>
+        <div class="rp dash">— rpm</div>
+      </div>
+      <div class="v-tiles">
+        <div class="card t"><div class="lbl"><span class="ms">device_thermostat</span>Arrefecimento</div><div class="val num dash">—</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">battery_charging_full</span>Bateria</div><div class="val num dash">—</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">local_gas_station</span>Combustível</div><div class="val num dash">—</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">speed</span>Carga do motor</div><div class="val num dash">—</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">tune</span>Acelerador</div><div class="val num dash">—</div></div>
+        <div class="card t"><div class="lbl"><span class="ms">air</span>Ar de admissão</div><div class="val num dash">—</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="vehicle-empty">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1>
+      <span class="chip off"><i class="d"></i>Sem adaptador</span></div>
+    <div class="card empty">
+      <span class="ms">bluetooth_searching</span>
+      <h2>Conecte o adaptador OBD</h2>
+      <p>Plugue o adaptador ELM327 na porta OBD-II do carro, pareie nos ajustes de Bluetooth e escolha-o aqui.</p>
+      <span class="btn acc" style="height:52px;padding:0 26px;font-size:18px;margin-top:10px">Escolher adaptador</span>
+    </div>
+  </section>
+
+  <section class="screen" data-id="adapters">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1><span class="chip off"><i class="d"></i>Sem adaptador</span></div>
+    <div class="card empty" style="opacity:.4"><span class="ms">bluetooth_searching</span><h2>Conecte o adaptador OBD</h2></div>
+    <div class="scrim"></div>
+    <div class="sheet"><div class="grab"></div>
+      <h2>Escolher adaptador</h2><div class="hint">Dispositivos Bluetooth já pareados neste aparelho.</div>
+      <div class="row"><div class="ic"><span class="ms">bluetooth</span></div><div><b>OBDII</b><span class="s">00:1D:A5:68:98:8B</span></div><span class="ms f end">check_circle</span></div>
+      <div class="row"><div class="ic"><span class="ms">bluetooth</span></div><div><b>Viecar</b><span class="s">AA:BB:CC:DD:EE:FF</span></div></div>
+      <div class="row"><div class="ic" style="background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)"><span class="ms">add</span></div><div><b style="color:var(--accent)">Parear novo adaptador</b><span class="s">Abre os ajustes de Bluetooth. O PIN costuma ser 1234 ou 0000.</span></div></div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="faults">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1><span class="chip" style="margin-left:auto"><i class="d"></i>Conectado · ELM327 v1.5</span></div>
+    <div class="card empty" style="opacity:.4"></div>
+    <div class="scrim"></div>
+    <div class="sheet"><div class="grab"></div>
+      <h2>Falhas registradas</h2><div class="hint">Somente leitura: o Nórdico não apaga códigos nem altera o carro.</div>
+      <div class="row"><div class="code">P0133</div><div><b>Sensor de oxigênio, resposta lenta</b><span class="s">Banco 1, sensor 1</span></div></div>
+      <div class="row"><div class="code">P0420</div><div><b>Eficiência do catalisador abaixo do limite</b><span class="s">Banco 1</span></div></div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="faults-empty">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Veículo</h1><span class="chip" style="margin-left:auto"><i class="d"></i>Conectado · ELM327 v1.5</span></div>
+    <div class="card empty" style="opacity:.4"></div>
+    <div class="scrim"></div>
+    <div class="sheet"><div class="grab"></div>
+      <h2>Falhas registradas</h2><div class="hint">Somente leitura: o Nórdico não apaga códigos nem altera o carro.</div>
+      <div style="height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--label-2)"><span class="ms f" style="font-size:64px;color:#30D158">check_circle</span><b style="font-size:22px;color:var(--label)">Nenhuma falha registrada</b></div>
+    </div>
+  </section>
+
+  <!-- RÁDIO -->
+  <section class="screen" data-id="radio-fm">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Rádio</h1>
+      <div class="seg" style="margin-left:auto"><i></i><b class="on">FM</b><b>AM</b></div></div>
+    <div class="r-wrap" style="top:96px;grid-template-rows:1fr auto">
+      <div class="card r-main">
+        <div class="r-freq"><div class="f num">98,5</div><div class="u">MHz</div><div class="st"><b>Rádio Nórdico</b><span>Estéreo</span></div></div>
+        <div>
+          <div class="dial" id="dialFm"><div class="needle"></div></div>
+          <div class="r-ctl"><div class="k"><span class="ms">skip_previous</span>Buscar</div><div class="k sm"><span class="ms">remove</span></div><div class="k sm"><span class="ms">add</span></div><div class="k">Buscar<span class="ms">skip_next</span></div></div>
+        </div>
+      </div>
+      <div><div class="pg">Memórias · toque para chamar, segure para salvar<i class="on"></i><i></i><i></i></div><div class="presets" id="presFm"></div></div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="radio-am">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Rádio</h1>
+      <div class="seg am" style="margin-left:auto"><i></i><b>FM</b><b class="on">AM</b></div></div>
+    <div class="r-wrap" style="grid-template-rows:1fr auto">
+      <div class="card r-main">
+        <div class="r-freq"><div class="f num">1040</div><div class="u">kHz</div><div class="st"><b>Esporte AM</b><span>Mono</span></div></div>
+        <div>
+          <div class="dial" id="dialAm"><div class="needle"></div></div>
+          <div class="r-ctl"><div class="k"><span class="ms">skip_previous</span>Buscar</div><div class="k sm"><span class="ms">remove</span></div><div class="k sm"><span class="ms">add</span></div><div class="k">Buscar<span class="ms">skip_next</span></div></div>
+        </div>
+      </div>
+      <div><div class="pg">Memórias · toque para chamar, segure para salvar<i class="on"></i><i></i></div><div class="presets" id="presAm"></div></div>
+    </div>
+  </section>
+
+  <section class="screen" data-id="radio-off">
+    <div class="pg-top"><div class="back"><span class="ms">chevron_left</span></div><h1>Rádio</h1></div>
+    <div class="card empty">
+      <span class="ms">radio</span>
+      <h2>Rádio do fabricante</h2>
+      <p>O controle do sintonizador desta central ainda não está disponível no Nórdico. Abra o rádio do fabricante para sintonizar.</p>
+      <span class="btn acc" style="height:52px;padding:0 26px;font-size:18px;margin-top:10px">Abrir rádio</span>
+    </div>
+  </section>
+
+  <!-- TOCANDO AGORA -->
+  <section class="screen" data-id="np">
+    <div class="np">
+      <div class="close"><span class="ms">keyboard_arrow_down</span></div>
+      <div class="art"></div>
+      <div class="info">
+        <div class="src"><span class="ms" style="font-size:18px">cast</span>Spotify</div>
+        <h1>Evidências</h1><p>Chitãozinho &amp; Xororó</p>
+        <div class="track"><i></i><b></b></div>
+        <div class="times"><span>1:55</span><span>-2:43</span></div>
+        <div class="ctl"><span class="ms f">skip_previous</span><span class="pp"><span class="ms f">pause</span></span><span class="ms f">skip_next</span></div>
+        <div class="acts"><div class="a on"><span class="ms f">shuffle</span></div><div class="a"><span class="ms">repeat</span></div><div class="a"><span class="ms">favorite</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hud" id="hud"><span class="ms f">warning</span>Temperatura alta · 108 °C</div>
+</div></div></div>
+
+<script>
+  var hu = document.getElementById('hu'), scr = document.getElementById('scr');
+  function fit() { hu.style.transform = 'scale(' + (scr.clientWidth / 1280) + ')'; }
+  new ResizeObserver(fit).observe(scr); fit();
+
+  // arco de rotação (270°, de 135° a 405°); zona vermelha acima de 6.500 rpm
+  function gauge(id, frac) {
+    var r = 218, cx = 240, cy = 240, a0 = 135, span = 270;
+    function pt(a) { var t = a * Math.PI / 180; return [cx + r * Math.cos(t), cy + r * Math.sin(t)]; }
+    function arc(f0, f1, color, w) {
+      var p0 = pt(a0 + span * f0), p1 = pt(a0 + span * f1), large = (span * (f1 - f0)) > 180 ? 1 : 0;
+      return '<path d="M' + p0[0] + ' ' + p0[1] + ' A' + r + ' ' + r + ' 0 ' + large + ' 1 ' + p1[0] + ' ' + p1[1] + '" fill="none" stroke="' + color + '" stroke-width="' + w + '" stroke-linecap="round"/>';
+    }
+    var s = arc(0, 1, 'var(--fill-2)', 16) + arc(6500/8000, 1, 'rgba(255,59,48,.35)', 16);
+    if (frac > 0) s += arc(0, frac, frac > 6500/8000 ? 'var(--danger)' : 'var(--label)', 16);
+    document.getElementById(id).innerHTML = s;
+  }
+  gauge('g1', 2400/8000); gauge('g2', 900/8000); gauge('g3', 0);
+
+  // zonas do arrefecimento: 20 passos de 60 a 120 °C (3 °C cada)
+  function zones(id, value, cls) {
+    var h = '';
+    for (var i = 0; i < 20; i++) h += '<i class="' + (60 + i * 3 < value ? 'on' : '') + '"></i>';
+    var el = document.getElementById(id); el.innerHTML = h; if (cls) el.className = 'zones ' + cls;
+  }
+  zones('z1', 90, ''); zones('z2', 108, 'hot');
+
+  // escala do dial
+  function dial(id, min, max, step, majorEvery, label) {
+    var el = document.getElementById(id), n = Math.round((max - min) / step), h = '<div class="ticks">', lab = '';
+    for (var i = 0; i <= n; i++) {
+      var cls = i % (majorEvery * 5) === 0 ? 'L' : (i % majorEvery === 0 ? 'm' : '');
+      h += '<i class="' + cls + '"></i>';
+    }
+    h += '</div>';
+    el.insertAdjacentHTML('afterbegin', h);
+  }
+  dial('dialFm', 76, 108, .1, 5, 'FM'); dial('dialAm', 520, 1710, 10, 5, 'AM');
+  document.getElementById('dialFm').querySelector('.needle').style.left = ((98.5 - 76) / 32 * 100) + '%';
+  document.getElementById('dialAm').querySelector('.needle').style.left = ((1040 - 520) / 1190 * 100) + '%';
+
+  // presets
+  function presets(id, vals, active, count, fmt) {
+    var h = '';
+    for (var i = 0; i < count; i++) {
+      var v = vals[i];
+      h += v == null ? '<div class="p empty-p"><span class="ms">add</span></div>'
+                     : '<div class="p' + (v === active ? ' on' : '') + '">' + fmt(v) + '<small>' + (id === 'presFm' ? 'MHz' : 'kHz') + '</small></div>';
+    }
+    document.getElementById(id).innerHTML = h;
+  }
+  presets('presFm', [88.1, 91.3, 94.7, 98.5, 102.1, 105.5, null, null, null, null, null, null, null, null, null, null, null, null].slice(0, 6), 98.5, 6, function (v) { return v.toFixed(1).replace('.', ','); });
+  presets('presAm', [620, 790, 1040, 1230, 1490, null], 1040, 6, function (v) { return v; });
+
+  // controles da página
+  var cur = { s: 'vehicle', t: 'light', a: '0' };
+  function show() {
+    document.querySelectorAll('.screen').forEach(function (e) { e.classList.toggle('on', e.dataset.id === cur.s); });
+    hu.dataset.theme = cur.t;
+    document.getElementById('hud').classList.toggle('on', cur.a === '1');
+    [['screens', 's'], ['themes', 't'], ['alerts', 'a']].forEach(function (g) {
+      document.querySelectorAll('#' + g[0] + ' button').forEach(function (b) { b.classList.toggle('on', b.dataset[g[1]] === cur[g[1]]); });
+    });
+    history.replaceState(null, '', '#' + cur.s + ',' + cur.t + ',' + cur.a);
+  }
+  [['screens', 's'], ['themes', 't'], ['alerts', 'a']].forEach(function (g) {
+    document.querySelectorAll('#' + g[0] + ' button').forEach(function (b) { b.onclick = function () { cur[g[1]] = b.dataset[g[1]]; show(); }; });
+  });
+  var h = location.hash.slice(1).split(',');
+  if (h[0]) cur.s = h[0]; if (h[1]) cur.t = h[1]; if (h[2]) cur.a = h[2];
+  show();
+</script>
+</body>
+</html>
