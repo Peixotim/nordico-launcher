@@ -34,7 +34,7 @@ fun SimPanel(c: AppContainer, onClose: () -> Unit) {
     val climate by c.simVehicle.climate.collectAsStateWithLifecycle()
     // Sem fundo clicável: dá para navegar entre telas com o painel aberto e ver o efeito na hora.
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
-        NordicCard(Modifier.padding(16.dp).fillMaxWidth().height(280.dp), radius = 26.dp) {
+        NordicCard(Modifier.padding(16.dp).fillMaxWidth().height(330.dp), radius = 26.dp) {
             Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 Line("Painel do ar") {
                     SimButton("Temp −") { c.simVehicle.press(PanelButton.TempDown) }
@@ -47,6 +47,9 @@ fun SimPanel(c: AppContainer, onClose: () -> Unit) {
                     SimButton("Recircular") { c.simVehicle.press(PanelButton.Recirc) }
                     SimButton("Desemb. frontal") { c.simVehicle.press(PanelButton.DefrostFront) }
                     SimButton("Desemb. traseiro") { c.simVehicle.press(PanelButton.DefrostRear) }
+                }
+                Line("OBD") {
+                    ObdScenario.entries.forEach { sc -> SimButton(sc.name) { c.simObd.scenario(sc) } }
                 }
                 Line("Volante") {
                     SimButton("Vol −") { c.simVolume.simulateExternal(-1) }
