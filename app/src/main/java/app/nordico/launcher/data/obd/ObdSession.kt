@@ -3,10 +3,15 @@ package app.nordico.launcher.data.obd
 import kotlinx.coroutines.CancellationException
 import java.io.IOException
 
+const val DEFAULT_TIMEOUT_MS = 3_000L
+
+/** A primeira consulta (`0100`) dispara a busca automática de protocolo, que pode levar vários segundos. */
+const val SEARCH_TIMEOUT_MS = 10_000L
+
 /** Canal com o adaptador ELM327 (Bluetooth, TCP…). `send` devolve a resposta completa, sem o prompt `>`. */
 interface ObdTransport {
     suspend fun open()
-    suspend fun send(cmd: String): String
+    suspend fun send(cmd: String, timeoutMs: Long = DEFAULT_TIMEOUT_MS): String
     fun close()
 }
 
@@ -26,7 +31,7 @@ class ObdSession(private val t: ObdTransport) {
         val protocol = firstLine(t.send("ATDPN"))
 
         val supported = mutableSetOf<Int>()
-        when (val r = parseData(t.send("0100"), 1, 0x00)) {
+        when (val r = parseData(t.send("0100", SEARCH_TIMEOUT_MS), 1, 0x00)) {
             is ObdResult.Err -> return@safe r
             is ObdResult.Ok -> supported += supportedPids(0x00, r.value)
         }
