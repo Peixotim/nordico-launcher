@@ -13,8 +13,10 @@ import android.service.notification.NotificationListenerService
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.app.NotificationManagerCompat
+import app.nordico.launcher.data.media.MediaAction
 import app.nordico.launcher.data.media.MediaRepository
 import app.nordico.launcher.data.media.NowPlaying
+import app.nordico.launcher.data.media.classifyAction
 import app.nordico.launcher.data.media.livePosition
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -41,6 +43,8 @@ class DeviceMediaRepository(private val context: Context, scope: CoroutineScope)
     private val _access = MutableStateFlow(false)
     override val nowPlaying: StateFlow<NowPlaying?> = _now
     override val hasAccess: StateFlow<Boolean> = _access
+    private val _actions = MutableStateFlow<List<MediaAction>>(emptyList())
+    override val actions: StateFlow<List<MediaAction>> = _actions
 
     private var controller: MediaController? = null
     private var registered = false
@@ -121,10 +125,12 @@ class DeviceMediaRepository(private val context: Context, scope: CoroutineScope)
     private fun publish() {
         if (controller == null) {
             _now.value = null
+            _actions.value = emptyList()
             return
         }
         val s = state
         val playing = s?.state == PlaybackState.STATE_PLAYING
+        _actions.value = s?.customActions.orEmpty().mapNotNull { classifyAction(it.action, it.name) }
         _now.value = NowPlaying(
             title = title,
             artist = artist,
@@ -152,5 +158,13 @@ class DeviceMediaRepository(private val context: Context, scope: CoroutineScope)
 
     override fun previous() {
         controller?.transportControls?.skipToPrevious()
+    }
+
+    override fun seekTo(ms: Long) {
+        controller?.transportControls?.seekTo(ms)
+    }
+
+    override fun perform(id: String) {
+        controller?.transportControls?.sendCustomAction(id, null)
     }
 }
