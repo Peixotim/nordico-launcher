@@ -16,6 +16,7 @@ import app.nordico.launcher.data.obd.ElmObdRepository
 import app.nordico.launcher.data.obd.ObdAdapter
 import app.nordico.launcher.data.obd.ObdRepository
 import app.nordico.launcher.data.prefs.PrefsRepository
+import app.nordico.launcher.data.radio.RadioRepository
 import app.nordico.launcher.data.status.StatusRepository
 import app.nordico.launcher.data.vehicle.ClimateState
 import app.nordico.launcher.data.vehicle.VehicleRepository
@@ -23,6 +24,7 @@ import app.nordico.launcher.device.BluetoothSppTransport
 import app.nordico.launcher.device.DeviceAppsRepository
 import app.nordico.launcher.device.DeviceLocationRepository
 import app.nordico.launcher.device.DeviceMediaRepository
+import app.nordico.launcher.device.DeviceRadioRepository
 import app.nordico.launcher.device.DeviceStatusRepository
 import app.nordico.launcher.device.DeviceVolumeRepository
 import app.nordico.launcher.feature.map.NavApp
@@ -79,6 +81,8 @@ class AppContainer(context: Context) {
         select = prefs::setObdAdapter,
         transportFor = { address -> BluetoothSppTransport(bluetooth, address) },
     )
+
+    val radio: RadioRepository = DeviceRadioRepository()
 
     val devPanel: (@Composable (onClose: () -> Unit) -> Unit)? = null
 
