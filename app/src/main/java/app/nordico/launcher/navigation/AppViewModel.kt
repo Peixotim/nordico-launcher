@@ -1,9 +1,14 @@
 package app.nordico.launcher.navigation
 
+import android.os.SystemClock
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.nordico.launcher.AppContainer
 import app.nordico.launcher.data.audio.VolumeOrigin
+import app.nordico.launcher.data.obd.Alert
+import app.nordico.launcher.data.obd.alertFor
+import app.nordico.launcher.data.obd.alertText
+import app.nordico.launcher.data.obd.shouldShowAlert
 import app.nordico.launcher.data.prefs.Accent
 import app.nordico.launcher.data.prefs.Prefs
 import app.nordico.launcher.data.prefs.ScreenMode
@@ -55,6 +60,34 @@ class AppViewModel(private val c: AppContainer) : ViewModel() {
             c.vehicle.climate.drop(1).collect { climate ->
                 _screen.value = nextScreenOnClimate(_screen.value, climate)
                 if (climate != null && _screen.value != Screen.Climate) hud.show(HudKind.Climate)
+            }
+        }
+    }
+
+    private val _alertText = MutableStateFlow("")
+    val alertText: StateFlow<String> = _alertText
+    private var alert = Alert.None
+    private var alertShownAt: Long? = null
+
+    init {
+        // O ticker repete o aviso a cada minuto mesmo com a telemetria parada (StateFlow não reemite valor igual).
+        val tick = flow {
+            while (true) {
+                emit(Unit)
+                delay(1000)
+            }
+        }
+        viewModelScope.launch {
+            combine(c.obd.telemetry, tick) { t, _ -> t }.collect { t ->
+                val next = alertFor(t, alert)
+                val now = SystemClock.elapsedRealtime()
+                if (next != Alert.None) _alertText.value = alertText(next, t)
+                if (shouldShowAlert(alert, next, alertShownAt, now)) {
+                    alertShownAt = now
+                    hud.show(HudKind.Alert)
+                }
+                if (next == Alert.None) alertShownAt = null
+                alert = next
             }
         }
     }
