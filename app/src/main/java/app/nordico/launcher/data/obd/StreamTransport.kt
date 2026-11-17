@@ -11,7 +11,7 @@ private const val POLL_MS = 10L
  * Transporte ELM327 sobre um par de streams (socket TCP, socket Bluetooth…).
  * Pergunta e resposta, uma por vez: escreve `cmd\r` e lê até o prompt `>`.
  */
-open class StreamTransport(private val timeoutMs: Long = 3000) : ObdTransport {
+open class StreamTransport : ObdTransport {
     private var input: InputStream? = null
     private var output: OutputStream? = null
     private var onClose: () -> Unit = {}
@@ -24,9 +24,11 @@ open class StreamTransport(private val timeoutMs: Long = 3000) : ObdTransport {
 
     override suspend fun open() = Unit
 
-    override suspend fun send(cmd: String): String {
+    override suspend fun send(cmd: String, timeoutMs: Long): String {
         val inp = input ?: throw IOException("not connected")
         val out = output ?: throw IOException("not connected")
+        // Resposta tardia de um comando que estourou o tempo: descartar, senão vira a resposta deste.
+        while (inp.available() > 0) if (inp.skip(inp.available().toLong()) <= 0) break
         out.write("$cmd\r".toByteArray())
         out.flush()
 
