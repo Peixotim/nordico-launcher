@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import app.nordico.launcher.data.audio.VolumeState
 import app.nordico.launcher.data.audio.icon
 import app.nordico.launcher.data.vehicle.ClimateState
+import app.nordico.launcher.designsystem.FixedColors
 import app.nordico.launcher.designsystem.LocalNordic
 import app.nordico.launcher.designsystem.NText
 import app.nordico.launcher.designsystem.Sym
@@ -59,6 +60,15 @@ fun ClimateHud(visible: Boolean, state: ClimateState, onOpen: () -> Unit, modifi
             Divider()
             AutoBadge()
         }
+    }
+}
+
+/** Alerta do carro (temperatura alta, bateria). Vermelho de sistema, nunca a cor de destaque. */
+@Composable
+fun AlertHud(visible: Boolean, text: String, modifier: Modifier = Modifier) {
+    Hud(visible, 60.dp, modifier) {
+        Sym("warning", size = 26.dp, filled = true, tint = FixedColors.Danger)
+        NText(text, nordicText(22, FontWeight.SemiBold))
     }
 }
 
