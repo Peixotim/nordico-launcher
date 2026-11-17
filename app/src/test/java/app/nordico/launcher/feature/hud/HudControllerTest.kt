@@ -31,6 +31,16 @@ class HudControllerTest {
         assertNull(h.visible.value)
     }
 
+    @Test fun alert_lasts_6000() = runTest {
+        val h = HudController(backgroundScope)
+        h.show(HudKind.Alert)
+        runCurrent()
+        advanceTimeBy(5999)
+        assertEquals(HudKind.Alert, h.visible.value)
+        advanceTimeBy(2)
+        assertNull(h.visible.value)
+    }
+
     @Test fun climate_lasts_2600_and_replaces_volume() = runTest {
         val h = HudController(backgroundScope)
         h.show(HudKind.Volume)
