@@ -14,6 +14,7 @@ import app.nordico.launcher.data.audio.VolumeState
 import app.nordico.launcher.data.audio.stepped
 import app.nordico.launcher.data.location.LatLng
 import app.nordico.launcher.data.location.LocationRepository
+import app.nordico.launcher.data.media.MediaAction
 import app.nordico.launcher.data.media.MediaRepository
 import app.nordico.launcher.data.media.NowPlaying
 import app.nordico.launcher.data.status.StatusRepository
@@ -71,6 +72,14 @@ class SimMediaRepository(context: Context, scope: CoroutineScope) : MediaReposit
     )
     override val nowPlaying: StateFlow<NowPlaying?> = _now
     override val hasAccess: StateFlow<Boolean> = MutableStateFlow(true)
+    private val _actions = MutableStateFlow(
+        listOf(
+            MediaAction("shuffle", "Aleatório", "shuffle", false),
+            MediaAction("repeat", "Repetir", "repeat", false),
+            MediaAction("like", "Curtir", "favorite", false),
+        ),
+    )
+    override val actions: StateFlow<List<MediaAction>> = _actions
 
     init {
         scope.launch {
@@ -86,6 +95,8 @@ class SimMediaRepository(context: Context, scope: CoroutineScope) : MediaReposit
     override fun playPause() = _now.update { it?.copy(playing = !it.playing) }
     override fun next() = _now.update { it?.copy(positionMs = 0) }
     override fun previous() = _now.update { it?.copy(positionMs = 0) }
+    override fun seekTo(ms: Long) = _now.update { np -> np?.copy(positionMs = ms.coerceIn(0, np.durationMs)) }
+    override fun perform(id: String) = _actions.update { list -> list.map { if (it.id == id) it.copy(active = !it.active) else it } }
 }
 
 class SimAppsRepository : AppsRepository {
