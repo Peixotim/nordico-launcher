@@ -17,6 +17,7 @@ data class Prefs(
     val accent: Accent = Accent.Orange,
     val hiddenApps: Set<String> = emptySet(),
     val navApp: String? = null,
+    val obdAdapter: String? = null,
 )
 
 private val Context.dataStore by preferencesDataStore("prefs")
@@ -25,6 +26,7 @@ private val MODE = stringPreferencesKey("screen_mode")
 private val ACCENT = stringPreferencesKey("accent")
 private val HIDDEN = stringSetPreferencesKey("hidden_apps")
 private val NAV = stringPreferencesKey("nav_app")
+private val OBD = stringPreferencesKey("obd_adapter")
 
 /** Preferências salvas (iguais nos dois flavors). Valores inválidos voltam ao padrão. */
 class PrefsRepository(private val context: Context) {
@@ -34,11 +36,16 @@ class PrefsRepository(private val context: Context) {
             accent = p[ACCENT]?.let { runCatching { Accent.valueOf(it) }.getOrNull() } ?: Accent.Orange,
             hiddenApps = p[HIDDEN] ?: emptySet(),
             navApp = p[NAV],
+            obdAdapter = p[OBD],
         )
     }
 
     suspend fun setScreenMode(m: ScreenMode) {
         context.dataStore.edit { it[MODE] = m.name }
+    }
+
+    suspend fun setObdAdapter(address: String) {
+        context.dataStore.edit { it[OBD] = address }
     }
 
     suspend fun setHidden(id: String, hidden: Boolean) {
