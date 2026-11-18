@@ -1,0 +1,375 @@
+{
+  "P0420": {
+    "title": "Eficiência do catalisador abaixo do limite (banco 1)",
+    "severity": "attention",
+    "causes": [
+      "Catalisador envelhecido ou contaminado (consumo de óleo, aditivos, líquido de arrefecimento)",
+      "Catalisador superaquecido por falha de ignição ou mistura rica",
+      "Sensor de oxigênio traseiro lento ou sujo",
+      "Vazamento no escapamento antes do sensor traseiro"
+    ],
+    "symptoms": [
+      "Luz do motor acesa, quase sempre sem mudança na direção",
+      "Reprovação em teste de emissões",
+      "Barulho de peças soltas ou perda de força se o catalisador se desfez"
+    ],
+    "solution": "Antes de trocar o catalisador, confira vazamentos no escapamento e o sensor de oxigênio traseiro, que são mais baratos. Se houver falha de ignição ou mistura errada, corrija primeiro, senão o catalisador novo estraga de novo. Se a luz voltar logo depois de apagar, procure uma oficina."
+  },
+  "P0133": {
+    "title": "Sensor de oxigênio, resposta lenta (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Sensor de oxigênio dianteiro envelhecido, com fuligem ou contaminado",
+      "Vazamento no coletor ou no escapamento antes do sensor",
+      "Aquecedor do sensor fraco ou intermitente",
+      "Falha de mistura: entrada de ar, injetores, pressão de combustível, sensor de fluxo de ar"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar no teste",
+      "O P0420 pode aparecer em seguida"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor e procure vazamentos de escape ou de ar antes de trocá-lo. Sensor com muitos anos costuma ser substituído. Use peça de especificação correta: sensor diferente pode dar o mesmo código."
+  },
+  "P0171": {
+    "title": "Mistura pobre demais (banco 1)",
+    "severity": "attention",
+    "causes": [
+      "Entrada de ar depois do sensor de fluxo de ar (junta do coletor, mangueiras de vácuo, corpo de borboleta, servo-freio)",
+      "Ventilação do cárter (PCV) com vazamento ou defeito",
+      "Sensor de fluxo de ar (MAF) sujo ou fora de calibração",
+      "Pressão ou vazão de combustível baixa (bomba fraca, filtro entupido, tanque quase vazio)",
+      "Bicos entupidos ou vazamento no escapamento antes do sensor de oxigênio"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (depois de dois ciclos de condução)",
+      "Marcha lenta irregular, às vezes morrendo",
+      "Falta de força ou hesitação ao acelerar",
+      "Assobio ou chiado no cofre do motor (entrada de ar)"
+    ],
+    "solution": "Comece pelo simples: procure mangueiras soltas ou rachadas, confira a tampa do óleo e a mangueira da ventilação do cárter e limpe o sensor de fluxo de ar com limpa-contato próprio. Se continuar, teste a pressão de combustível. Dirigir é possível, mas evite forçar o motor."
+  },
+  "P0172": {
+    "title": "Mistura rica demais (banco 1)",
+    "severity": "attention",
+    "causes": [
+      "Válvula de purga do canister presa aberta ou canister saturado",
+      "Bicos vazando ou pingando",
+      "Pressão de combustível alta (regulador, retorno obstruído)",
+      "Combustível no óleo do motor (trajetos curtos, bicos vazando)",
+      "Filtro de ar entupido ou sensor de fluxo de ar lendo alto; em flex, teor de etanol aprendido errado"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (depois de dois ciclos de condução)",
+      "Consumo maior e cheiro de combustível",
+      "Fumaça preta e velas sujas de fuligem",
+      "Marcha lenta irregular ou dificuldade de partida depois de abastecer"
+    ],
+    "solution": "Verifique o filtro de ar, as velas e o cheiro de gasolina no óleo. Se a falha começou depois de abastecer, teste outro posto. Mistura rica por muito tempo pode danificar o catalisador, então não deixe passar muito tempo sem diagnóstico."
+  },
+  "P0300": {
+    "title": "Falhas de ignição em vários cilindros (aleatório)",
+    "severity": "stop",
+    "causes": [
+      "Entrada de ar falsa (vácuo, ventilação do cárter, junta do coletor)",
+      "Velas desgastadas ou erradas em vários cilindros, bobinas com defeito",
+      "Pressão de combustível baixa ou alta, combustível ruim",
+      "Comando de válvulas fora do ponto (corrente esticada), válvulas, compressão baixa",
+      "Falsa detecção: polia ou roda fônica, estrada ruim, software"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força, hesitação",
+      "Cheiro de combustível não queimado e consumo maior"
+    ],
+    "solution": "Se a luz estiver piscando, reduza a carga e procure uma oficina: falha de ignição danifica o catalisador rapidamente. Costuma ser velas, bobinas ou entrada de ar. Não rode longe com o motor falhando."
+  },
+  "P0301": {
+    "title": "Falha de ignição no cilindro 1",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 1 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 1 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 1 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 1 (válvula, anéis, junta do cabeçote) ou entrada de ar local",
+      "Água ou óleo no poço da vela"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força, hesitação",
+      "Cheiro de combustível não queimado e consumo maior"
+    ],
+    "solution": "O jeito mais barato de achar o defeito é trocar a bobina do cilindro 1 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0302": {
+    "title": "Falha de ignição no cilindro 2",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 2 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 2 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 2 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 2 (válvula, anéis, junta do cabeçote) ou entrada de ar local",
+      "Água ou óleo no poço da vela"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força, hesitação",
+      "Cheiro de combustível não queimado e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 2 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0303": {
+    "title": "Falha de ignição no cilindro 3",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 3 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 3 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 3 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 3 (válvula, anéis, junta do cabeçote) ou entrada de ar local",
+      "Água ou óleo no poço da vela"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força, hesitação",
+      "Cheiro de combustível não queimado e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 3 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0304": {
+    "title": "Falha de ignição no cilindro 4",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 4 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 4 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 4 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 4 (válvula, anéis, junta do cabeçote) ou entrada de ar local",
+      "Água ou óleo no poço da vela"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força, hesitação",
+      "Cheiro de combustível não queimado e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 4 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0442": {
+    "title": "Vazamento no sistema EVAP (vazamento pequeno)",
+    "severity": "ok",
+    "causes": [
+      "Vedação da tampa do tanque gasta, tampa errada ou mal fechada",
+      "Mangueiras do EVAP rachadas ou porosas, ou conexões com vazamento",
+      "Válvula de purga ou de ventilação que não veda",
+      "Gargalo do tanque corroído ou vedação do sensor de nível com vazamento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Possível leve cheiro de combustível",
+      "Reprovação em inspeção de emissões",
+      "Sem mudança na direção"
+    ],
+    "solution": "Comece pela tampa do tanque: feche até ouvir os cliques, confira a borracha de vedação e troque se estiver ressecada. Depois apague as falhas e dirija alguns dias; se voltar, procure vazamento nas mangueiras e válvulas. Pode seguir viagem."
+  },
+  "P0455": {
+    "title": "Vazamento no sistema EVAP (vazamento grande)",
+    "severity": "ok",
+    "causes": [
+      "Tampa do tanque ausente, mal fechada ou com vedação ruim",
+      "Mangueira solta ou rachada (canister, gargalo, linha de purga)",
+      "Válvula de ventilação presa aberta ou válvula de purga presa fechada",
+      "Canister ou gargalo do tanque trincado ou corroído"
+    ],
+    "symptoms": [
+      "Luz do motor acesa, às vezes com aviso de verificar a tampa",
+      "Possível cheiro de combustível",
+      "Reprovação em inspeção de emissões"
+    ],
+    "solution": "Verifique a tampa do tanque primeiro: é a causa mais comum e a mais barata. Se estiver certa, procure mangueiras soltas perto do canister e do tanque. Pode seguir viagem, mas resolva para não reprovar na inspeção."
+  },
+  "P0456": {
+    "title": "Vazamento no sistema EVAP (vazamento muito pequeno)",
+    "severity": "ok",
+    "causes": [
+      "Vedação da tampa do tanque gasta ou tampa mal fechada",
+      "Válvula de purga ou de ventilação que não veda",
+      "Mangueiras ou anéis de vedação porosos, trinca fina no canister ou no gargalo"
+    ],
+    "symptoms": [
+      "Luz do motor acesa, às vezes com aviso de verificar a tampa",
+      "Possível cheiro de combustível",
+      "Reprovação em inspeção de emissões"
+    ],
+    "solution": "Feche a tampa do tanque até ouvir os cliques e confira a vedação. Vazamento muito pequeno é difícil de achar: se o código voltar, a oficina pode usar teste com fumaça. Pode seguir viagem."
+  },
+  "P0128": {
+    "title": "Termostato: temperatura do motor abaixo da esperada",
+    "severity": "attention",
+    "causes": [
+      "Válvula termostática presa aberta ou abrindo cedo demais",
+      "Sensor de temperatura lendo baixo, ou resistência por corrosão no circuito",
+      "Nível baixo do líquido de arrefecimento ou ar no sistema",
+      "Ventoinha do radiador ligada o tempo todo"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Ponteiro de temperatura fica baixo ou cai na estrada",
+      "O aquecimento da cabine não esquenta direito",
+      "Consumo maior"
+    ],
+    "solution": "Confira o nível do líquido de arrefecimento com o motor frio e observe o ponteiro de temperatura: se o motor demora muito a esquentar, o termostato é o principal suspeito e a troca é barata. Pode rodar, mas o motor frio por muito tempo gasta mais combustível."
+  },
+  "P0117": {
+    "title": "Sensor de temperatura do líquido de arrefecimento, sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com o terra (fio roçado ou prensado)",
+      "Sensor em curto internamente ou com líquido dentro",
+      "Umidade ou líquido de arrefecimento no conector",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Ventoinha do radiador ligada o tempo todo",
+      "Partida a frio difícil (o motor 'acha' que está quente)",
+      "Ponteiro de temperatura no máximo ou sem leitura"
+    ],
+    "solution": "Inspecione o conector e o chicote do sensor. Se o ponteiro de temperatura do painel está normal, o problema costuma ser só o sinal do sensor. Como o sensor pode esconder um superaquecimento real, vigie o ponteiro e não deixe passar muito tempo."
+  },
+  "P0113": {
+    "title": "Sensor de temperatura do ar de admissão, sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Conector solto ou desconectado, ou fio rompido",
+      "Sensor aberto internamente",
+      "Fio de retorno (terra) do sensor rompido",
+      "Fio de sinal em curto com tensão positiva"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Em geral quase não se nota",
+      "Mistura um pouco mais rica e consumo maior",
+      "Limitação de torque em alguns sistemas"
+    ],
+    "solution": "Verifique o conector do sensor, perto da caixa do filtro de ar ou no coletor. Costuma ser mau contato; sensor novo é barato. Pode rodar, mas resolva logo."
+  },
+  "P0335": {
+    "title": "Sensor de rotação do virabrequim, sem sinal",
+    "severity": "attention",
+    "causes": [
+      "Sensor de rotação com defeito (calor, idade; sintoma típico: não pega quente)",
+      "Conector ou chicote corroído, roçado, com óleo ou aberto",
+      "Referência de 5 V em curto por outro sensor",
+      "Roda fônica danificada, solta ou suja; folga errada depois de serviço no motor"
+    ],
+    "symptoms": [
+      "O motor gira, mas não pega",
+      "Motor morre rodando ou na marcha lenta",
+      "Falha para dar partida a quente, que volta a pegar depois de esfriar",
+      "Conta-giros oscila e a luz do motor acende"
+    ],
+    "solution": "Se o carro morre quente e volta depois de esfriar, o sensor é o suspeito principal. Verifique o conector e o chicote. Como o motor pode apagar a qualquer momento, evite trânsito pesado até resolver."
+  },
+  "P0340": {
+    "title": "Sensor do comando de válvulas (banco 1), circuito",
+    "severity": "attention",
+    "causes": [
+      "Sensor do comando de válvulas com defeito (calor, umidade)",
+      "Conector ou chicote corroído ou aberto, referência de 5 V perturbada",
+      "Roda fônica do comando danificada, solta ou na distância errada",
+      "Correia ou corrente dentada saltou ou foi montada errada"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Partida mais demorada",
+      "Perda de força (comando mantido na posição básica)",
+      "Marcha lenta irregular, às vezes morrendo"
+    ],
+    "solution": "Verifique o conector e o chicote do sensor. Se o carro teve serviço recente de correia ou corrente, confira o ponto de distribuição. Procure uma oficina se houver perda de força."
+  },
+  "P0505": {
+    "title": "Controle da marcha lenta",
+    "severity": "attention",
+    "causes": [
+      "Corpo de borboleta ou válvula de marcha lenta sujos ou com goma",
+      "Entrada de ar falsa (mangueiras, junta do coletor, ventilação do cárter)",
+      "Válvula de marcha lenta com defeito mecânico ou elétrico",
+      "Valores aprendidos não reiniciados depois da limpeza"
+    ],
+    "symptoms": [
+      "Rotação da marcha lenta oscila, alta ou baixa demais",
+      "Motor morre na marcha lenta ou ao frear",
+      "Start-stop não funciona"
+    ],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e procure entradas de ar. Em muitos carros é preciso reiniciar o aprendizado da marcha lenta depois da limpeza (ligar com a chave sem dar partida e esperar, por exemplo); consulte o manual ou uma oficina."
+  },
+  "P0562": {
+    "title": "Tensão do sistema baixa",
+    "severity": "attention",
+    "causes": [
+      "Alternador ou regulador de tensão entregando pouco",
+      "Bateria com defeito (célula em curto)",
+      "Terminais, cabos de massa ou cabo do alternador corroídos",
+      "Consumo alto com o carro parado ou muitos acessórios ligados na marcha lenta"
+    ],
+    "symptoms": [
+      "Luz da bateria ou da carga acesa",
+      "Dificuldade para dar partida, faróis fracos",
+      "Códigos de falha em vários módulos"
+    ],
+    "solution": "Meça a tensão da bateria com o motor ligado: o normal fica em torno de 13,8 a 14,5 V. Abaixo disso, o alternador não está carregando. Limpe e aperte os terminais antes de trocar peças. Com carga fraca o carro pode parar de repente, então resolva logo."
+  },
+  "P0141": {
+    "title": "Aquecedor do sensor de oxigênio (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Alimentação do aquecedor (fusível, relé) ou fio de comando aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Monitor do catalisador não completa a prontidão",
+      "Podem aparecer P0140 e P0136"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0138": {
+    "title": "Sensor de oxigênio, tensão alta (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com a alimentação do aquecedor ou com a bateria",
+      "Sensor com defeito internamente (curto entre aquecedor e sinal)",
+      "Circuito de sinal aberto ou com alta resistência",
+      "Escapamento realmente rico ou sensor contaminado por óleo ou líquido de arrefecimento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Monitor do catalisador não completa a prontidão",
+      "Em geral sem mudança perceptível na direção"
+    ],
+    "solution": "Inspecione o chicote e o conector do sensor traseiro. Se o conector e a fiação estão bons, o sensor costuma ser trocado. Confira também se o motor não está rico (P0172)."
+  },
+  "P0102": {
+    "title": "Sensor de fluxo de ar (MAF), sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal aberto ou em curto com o terra, conector corroído ou solto",
+      "Eletrônica do sensor falhou",
+      "Falta de alimentação (fusível, relé) ou terra ruim",
+      "Vazamento grande ou duto desconectado entre o sensor e a borboleta"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falta de força, hesitação, o carro entra em modo de emergência",
+      "Marcha lenta irregular ou motor morrendo",
+      "Consumo maior"
+    ],
+    "solution": "Confira o conector e a mangueira de ar entre o sensor e o corpo de borboleta. Limpar o sensor com limpa-contato próprio ajuda em alguns casos. Se o carro está sem força, evite rodar longe."
+  }
+}
