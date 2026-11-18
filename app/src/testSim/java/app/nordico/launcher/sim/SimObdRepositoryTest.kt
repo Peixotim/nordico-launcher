@@ -32,6 +32,18 @@ class SimObdRepositoryTest {
         assertNull(r.telemetry.value.coolantC)
     }
 
+    @Test fun faults_scenario_turns_the_engine_light_on() {
+        val r = SimObdRepository().apply { scenario(ObdScenario.Faults) }
+        assertEquals(true, r.telemetry.value.milOn)
+        assertEquals(2, r.telemetry.value.faultCount)
+    }
+
+    @Test fun healthy_scenarios_have_no_faults() {
+        val r = SimObdRepository()
+        assertEquals(false, r.telemetry.value.milOn)
+        assertEquals(0, r.telemetry.value.faultCount)
+    }
+
     @Test fun lists_two_fake_adapters() {
         assertEquals(2, SimObdRepository().bondedAdapters().size)
     }
@@ -46,6 +58,6 @@ class SimObdRepositoryTest {
         val r = SimObdRepository()
         assertNull(r.faults.value)
         r.readFaults()
-        assertEquals(listOf(Dtc("P0133")), r.faults.value)
+        assertEquals(listOf(Dtc("P0133"), Dtc("P0420")), r.faults.value)
     }
 }
