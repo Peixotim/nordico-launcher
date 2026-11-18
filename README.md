@@ -41,6 +41,11 @@ time and needs no root.
 | ![Now playing](docs/screenshots/now-playing.png) | ![App drawer](docs/screenshots/apps.png) |
 | ![Climate HUD](docs/screenshots/hud-climate.png) | ![Edit mode](docs/screenshots/apps-edit.png) |
 
+| Vehicle | Radio |
+|---|---|
+| ![Vehicle](docs/screenshots/vehicle.png) | ![Radio](docs/screenshots/radio.png) |
+| ![Fault codes](docs/screenshots/vehicle-faults.png) | |
+
 The original HTML prototypes that defined the design live in
 [`docs/prototipos/`](docs/prototipos) and open directly in a browser.
 
@@ -55,7 +60,18 @@ The original HTML prototypes that defined the design live in
 - Screen mode: Auto (follows the headlights when the car reports them, otherwise 18:00–06:00), Day or Night.
 - Screen-off button that leaves only a dim clock.
 
+**Vehicle (OBD-II, read-only)**
+- Speed with a rotation arc, coolant, battery voltage, fuel, engine load, throttle and intake air, read from an ELM327 adapter over Bluetooth.
+- Stored fault codes with Portuguese descriptions and a badge with the count. It never clears codes or writes to the car.
+- Alerts for high coolant temperature and abnormal battery voltage, shown as a HUD on any screen. Tapping it opens Vehicle.
+- Reads only while the app is visible, backs off when the adapter is lost and reconnects on its own.
+
+**Radio**
+- FM and AM with a draggable dial, seek and step buttons, and 18 FM / 12 AM presets (tap to tune, long press to save).
+- On the real head unit it shows a "vendor radio" card until the tuner integration lands.
+
 **Now playing**
+- Draggable seek bar with elapsed and remaining time, plus shuffle, repeat and like when the music app offers them.
 - The card expands to full screen with a shared-element transition, and the album art flies into place.
 - The backdrop is blurred from the cover art without GPU-heavy blur: the art is downscaled to 32 px and stretched.
 
@@ -198,7 +214,8 @@ access" on the home screen, or run
 - [ ] Polish: lighter night map style, 4G/5G indicator independent of Wi-Fi, search reset in the drawer.
 
 **Phase 2: system screens**
-- [ ] Radio screen on top of the vendor radio.
+- [x] Vehicle (OBD-II) and radio screens, with simulated data and an ELM327 emulator for tests (`-PobdTcp=10.0.2.2:35000`).
+- [ ] Radio screen on top of the vendor radio (needs the head unit).
 - [ ] Nórdico settings (accent color, navigation app, music app).
 
 **Phase 3: head-unit integration**
