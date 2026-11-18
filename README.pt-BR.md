@@ -63,7 +63,7 @@ abrem direto no navegador.
 
 **Veículo (OBD-II)**
 - Velocidade com arco de rotação, temperatura do motor, tensão da bateria, combustível, carga, acelerador e ar de admissão, lidos de um adaptador ELM327 por Bluetooth.
-- Códigos de falha armazenados com selo de contagem. Cada código tem título, gravidade, causas prováveis, o que fazer e link de vídeo, de um catálogo offline com ~9.600 códigos (cerca de 20 escritos por completo em português, o resto com título, crescendo em lotes).
+- Códigos de falha armazenados com selo de contagem. Cada código tem título, gravidade, causas prováveis, o que fazer e link de vídeo, de um catálogo offline com ~9.600 códigos (cerca de 100 escritos por completo em português, o resto com título, crescendo em lotes).
 - **Apagar falhas**: "Apagar todas as falhas" envia o comando padrão do OBD-II (modo 04). É a única escrita que o app faz, e com proteções: só com o carro parado e conectado, depois de uma confirmação que explica os efeitos, sem reenvio automático, e só diz "apagado" depois de reler os códigos.
 - "Marcar como corrigida" (uma ou várias) é uma anotação no app. Não mexe no carro: o padrão OBD-II não apaga um código só, apenas todos.
 - Alertas de temperatura alta e tensão anormal da bateria, em um aviso sobre qualquer tela. Tocar nele abre o Veículo.
