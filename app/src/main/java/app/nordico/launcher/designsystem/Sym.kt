@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.nordico.launcher.R
@@ -47,6 +48,8 @@ fun Sym(
             text = name,
             softWrap = false,
             maxLines = 1,
+            // Ícones grandes (76 dp) tinham o fundo do glifo cortado pela caixa da linha.
+            overflow = TextOverflow.Visible,
             style = TextStyle(
                 color = tint,
                 fontFamily = if (filled) FilledSymbols else OutlineSymbols,
