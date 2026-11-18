@@ -134,7 +134,7 @@ Fontes abertas verificadas (licença conferida nos arquivos):
 
 Camadas, da mais para a menos rica (campo `tier`):
 1. **Completa (tier 1)**: título, gravidade, causas, sintomas e o que fazer, **em português, traduzidos e revisados à mão** a partir do OBDex. ~300 códigos prioritários para um Civic flex e carros brasileiros: oxigênio, mistura, ignição/misfire, catalisador, EVAP, VVT, TPS/MAP, câmbio e os P1xxx Honda.
-2. **Título em português (tier 2)**: ~3.000 códigos com título em pt-BR da base do fabiovila, mais o texto genérico do subsistema.
+2. **Título em português (tier 2)**: ~1.750 códigos genéricos com título em pt-BR da base do fabiovila (a base tem ~3.000, mas ~1.200 são P1xxx de várias marcas e ficam de fora de propósito, porque o significado depende do fabricante), mais o texto genérico do subsistema.
 3. **Básica (tier 3)**: o resto dos ~9.500 genéricos e os Honda, com título em inglês (campo `titleLang = "en"`), categoria e o texto genérico do subsistema.
 
 O `catalog.json` é **gerado** por um script do repositório (`tools/dtc/build_catalog.py`) a partir das fontes e das traduções à mão (`tools/dtc/curated/`). O arquivo gerado é versionado; as fontes baixadas, não. Avisos de licença em `THIRD_PARTY_NOTICES.md`. Gravidade fora do tier 1 é sempre **Atenção** (conservadora). A tradução cresce por lotes sem mudar o formato.
