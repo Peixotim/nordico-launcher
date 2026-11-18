@@ -55,4 +55,6 @@ dependencies {
     implementation(libs.maplibre)
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
+    // O org.json do Android é só um stub na JVM: o catálogo de falhas precisa do real nos testes.
+    testImplementation(libs.org.json)
 }
