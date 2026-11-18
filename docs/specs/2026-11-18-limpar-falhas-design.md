@@ -21,7 +21,7 @@ Isso **revoga uma regra da fase 2**: "o Nórdico só lê, nunca escreve no carro
 
 ## 3. Objetivos
 
-- Lista de falhas com, por código: título, **gravidade**, causas prováveis, solução sugerida e botão de vídeo. Conteúdo em português, **embutido no app (offline)**.
+- Lista de falhas com, por código: título, **gravidade**, causas prováveis, solução sugerida e botão de vídeo. Conteúdo **embutido no app (offline)**, com o catálogo **o mais extenso possível** (seção 8.5).
 - **"Apagar todas as falhas"**: comando real, com confirmação que explica os efeitos e com resultado verificado por releitura.
 - **"Marcar como corrigida"** por falha, com **seleção múltipla**: anotação **só no app**, para acompanhar reparos. Não toca no carro, e a interface diz isso.
 - Histórico local das limpezas (data, códigos que existiam, resultado).
@@ -34,7 +34,7 @@ Isso **revoga uma regra da fase 2**: "o Nórdico só lê, nunca escreve no carro
 - Qualquer outra escrita no carro: coding, adaptações, reset de ECU, modos 05, 08, 09 de escrita, UDS.
 - Ler e salvar o freeze frame (modo 02) antes de apagar. Fica como evolução; a confirmação avisa que ele será perdido.
 - Códigos pendentes (modo 07) e permanentes (modo 0A) na lista. O resultado apenas informa quando códigos "voltaram".
-- Catálogo completo de milhares de códigos. A primeira versão leva os códigos mais comuns (seção 8.5); o resto cai em descrição genérica por categoria.
+- Causas e solução **escritas em português para os ~9.500 códigos**. Só ~300 prioritários terão entrada completa; o resto entra em camadas mais simples (seção 8.5).
 - API externa. Não há API gratuita confiável com solução em português, e a central pode estar sem internet.
 - Vídeo dentro do app. Só um link de busca.
 - Apagar por qualquer atalho (HUD, gaveta, notificação). Só dentro da folha de falhas.
@@ -125,12 +125,21 @@ Confirmação (folha própria): lista o que será apagado (os códigos), os efei
 
 Gravidade: **Pode seguir** (verde de sistema), **Atenção** (âmbar), **Pare e procure ajuda** (vermelho de sistema). Vermelho só nesse caso.
 
-### 8.5 Conteúdo (catálogo embutido)
+### 8.5 Conteúdo (catálogo embutido, em três camadas)
 
-- `assets/dtc/catalog.json`: por código, `title`, `severity`, `causes[]`, `solution`.
-- Primeira versão: os códigos mais comuns de motor e de emissões (P0xxx genéricos) e os da linha Honda que tivermos como confirmar (P1xxx), todos em português, **escritos e revisados à mão**, com nota de que é orientação e não diagnóstico.
-- Fallback sempre definido: código padrão sem entrada ("descrição não disponível no Nórdico", pelo prefixo: motor/câmbio, carroceria, chassi, rede) e código de fabricante.
-- A função atual `dtcDescription` é substituída pelo catálogo.
+Fontes abertas verificadas (licença conferida nos arquivos):
+- [OBDex](https://github.com/foerbsnavi/OBDex): 9.533 códigos genéricos SAE J2012 com descrição, causas prováveis com probabilidade, sintomas, dificuldade e se aciona a luz. **Dados CC0**; inglês e alemão, sem português.
+- [fabiovila/OBDIICodes](https://github.com/fabiovila/OBDIICodes) (MIT): 2.973 títulos **em português**.
+- [Wal33D/dtc-database](https://github.com/Wal33D/dtc-database) (MIT): inclui `honda_codes.txt` (95 códigos P1xxx da Honda, em inglês).
+
+Camadas, da mais para a menos rica (campo `tier`):
+1. **Completa (tier 1)**: título, gravidade, causas, sintomas e o que fazer, **em português, traduzidos e revisados à mão** a partir do OBDex. ~300 códigos prioritários para um Civic flex e carros brasileiros: oxigênio, mistura, ignição/misfire, catalisador, EVAP, VVT, TPS/MAP, câmbio e os P1xxx Honda.
+2. **Título em português (tier 2)**: ~3.000 códigos com título em pt-BR da base do fabiovila, mais o texto genérico do subsistema.
+3. **Básica (tier 3)**: o resto dos ~9.500 genéricos e os Honda, com título em inglês (campo `titleLang = "en"`), categoria e o texto genérico do subsistema.
+
+O `catalog.json` é **gerado** por um script do repositório (`tools/dtc/build_catalog.py`) a partir das fontes e das traduções à mão (`tools/dtc/curated/`). O arquivo gerado é versionado; as fontes baixadas, não. Avisos de licença em `THIRD_PARTY_NOTICES.md`. Gravidade fora do tier 1 é sempre **Atenção** (conservadora). A tradução cresce por lotes sem mudar o formato.
+
+Fallback sempre definido: código que não está em nenhuma camada recebe texto por prefixo (motor/câmbio, carroceria, chassi, rede; padrão ou de fabricante).
 
 ### 8.6 Vídeo
 
@@ -143,10 +152,12 @@ data/obd/     ObdClear.kt  (parseClear, ClearOutcome, ClearGate, clearGate)
               ObdSession.kt (altera: clearFaults, lista de comandos permitidos)
               ObdRepository.kt (altera: clearFaults(), clearState, dismissClearResult())
               ElmObdRepository.kt (altera)
-              DtcCatalog.kt  (DtcInfo, Severity, lookup com fallback)
+              DtcCatalog.kt  (DtcInfo, Severity, Tier, lookup com fallback)
 data/prefs/   FaultLog.kt (marcas e histórico, codec puro)  PrefsRepository.kt (altera)
 feature/vehicle/  FaultsSheet.kt (reescreve)  ClearConfirmSheet.kt  FaultRow.kt  FaultsLogic.kt
-app/src/main/assets/dtc/catalog.json
+app/src/main/assets/dtc/catalog.json   (gerado)
+tools/dtc/     build_catalog.py  curated/*.json  README.md
+THIRD_PARTY_NOTICES.md
 app/src/sim/  SimObdRepository.kt (altera: clear e cenários)
 docs/prototipos/05-limpar-falhas.html
 ```
@@ -176,11 +187,11 @@ Dependência nova só de teste: `org.json:json` (o `org.json` do Android não ex
 - **Não** bloquear por rotação: a ECU decide e a recusa `22` é explicada. Bloquear por rotação poderia impedir um carro que aceita.
 - Histórico gravado **antes** do envio.
 - Uma confirmação em folha própria (sem "segurar para confirmar"), por simplicidade; reavaliar se houver toque acidental.
-- Catálogo inicial pequeno, em vez de importar uma base aberta sem licença verificada.
+- Catálogo em três camadas a partir de bases abertas com licença verificada (CC0 e MIT), em vez de escrever tudo à mão. Tradução manual só para o tier 1.
 
 ## 13. Deixado para quem implementar
 
-- Texto final de cada entrada do catálogo (com fonte conferida) e a lista exata dos códigos da v1.
+- A lista exata dos ~300 códigos do tier 1 (priorizar por probabilidade num Civic flex) e o texto final de cada um, com fonte conferida.
 - Valores de espera e de tempo limite, ajustáveis na constante.
 - Detalhes visuais da folha, a partir do protótipo 05.
 - Se o emulador ELM327 suporta `04`; senão, só o roteiro.
