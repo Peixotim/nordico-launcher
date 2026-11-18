@@ -38,6 +38,12 @@ data class FaultLog(
         return copy(history = history.dropLast(1) + last.copy(result = result))
     }
 
+    /** Remove a tentativa mais recente se ela ainda estiver pendente (o comando foi bloqueado e nada foi enviado). */
+    fun discard(): FaultLog {
+        val last = history.lastOrNull() ?: return this
+        return if (last.result == ClearResult.Attempt) copy(history = history.dropLast(1)) else this
+    }
+
     /** Uma linha por item: `M|código|quando` e `H|quando|RESULTADO|código,código`. */
     fun encode(): String = buildString {
         marks.forEach { (code, at) -> append("M|").append(code).append('|').append(at).append('\n') }
