@@ -1,0 +1,198 @@
+{
+  "P2096": {
+    "title": "Correção de combustível depois do catalisador, pobre demais (banco 1)",
+    "severity": "attention",
+    "causes": ["Sensor de oxigênio traseiro lendo rico (por exemplo, duto de ar de referência contaminado)", "Sensor dianteiro lendo pobre, e o motor na verdade trabalha rico", "Calibração do módulo corrigida por atualização"],
+    "symptoms": ["Luz do motor acesa", "Em geral sem mudança na direção"],
+    "solution": "Confira os sensores de oxigênio e vazamentos de escape perto deles. Se tudo estiver bom, pergunte à concessionária sobre atualização do módulo."
+  },
+  "P2097": {
+    "title": "Correção de combustível depois do catalisador, rica demais (banco 1)",
+    "severity": "attention",
+    "causes": ["Vazamento no escapamento antes do sensor traseiro, puxando ar", "Sensor de oxigênio traseiro lendo pobre ou envelhecido", "Calibração do módulo corrigida por atualização"],
+    "symptoms": ["Luz do motor acesa", "Em geral sem mudança na direção"],
+    "solution": "Procure vazamentos no escapamento antes do sensor traseiro e confira o sensor. Se tudo estiver bom, pergunte à concessionária sobre atualização do módulo."
+  },
+  "P2098": {
+    "title": "Correção de combustível depois do catalisador, pobre demais (banco 2)",
+    "severity": "attention",
+    "causes": ["Sensor de oxigênio traseiro do banco 2 lendo rico", "Sensor dianteiro do banco 2 lendo pobre"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Confira os sensores de oxigênio do banco 2 e vazamentos de escape perto deles."
+  },
+  "P2099": {
+    "title": "Correção de combustível depois do catalisador, rica demais (banco 2)",
+    "severity": "attention",
+    "causes": ["Vazamento no escapamento antes do sensor traseiro do banco 2", "Sensor de oxigênio traseiro do banco 2 lendo pobre ou envelhecido"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Procure vazamentos no escapamento do banco 2 e confira o sensor traseiro."
+  },
+  "P2101": {
+    "title": "Motor da borboleta eletrônica, desempenho fora da faixa",
+    "severity": "attention",
+    "causes": ["Carvão ou gelo deixando a borboleta dura ou grudando", "Resistência alta nos pinos do conector da borboleta", "Engrenagens gastas ou motor fraco dentro do corpo de borboleta"],
+    "symptoms": ["Luz do motor acesa", "Aceleração falhando ou limitada", "Modo de emergência"],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Se persistir, o corpo de borboleta costuma ser trocado. Com a potência limitada, evite rodar longe."
+  },
+  "P2102": {
+    "title": "Motor da borboleta eletrônica, circuito baixo",
+    "severity": "attention",
+    "causes": ["Fio do motor roçado em curto com o terra", "Enrolamento em curto ou motor travado consumindo corrente demais", "Água no conector da borboleta ligando os terminais"],
+    "symptoms": ["Luz do motor acesa", "Modo de emergência com pouca potência"],
+    "solution": "Inspecione o conector e o chicote do corpo de borboleta. Com a potência limitada, evite rodar longe."
+  },
+  "P2103": {
+    "title": "Motor da borboleta eletrônica, circuito alto",
+    "severity": "attention",
+    "causes": ["Fio do motor em curto com uma alimentação de bateria", "Relé do motor da borboleta preso ligado (onde existe)", "Conector da borboleta danificado ou molhado"],
+    "symptoms": ["Luz do motor acesa", "Modo de emergência com pouca potência"],
+    "solution": "Inspecione o conector e o chicote do corpo de borboleta. Com a potência limitada, evite rodar longe."
+  },
+  "P2119": {
+    "title": "Corpo de borboleta eletrônica, desempenho fora da faixa",
+    "severity": "attention",
+    "causes": ["Depósitos de carvão que fazem a borboleta grudar", "Água ou gelo na admissão atrás do corpo de borboleta", "Mola de retorno fraca ou engrenagem gasta"],
+    "symptoms": ["Luz do motor acesa", "Aceleração limitada ou irregular"],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio. Se o problema voltar, o corpo de borboleta costuma ser trocado."
+  },
+  "P2122": {
+    "title": "Sensor D do pedal do acelerador, sinal baixo",
+    "severity": "attention",
+    "causes": ["Fio de sinal da trilha D em curto com o terra ou roçado", "Alimentação de 5 V do pedal aberta ou em curto", "Sensor do pedal com defeito (por exemplo, solda trincada)"],
+    "symptoms": ["Luz do motor acesa", "Pedal sem resposta ou aceleração limitada", "Modo de emergência"],
+    "solution": "Confira o conector do pedal do acelerador e o chicote. Sensor do pedal costuma ser trocado junto com o pedal."
+  },
+  "P2123": {
+    "title": "Sensor D do pedal do acelerador, sinal alto",
+    "severity": "attention",
+    "causes": ["Terra do sensor do pedal aberto ou com alta resistência", "Sinal da trilha D em curto com 5 V ou com a bateria", "Defeito interno no sensor do pedal"],
+    "symptoms": ["Luz do motor acesa", "Aceleração limitada", "Modo de emergência"],
+    "solution": "Confira o conector e o fio de terra do pedal. Sensor com defeito é trocado junto com o pedal."
+  },
+  "P2127": {
+    "title": "Sensor E do pedal do acelerador, sinal baixo",
+    "severity": "attention",
+    "causes": ["Fio de sinal da trilha E em curto com o terra", "Alimentação de 5 V da segunda trilha aberta", "Trilha E gasta no fim de curso (pedal solto)"],
+    "symptoms": ["Luz do motor acesa", "Aceleração limitada", "Modo de emergência"],
+    "solution": "Confira o conector e o chicote do pedal. Sensor com defeito é trocado junto com o pedal."
+  },
+  "P2128": {
+    "title": "Sensor E do pedal do acelerador, sinal alto",
+    "severity": "attention",
+    "causes": ["Terra do sensor do pedal aberto ou com alta resistência", "Sinal da trilha E em curto com a referência de 5 V", "Trilha ou solda interna do sensor do pedal rompida"],
+    "symptoms": ["Luz do motor acesa", "Aceleração limitada", "Modo de emergência"],
+    "solution": "Confira o conector e o fio de terra do pedal. Sensor com defeito é trocado junto com o pedal."
+  },
+  "P2135": {
+    "title": "Sensores A e B da borboleta, correlação de tensão",
+    "severity": "attention",
+    "causes": ["Trilhas do sensor de posição da borboleta gastas ou contaminadas", "Resistência alta ou corrosão no conector da borboleta", "Calibração do módulo propensa a falsa detecção (atualização em alguns modelos)"],
+    "symptoms": ["Luz do motor acesa", "Aceleração falhando", "Modo de emergência"],
+    "solution": "Limpe o corpo de borboleta e confira o conector. Se persistir, o corpo de borboleta costuma ser trocado."
+  },
+  "P2138": {
+    "title": "Sensores D e E do pedal, correlação de tensão",
+    "severity": "attention",
+    "causes": ["Água ou corrosão em um conector do pedal ou do chicote", "Sensor do pedal gasto, com uma trilha desviando", "Terminais mal crimpados ou soltos aumentando a resistência"],
+    "symptoms": ["Luz do motor acesa", "Aceleração limitada", "Modo de emergência"],
+    "solution": "Confira o conector do pedal do acelerador e o chicote. Sensor com defeito é trocado junto com o pedal."
+  },
+  "P2187": {
+    "title": "Mistura pobre demais na marcha lenta (banco 1)",
+    "severity": "attention",
+    "causes": ["Entrada de ar depois do sensor de fluxo de ar, em geral na ventilação do cárter", "Fiação do sensor de oxigênio ou de mistura dianteiro danificada", "Pressão de combustível baixa"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular"],
+    "solution": "Procure vazamentos de ar, principalmente na ventilação do cárter e nas mangueiras de vácuo. Confira a pressão de combustível se persistir."
+  },
+  "P2188": {
+    "title": "Mistura rica demais na marcha lenta (banco 1)",
+    "severity": "attention",
+    "causes": ["Bico vazando ou pressão de combustível alta", "Vapor de combustível pela válvula de purga ou gases do cárter diluídos no óleo", "Sensor de fluxo de ar ou de pressão do coletor lendo errado"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Cheiro de combustível"],
+    "solution": "Confira filtro de ar, velas e cheiro de gasolina no óleo. Mistura rica por muito tempo pode danificar o catalisador."
+  },
+  "P2195": {
+    "title": "Sensor de oxigênio preso em mistura pobre (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": ["Sensor de oxigênio ou de mistura dianteiro envelhecido ou contaminado", "Vazamento de escapamento antes do sensor", "Fiação de sinal ou de referência do sensor com defeito"],
+    "symptoms": ["Luz do motor acesa", "Consumo um pouco maior"],
+    "solution": "Procure vazamentos de escape e inspecione a fiação do sensor. Sensor envelhecido costuma ser trocado."
+  },
+  "P2196": {
+    "title": "Sensor de oxigênio preso em mistura rica (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": ["Sensor de oxigênio ou de mistura dianteiro contaminado ou envelhecido", "Sinal em curto ou circuito de referência com defeito"],
+    "symptoms": ["Luz do motor acesa", "Consumo um pouco maior"],
+    "solution": "Inspecione a fiação do sensor e confira se o motor não está realmente rico. Sensor contaminado costuma ser trocado."
+  },
+  "P2197": {
+    "title": "Sensor de oxigênio preso em mistura pobre (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": ["Sensor dianteiro do banco 2 envelhecido ou contaminado", "Vazamento de escapamento antes do sensor", "Fiação de sinal ou de referência com defeito"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Procure vazamentos de escape do lado do banco 2 e inspecione a fiação do sensor."
+  },
+  "P2198": {
+    "title": "Sensor de oxigênio preso em mistura rica (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": ["Sensor dianteiro do banco 2 contaminado ou envelhecido", "Sinal em curto ou circuito de referência com defeito"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Inspecione a fiação do sensor do banco 2 e confira se o motor não está rico."
+  },
+  "P2270": {
+    "title": "Sensor de oxigênio preso em mistura pobre (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": ["Sensor traseiro envelhecido, contaminado ou lento para chegar à tensão de rico", "Vazamento de escapamento antes do sensor traseiro, diluindo o gás com ar", "Óleo no conector do sensor ou terminal torto"],
+    "symptoms": ["Luz do motor acesa", "Em geral sem mudança na direção"],
+    "solution": "Procure vazamentos no escapamento antes do sensor traseiro e inspecione o conector. Sensor envelhecido costuma ser trocado."
+  },
+  "P2271": {
+    "title": "Sensor de oxigênio preso em mistura rica (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": ["Sensor traseiro contaminado por líquido de arrefecimento, óleo ou silicone", "Sensor de mistura dianteiro com defeito, fazendo o traseiro parecer rico", "Fio de sinal roçando em uma fonte de tensão"],
+    "symptoms": ["Luz do motor acesa", "Em geral sem mudança na direção"],
+    "solution": "Inspecione a fiação do sensor traseiro e confira se há consumo de óleo ou de líquido de arrefecimento. Sensor contaminado costuma ser trocado."
+  },
+  "P2272": {
+    "title": "Sensor de oxigênio preso em mistura pobre (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": ["Sensor traseiro do banco 2 envelhecido ou contaminado", "Vazamento de escapamento antes do sensor traseiro do banco 2"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Procure vazamentos no escapamento do banco 2 e inspecione o conector do sensor."
+  },
+  "P2273": {
+    "title": "Sensor de oxigênio preso em mistura rica (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": ["Sensor traseiro do banco 2 contaminado por líquido de arrefecimento, óleo ou silicone", "Sensor de mistura dianteiro do banco 2 com defeito"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Inspecione a fiação do sensor traseiro do banco 2 e confira consumo de óleo ou de líquido de arrefecimento."
+  },
+  "P2227": {
+    "title": "Sensor de pressão barométrica, fora da faixa",
+    "severity": "attention",
+    "causes": ["Gelo ou borra no intercooler em motores turbo no frio forte", "Sensor barométrico com leitura deslocada", "Sensor de pressão do coletor ou de sobrealimentação com defeito, distorcendo a comparação"],
+    "symptoms": ["Luz do motor acesa", "Perda de força em altitude ou no frio"],
+    "solution": "Confira o conector e o sensor de pressão do coletor. Se o código aparece só em frio forte, pode ser gelo no sistema de admissão."
+  },
+  "P2228": {
+    "title": "Sensor de pressão barométrica, sinal baixo",
+    "severity": "attention",
+    "causes": ["Fio de sinal do sensor externo em curto com o terra ou aberto", "Sensor interno do módulo com defeito (alguns modelos), exigindo troca do módulo", "Referência de 5 V baixa ou ausente"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta e potência levemente irregulares"],
+    "solution": "Confira o conector e o fio do sensor barométrico. Em alguns carros o sensor fica dentro do módulo e só uma oficina resolve."
+  },
+  "P2229": {
+    "title": "Sensor de pressão barométrica, sinal alto",
+    "severity": "attention",
+    "causes": ["Respiro do sensor interno do módulo entupido (por exemplo, por cera no cofre do motor)", "Fio do sensor externo em curto com 5 V ou com a bateria", "Defeito interno do sensor ou do módulo"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta e potência levemente irregulares"],
+    "solution": "Confira o conector e o fio do sensor barométrico e se o respiro não está entupido."
+  },
+  "P2230": {
+    "title": "Sensor de pressão barométrica, intermitente",
+    "severity": "attention",
+    "causes": ["Chicote do motor roçando em uma peça do motor (por exemplo, polia da bomba de vácuo, tampa de válvulas)", "Pino solto ou corroído no conector do sensor ou do módulo", "Sensor com mau contato interno"],
+    "symptoms": ["Luz do motor acesa", "Falhas ocasionais"],
+    "solution": "Procure o ponto do chicote que está roçando e confira os conectores."
+  }
+}
