@@ -35,7 +35,7 @@ class AppContainer(context: Context) {
 
     val simVolume = SimVolumeRepository()
     val simVehicle = SimVehicleRepository()
-    val simObd = SimObdRepository()
+    val simObd = SimObdRepository(scope)
 
     val media: MediaRepository = SimMediaRepository(context, scope)
     val apps: AppsRepository = SimAppsRepository()
