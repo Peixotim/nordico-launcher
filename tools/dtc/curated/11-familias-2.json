@@ -1,0 +1,1439 @@
+{
+  "P0230": {
+    "title": "Bomba de combustível, circuito primário (relé de controle), circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Fusível ou relé da bomba de combustível com defeito",
+      "Conector ou fio da bomba ou do relé aberto, em curto ou corroído",
+      "Bomba de combustível com defeito",
+      "Interruptor de corte de combustível (inércia) acionado"
+    ],
+    "symptoms": [
+      "Carro que não pega ou morre rodando",
+      "Luz do motor acesa",
+      "Falta de força"
+    ],
+    "solution": "Teste o fusível e o relé da bomba e ouça o zumbido da bomba ao ligar a chave. Se o carro não pega, evite insistir na partida."
+  },
+  "P0231": {
+    "title": "Bomba de combustível, circuito primário (relé de controle), sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Fusível ou relé da bomba de combustível com defeito",
+      "Conector ou fio da bomba ou do relé aberto, em curto ou corroído",
+      "Bomba de combustível com defeito",
+      "Interruptor de corte de combustível (inércia) acionado"
+    ],
+    "symptoms": [
+      "Carro que não pega ou morre rodando",
+      "Luz do motor acesa",
+      "Falta de força"
+    ],
+    "solution": "Teste o fusível e o relé da bomba e ouça o zumbido da bomba ao ligar a chave. Se o carro não pega, evite insistir na partida."
+  },
+  "P0232": {
+    "title": "Bomba de combustível, circuito primário (relé de controle), sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Fusível ou relé da bomba de combustível com defeito",
+      "Conector ou fio da bomba ou do relé aberto, em curto ou corroído",
+      "Bomba de combustível com defeito",
+      "Interruptor de corte de combustível (inércia) acionado"
+    ],
+    "symptoms": [
+      "Carro que não pega ou morre rodando",
+      "Luz do motor acesa",
+      "Falta de força"
+    ],
+    "solution": "Teste o fusível e o relé da bomba e ouça o zumbido da bomba ao ligar a chave. Se o carro não pega, evite insistir na partida."
+  },
+  "P0233": {
+    "title": "Bomba de combustível, circuito primário (relé de controle), sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Fusível ou relé da bomba de combustível com defeito",
+      "Conector ou fio da bomba ou do relé aberto, em curto ou corroído",
+      "Bomba de combustível com defeito",
+      "Interruptor de corte de combustível (inércia) acionado"
+    ],
+    "symptoms": [
+      "Carro que não pega ou morre rodando",
+      "Luz do motor acesa",
+      "Falta de força"
+    ],
+    "solution": "Teste o fusível e o relé da bomba e ouça o zumbido da bomba ao ligar a chave. Se o carro não pega, evite insistir na partida."
+  },
+  "P0400": {
+    "title": "EGR: fluxo com defeito",
+    "severity": "attention",
+    "causes": [
+      "Válvula EGR ou passagens entupidas por carvão",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0401": {
+    "title": "EGR: fluxo insuficiente",
+    "severity": "attention",
+    "causes": [
+      "Válvula EGR ou passagens entupidas por carvão",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0402": {
+    "title": "EGR: fluxo excessivo",
+    "severity": "attention",
+    "causes": [
+      "Válvula EGR presa aberta",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0403": {
+    "title": "EGR: circuito da válvula",
+    "severity": "attention",
+    "causes": [
+      "Fio ou conector da válvula EGR com defeito",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0404": {
+    "title": "EGR: circuito fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Válvula EGR emperrada ou sensor de posição com defeito",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0405": {
+    "title": "EGR: sensor de posição A, sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Sensor de posição da EGR com defeito",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0406": {
+    "title": "EGR: sensor de posição A, sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Sensor de posição da EGR com defeito",
+      "Mangueiras de vácuo da EGR soltas ou rachadas",
+      "Conector ou chicote da válvula corroído ou solto"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular ou falhas em baixa rotação",
+      "Detonação (batida de pino) em aceleração"
+    ],
+    "solution": "Limpar a válvula EGR e as passagens costuma resolver. Confira também as mangueiras de vácuo."
+  },
+  "P0520": {
+    "title": "Sensor ou interruptor de pressão do óleo, circuito",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor de pressão do óleo com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Pressão de óleo realmente baixa (nível, bomba, desgaste)"
+    ],
+    "symptoms": [
+      "Luz de pressão do óleo acesa ou apagada de forma estranha",
+      "Luz do motor acesa"
+    ],
+    "solution": "Confira o nível do óleo agora. Se a luz de pressão do óleo estiver acesa no painel, pare o carro: rodar sem pressão destrói o motor."
+  },
+  "P0521": {
+    "title": "Sensor ou interruptor de pressão do óleo, fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor de pressão do óleo com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Pressão de óleo realmente baixa (nível, bomba, desgaste)"
+    ],
+    "symptoms": [
+      "Luz de pressão do óleo acesa ou apagada de forma estranha",
+      "Luz do motor acesa"
+    ],
+    "solution": "Confira o nível do óleo agora. Se a luz de pressão do óleo estiver acesa no painel, pare o carro: rodar sem pressão destrói o motor."
+  },
+  "P0522": {
+    "title": "Sensor ou interruptor de pressão do óleo, sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor de pressão do óleo com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Pressão de óleo realmente baixa (nível, bomba, desgaste)"
+    ],
+    "symptoms": [
+      "Luz de pressão do óleo acesa ou apagada de forma estranha",
+      "Luz do motor acesa"
+    ],
+    "solution": "Confira o nível do óleo agora. Se a luz de pressão do óleo estiver acesa no painel, pare o carro: rodar sem pressão destrói o motor."
+  },
+  "P0523": {
+    "title": "Sensor ou interruptor de pressão do óleo, sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor de pressão do óleo com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Pressão de óleo realmente baixa (nível, bomba, desgaste)"
+    ],
+    "symptoms": [
+      "Luz de pressão do óleo acesa ou apagada de forma estranha",
+      "Luz do motor acesa"
+    ],
+    "solution": "Confira o nível do óleo agora. Se a luz de pressão do óleo estiver acesa no painel, pare o carro: rodar sem pressão destrói o motor."
+  },
+  "P0524": {
+    "title": "Pressão do óleo do motor baixa demais",
+    "severity": "stop",
+    "causes": [
+      "Nível de óleo baixo ou óleo velho e fino",
+      "Bomba de óleo ou peneira entupida",
+      "Folgas internas do motor gastas",
+      "Sensor com defeito (menos provável)"
+    ],
+    "symptoms": [
+      "Luz de pressão do óleo acesa",
+      "Barulho de batidas ou do comando no motor",
+      "Luz do motor acesa"
+    ],
+    "solution": "Pare o carro em local seguro, desligue o motor e confira o nível do óleo. Não rode com a luz de pressão do óleo acesa: o motor pode ser destruído. Peça guincho se o nível estiver certo."
+  },
+  "P0700": {
+    "title": "Sistema de controle do câmbio (pedido de luz do motor)",
+    "severity": "attention",
+    "causes": [
+      "O módulo do câmbio registrou uma falha própria (leia os códigos do câmbio)",
+      "Fluido ou solenoides com problema",
+      "Comunicação entre o câmbio e o módulo do motor"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Câmbio em modo de emergência"
+    ],
+    "solution": "Esse código só avisa que o câmbio tem falhas próprias: peça a leitura dos códigos do módulo do câmbio em uma oficina."
+  },
+  "P0705": {
+    "title": "Sensor de posição da alavanca do câmbio, circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor da alavanca desregulado ou com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Cabo ou regulagem da alavanca fora de ajuste"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Carro que não dá partida em N ou P, ou que dá partida em outra posição",
+      "Indicador de marcha errado no painel"
+    ],
+    "solution": "Confira a regulagem da alavanca e o conector do sensor. É um serviço de oficina de câmbio."
+  },
+  "P0706": {
+    "title": "Sensor de posição da alavanca do câmbio, sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor da alavanca desregulado ou com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Cabo ou regulagem da alavanca fora de ajuste"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Carro que não dá partida em N ou P, ou que dá partida em outra posição",
+      "Indicador de marcha errado no painel"
+    ],
+    "solution": "Confira a regulagem da alavanca e o conector do sensor. É um serviço de oficina de câmbio."
+  },
+  "P0707": {
+    "title": "Sensor de posição da alavanca do câmbio, sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor da alavanca desregulado ou com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Cabo ou regulagem da alavanca fora de ajuste"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Carro que não dá partida em N ou P, ou que dá partida em outra posição",
+      "Indicador de marcha errado no painel"
+    ],
+    "solution": "Confira a regulagem da alavanca e o conector do sensor. É um serviço de oficina de câmbio."
+  },
+  "P0708": {
+    "title": "Sensor de posição da alavanca do câmbio, sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor da alavanca desregulado ou com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Cabo ou regulagem da alavanca fora de ajuste"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Carro que não dá partida em N ou P, ou que dá partida em outra posição",
+      "Indicador de marcha errado no painel"
+    ],
+    "solution": "Confira a regulagem da alavanca e o conector do sensor. É um serviço de oficina de câmbio."
+  },
+  "P0709": {
+    "title": "Sensor de posição da alavanca do câmbio, sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Sensor ou interruptor da alavanca desregulado ou com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Cabo ou regulagem da alavanca fora de ajuste"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Carro que não dá partida em N ou P, ou que dá partida em outra posição",
+      "Indicador de marcha errado no painel"
+    ],
+    "solution": "Confira a regulagem da alavanca e o conector do sensor. É um serviço de oficina de câmbio."
+  },
+  "P0710": {
+    "title": "Sensor de temperatura do fluido do câmbio, circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Sensor de temperatura do fluido com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Fluido do câmbio superaquecido por uso pesado ou por problema interno"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha diferentes do normal"
+    ],
+    "solution": "Confira o conector do sensor e o estado do fluido. Câmbio superaquecido pede revisão em oficina."
+  },
+  "P0711": {
+    "title": "Sensor de temperatura do fluido do câmbio, sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Sensor de temperatura do fluido com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Fluido do câmbio superaquecido por uso pesado ou por problema interno"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha diferentes do normal"
+    ],
+    "solution": "Confira o conector do sensor e o estado do fluido. Câmbio superaquecido pede revisão em oficina."
+  },
+  "P0712": {
+    "title": "Sensor de temperatura do fluido do câmbio, sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Sensor de temperatura do fluido com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Fluido do câmbio superaquecido por uso pesado ou por problema interno"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha diferentes do normal"
+    ],
+    "solution": "Confira o conector do sensor e o estado do fluido. Câmbio superaquecido pede revisão em oficina."
+  },
+  "P0713": {
+    "title": "Sensor de temperatura do fluido do câmbio, sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Sensor de temperatura do fluido com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Fluido do câmbio superaquecido por uso pesado ou por problema interno"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha diferentes do normal"
+    ],
+    "solution": "Confira o conector do sensor e o estado do fluido. Câmbio superaquecido pede revisão em oficina."
+  },
+  "P0714": {
+    "title": "Sensor de temperatura do fluido do câmbio, sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Sensor de temperatura do fluido com defeito",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Fluido do câmbio superaquecido por uso pesado ou por problema interno"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha diferentes do normal"
+    ],
+    "solution": "Confira o conector do sensor e o estado do fluido. Câmbio superaquecido pede revisão em oficina."
+  },
+  "P0715": {
+    "title": "Sensor de rotação de entrada do câmbio (turbina), circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0716": {
+    "title": "Sensor de rotação de entrada do câmbio (turbina), sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0717": {
+    "title": "Sensor de rotação de entrada do câmbio (turbina), sem sinal",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0718": {
+    "title": "Sensor de rotação de entrada do câmbio (turbina), sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0720": {
+    "title": "Sensor de rotação de saída do câmbio, circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0721": {
+    "title": "Sensor de rotação de saída do câmbio, sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0722": {
+    "title": "Sensor de rotação de saída do câmbio, sem sinal",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0723": {
+    "title": "Sensor de rotação de saída do câmbio, sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Sensor de velocidade com defeito ou sujo de limalha",
+      "Fio ou conector aberto, em curto ou corroído",
+      "Roda fônica ou anel danificado"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Velocímetro errático ou trocas de marcha estranhas"
+    ],
+    "solution": "Confira o conector e o fluido do câmbio. Sensor com limalha costuma ser limpo ou trocado em oficina."
+  },
+  "P0730": {
+    "title": "Câmbio: Relação de marcha incorreta",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0731": {
+    "title": "Câmbio: Relação incorreta na 1ª marcha",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0732": {
+    "title": "Câmbio: Relação incorreta na 2ª marcha",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0733": {
+    "title": "Câmbio: Relação incorreta na 3ª marcha",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0734": {
+    "title": "Câmbio: Relação incorreta na 4ª marcha",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0735": {
+    "title": "Câmbio: Relação incorreta na 5ª marcha",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0736": {
+    "title": "Câmbio: Relação incorreta na marcha à ré",
+    "severity": "attention",
+    "causes": [
+      "Câmbio patinando por fluido baixo, velho ou contaminado",
+      "Embreagens ou fitas internas gastas",
+      "Solenoide ou corpo de válvulas com defeito",
+      "Sensor de velocidade do câmbio com defeito"
+    ],
+    "symptoms": [
+      "Rotação do motor sobe sem o carro acompanhar",
+      "Trocas de marcha demoradas ou bruscas",
+      "Luz do motor ou do câmbio acesa"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Câmbio patinando se destrói rápido: evite acelerar forte e procure uma oficina logo."
+  },
+  "P0740": {
+    "title": "Solenoide do conversor de torque (TCC), mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0741": {
+    "title": "Solenoide do conversor de torque (TCC), desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0742": {
+    "title": "Solenoide do conversor de torque (TCC), preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0743": {
+    "title": "Solenoide do conversor de torque (TCC), falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0744": {
+    "title": "Solenoide do conversor de torque (TCC), intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0745": {
+    "title": "Solenoide de controle de pressão A, mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0746": {
+    "title": "Solenoide de controle de pressão A, desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0747": {
+    "title": "Solenoide de controle de pressão A, preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0748": {
+    "title": "Solenoide de controle de pressão A, falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0749": {
+    "title": "Solenoide de controle de pressão A, intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0750": {
+    "title": "Solenoide de troca A, mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0751": {
+    "title": "Solenoide de troca A, desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0752": {
+    "title": "Solenoide de troca A, preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0753": {
+    "title": "Solenoide de troca A, falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0754": {
+    "title": "Solenoide de troca A, intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0755": {
+    "title": "Solenoide de troca B, mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0756": {
+    "title": "Solenoide de troca B, desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0757": {
+    "title": "Solenoide de troca B, preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0758": {
+    "title": "Solenoide de troca B, falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0759": {
+    "title": "Solenoide de troca B, intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P075A": {
+    "title": "Solenoide de troca C, mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P075B": {
+    "title": "Solenoide de troca C, desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P075C": {
+    "title": "Solenoide de troca C, preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P075D": {
+    "title": "Solenoide de troca C, falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P075E": {
+    "title": "Solenoide de troca C, intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P075F": {
+    "title": "Solenoide de troca D, mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0760": {
+    "title": "Solenoide de troca D, desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0761": {
+    "title": "Solenoide de troca D, preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0762": {
+    "title": "Solenoide de troca D, falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0763": {
+    "title": "Solenoide de troca D, intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0764": {
+    "title": "Solenoide de troca E, mau funcionamento",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0765": {
+    "title": "Solenoide de troca E, desempenho ou preso desligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0766": {
+    "title": "Solenoide de troca E, preso ligado",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0767": {
+    "title": "Solenoide de troca E, falha elétrica",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0768": {
+    "title": "Solenoide de troca E, intermitente",
+    "severity": "attention",
+    "causes": [
+      "Nível ou estado do fluido do câmbio ruim (baixo, velho ou contaminado)",
+      "Solenoide com defeito, emperrado ou com a tela entupida",
+      "Conector ou chicote do solenoide com mau contato, aberto ou em curto",
+      "Corpo de válvulas ou módulo do câmbio com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio: solenoide e corpo de válvulas exigem desmontagem."
+  },
+  "P0780": {
+    "title": "Câmbio: Falha de troca de marcha",
+    "severity": "attention",
+    "causes": [
+      "Fluido do câmbio baixo, velho ou contaminado",
+      "Solenoide de troca ou corpo de válvulas com defeito",
+      "Embreagem ou fita interna gasta"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio."
+  },
+  "P0781": {
+    "title": "Câmbio: Falha na troca 1-2",
+    "severity": "attention",
+    "causes": [
+      "Fluido do câmbio baixo, velho ou contaminado",
+      "Solenoide de troca ou corpo de válvulas com defeito",
+      "Embreagem ou fita interna gasta"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio."
+  },
+  "P0782": {
+    "title": "Câmbio: Falha na troca 2-3",
+    "severity": "attention",
+    "causes": [
+      "Fluido do câmbio baixo, velho ou contaminado",
+      "Solenoide de troca ou corpo de válvulas com defeito",
+      "Embreagem ou fita interna gasta"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio."
+  },
+  "P0783": {
+    "title": "Câmbio: Falha na troca 3-4",
+    "severity": "attention",
+    "causes": [
+      "Fluido do câmbio baixo, velho ou contaminado",
+      "Solenoide de troca ou corpo de válvulas com defeito",
+      "Embreagem ou fita interna gasta"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio."
+  },
+  "P0784": {
+    "title": "Câmbio: Falha na troca 4-5",
+    "severity": "attention",
+    "causes": [
+      "Fluido do câmbio baixo, velho ou contaminado",
+      "Solenoide de troca ou corpo de válvulas com defeito",
+      "Embreagem ou fita interna gasta"
+    ],
+    "symptoms": [
+      "Luz do motor ou do câmbio acesa",
+      "Trocas de marcha bruscas, atrasadas ou erradas",
+      "Câmbio em modo de emergência (preso em uma marcha)"
+    ],
+    "solution": "Confira o nível e o estado do fluido do câmbio (cheiro de queimado ou cor escura é sinal ruim). Se o fluido estiver bom, procure uma oficina de câmbio."
+  },
+  "U0001": {
+    "title": "Rede de comunicação CAN de alta velocidade",
+    "severity": "attention",
+    "causes": [
+      "Fiação da rede CAN em curto, aberta ou com conector corroído",
+      "Resistores de terminação ou um módulo derrubando a rede",
+      "Bateria fraca ou terra ruim"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas",
+      "Carro que não pega ou funções sem resposta"
+    ],
+    "solution": "Confira bateria e terras e procure uma oficina para testar a rede CAN: um módulo ou um fio em curto pode derrubar tudo."
+  },
+  "U0073": {
+    "title": "Rede de comunicação desligada por erro (bus off)",
+    "severity": "attention",
+    "causes": [
+      "Fiação da rede CAN em curto ou aberta",
+      "Módulo com defeito derrubando a rede",
+      "Bateria fraca ou quedas de tensão"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas",
+      "Funções sem resposta"
+    ],
+    "solution": "Comece pela bateria e pelos terras. Se a bateria está boa, a rede CAN precisa de teste profissional."
+  },
+  "U0100": {
+    "title": "Comunicação perdida com o módulo do motor (ECM/PCM)",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0101": {
+    "title": "Comunicação perdida com o módulo do câmbio (TCM)",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0102": {
+    "title": "Comunicação perdida com o módulo da caixa de transferência",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0121": {
+    "title": "Comunicação perdida com o módulo do ABS",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0122": {
+    "title": "Comunicação perdida com o módulo de controle de estabilidade",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0140": {
+    "title": "Comunicação perdida com o módulo da carroceria (BCM)",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0151": {
+    "title": "Comunicação perdida com o módulo do airbag",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0155": {
+    "title": "Comunicação perdida com o painel de instrumentos",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0164": {
+    "title": "Comunicação perdida com o módulo do ar-condicionado",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  },
+  "U0167": {
+    "title": "Comunicação perdida com o módulo do imobilizador",
+    "severity": "attention",
+    "causes": [
+      "Bateria fraca ou queda de tensão (a causa mais comum)",
+      "Fiação da rede CAN danificada, em curto ou com conector corroído",
+      "Módulo sem alimentação (fusível, relé, terra) ou com defeito"
+    ],
+    "symptoms": [
+      "Várias luzes de aviso acesas ao mesmo tempo",
+      "Funções do módulo sem resposta",
+      "Códigos em vários módulos"
+    ],
+    "solution": "Comece pela bateria e pelos terminais: tensão baixa derruba vários módulos de uma vez. Se a bateria está boa, procure uma oficina para testar a rede CAN."
+  }
+}
