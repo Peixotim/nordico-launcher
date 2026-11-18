@@ -51,6 +51,8 @@ import app.nordico.launcher.feature.hud.ClimateHud
 import app.nordico.launcher.feature.hud.HudKind
 import app.nordico.launcher.feature.hud.VolumeHud
 import app.nordico.launcher.feature.nowplaying.NowPlayingScreen
+import app.nordico.launcher.feature.radio.RadioScreen
+import app.nordico.launcher.feature.vehicle.VehicleScreen
 import app.nordico.launcher.feature.map.chooseNavApp
 import app.nordico.launcher.feature.map.openFavorite
 import app.nordico.launcher.feature.map.openNavApp
@@ -116,9 +118,15 @@ private fun ScreenContent(s: Screen, vm: AppViewModel, c: AppContainer, mapHolde
             val outside by c.vehicle.outsideTemp.collectAsStateWithLifecycle()
             climate?.let { ClimateScreen(it, outside) { vm.go(Screen.Home) } }
         }
+        Screen.Vehicle -> {
+            val prefs by vm.prefs.collectAsStateWithLifecycle()
+            VehicleScreen(c, prefs.obdAdapter) { vm.go(Screen.Home) }
+        }
+        Screen.Radio -> RadioScreen(vm, c) { vm.go(Screen.Home) }
         Screen.Apps -> AppsScreen(c, onBack = { vm.go(Screen.Home) }) { route ->
             when (route) {
                 InternalRoute.Climate -> vm.go(Screen.Climate)
+                InternalRoute.Vehicle -> vm.go(Screen.Vehicle)
             }
         }
     }
@@ -132,7 +140,7 @@ private fun Huds(vm: AppViewModel, c: AppContainer) {
     val alertText by vm.alertText.collectAsStateWithLifecycle()
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         VolumeHud(kind == HudKind.Volume, volume)
-        AlertHud(kind == HudKind.Alert, alertText)
+        AlertHud(kind == HudKind.Alert, alertText, onOpen = { vm.go(Screen.Vehicle) })
         climate?.let { ClimateHud(kind == HudKind.Climate, it, onOpen = { vm.go(Screen.Climate) }) }
     }
 }
