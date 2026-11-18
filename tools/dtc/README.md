@@ -59,4 +59,10 @@ Families that follow a fixed SAE pattern (oxygen sensors, ignition coils, inject
 sensors, per-cylinder misfires) are produced by `gen_families.py` into `curated/10-familias.json` from
 hand-reviewed templates. Codes that already have a hand-written entry are skipped. Run it before `build_catalog.py`.
 
+`gen_families2.py` does the same for automatic transmission solenoids, gear ratio and speed sensors, fuel pump
+circuit, EGR, oil pressure and module communication loss (`curated/11-familias-2.json`).
+
+Note on the Honda list: the `honda_codes.txt` source looks like a mix of several makes and eras (it repeats codes
+and includes generic-looking titles), so its titles are kept in English and are not presented as authoritative.
+
 Licenses of the sources: see `THIRD_PARTY_NOTICES.md` at the repository root.
