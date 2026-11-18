@@ -43,7 +43,7 @@ Uso pessoal. A meta continua sendo a interface com cara de montadora, minimalist
 
 ## 5. Não-objetivos
 
-- **Escrever no carro.** Nada de apagar códigos de falha, reiniciar a ECU ou atuar em qualquer coisa. O anúncio do adaptador vende "apagar luz de injeção"; o Nórdico só **lê**.
+- **Escrever no carro.** Nada de reiniciar a ECU ou atuar em qualquer coisa. O anúncio do adaptador vende "apagar luz de injeção". *(Alterado em 2026-11-18: o apagar padrão do modo 04 passou a existir, com proteções; ver [limpar falhas](2026-11-18-limpar-falhas-design.md). Continua proibido qualquer outro comando de escrita.)*
 - Consumo instantâneo de combustível. Depende de PID de fluxo de ar que muitos Honda não têm, e o carro é flex (a mistura muda a conta). Fica para o futuro, calibrável.
 - PIDs proprietários da Honda (câmbio CVT, ventoinha): só depois de descobrir quais existem.
 - Biblioteca e playlists do Spotify (precisa de Client ID do Spotify).
