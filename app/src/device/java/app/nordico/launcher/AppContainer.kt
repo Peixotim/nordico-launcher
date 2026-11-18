@@ -60,6 +60,9 @@ class AppContainer(context: Context) {
     private val bluetooth: BluetoothAdapter? = context.getSystemService(BluetoothManager::class.java)?.adapter
     private val appContext = context
 
+    /** Preenchido pela MainActivity: abre o pedido de permissão do Bluetooth. */
+    var requestBluetoothPermission: () -> Unit = {}
+
     /** `true` com a permissão BLUETOOTH_CONNECT concedida (Android 12+). */
     fun hasBluetoothPermission(): Boolean =
         appContext.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
