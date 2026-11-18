@@ -153,5 +153,6 @@ private fun VehicleTelemetry.with(pid: ObdPid, v: Double?): VehicleTelemetry {
         ObdPid.Throttle -> copy(throttlePct = i)
         ObdPid.Fuel -> copy(fuelPct = i)
         ObdPid.Voltage -> copy(batteryV = v)
+        ObdPid.Status -> copy(milOn = v?.let { it >= 128 }, faultCount = i?.and(0x7F))
     }
 }
