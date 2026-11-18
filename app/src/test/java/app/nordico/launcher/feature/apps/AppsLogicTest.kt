@@ -39,6 +39,11 @@ class AppsLogicTest {
         assertTrue(sectionApps(listOf(radio), setOf("radio"), "spot").hidden.isEmpty())
     }
 
+    @Test fun vehicle_entry_opens_the_vehicle_screen() {
+        assertEquals(app.nordico.launcher.data.apps.InternalRoute.Vehicle, VEHICLE_APP.route)
+        assertEquals(AppSection.Car, VEHICLE_APP.section)
+    }
+
     @Test fun blank_query_matches_all() {
         assertEquals(listOf(spotify), sectionApps(listOf(spotify), emptySet(), "   ").mine)
     }
