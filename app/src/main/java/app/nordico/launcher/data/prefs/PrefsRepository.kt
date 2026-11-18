@@ -21,6 +21,7 @@ data class Prefs(
     val navApp: String? = null,
     val obdAdapter: String? = null,
     val radioPresets: Presets = Presets(),
+    val faultLog: FaultLog = FaultLog(),
 )
 
 private val Context.dataStore by preferencesDataStore("prefs")
@@ -32,6 +33,7 @@ private val NAV = stringPreferencesKey("nav_app")
 private val OBD = stringPreferencesKey("obd_adapter")
 private val PRESETS_FM = stringPreferencesKey("radio_presets_fm")
 private val PRESETS_AM = stringPreferencesKey("radio_presets_am")
+private val FAULT_LOG = stringPreferencesKey("fault_log")
 
 /** Preferências salvas (iguais nos dois flavors). Valores inválidos voltam ao padrão. */
 class PrefsRepository(private val context: Context) {
@@ -43,6 +45,7 @@ class PrefsRepository(private val context: Context) {
             navApp = p[NAV],
             obdAdapter = p[OBD],
             radioPresets = Presets.decode(p[PRESETS_FM], p[PRESETS_AM]),
+            faultLog = FaultLog.decode(p[FAULT_LOG]),
         )
     }
 
@@ -61,6 +64,11 @@ class PrefsRepository(private val context: Context) {
             it[PRESETS_FM] = current.first
             it[PRESETS_AM] = current.second
         }
+    }
+
+    /** Atualiza as marcas e o histórico de falhas de forma atômica (leitura, mudança e gravação juntas). */
+    suspend fun updateFaultLog(change: (FaultLog) -> FaultLog) {
+        context.dataStore.edit { it[FAULT_LOG] = change(FaultLog.decode(it[FAULT_LOG])).encode() }
     }
 
     suspend fun setHidden(id: String, hidden: Boolean) {
