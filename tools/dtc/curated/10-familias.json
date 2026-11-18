@@ -1,0 +1,1209 @@
+{
+  "P0100": {
+    "title": "Sensor de fluxo de ar (MAF), circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Sensor sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Vazamento ou duto de ar solto entre o sensor e a borboleta",
+      "Filtro de ar muito sujo"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falta de força ou hesitação",
+      "Marcha lenta irregular ou motor morrendo",
+      "Consumo maior"
+    ],
+    "solution": "Confira o conector e a mangueira de ar entre o sensor e a borboleta. Limpar o sensor com limpa-contato próprio ajuda em alguns casos."
+  },
+  "P0101": {
+    "title": "Sensor de fluxo de ar (MAF), sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Sensor sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Vazamento ou duto de ar solto entre o sensor e a borboleta",
+      "Filtro de ar muito sujo"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falta de força ou hesitação",
+      "Marcha lenta irregular ou motor morrendo",
+      "Consumo maior"
+    ],
+    "solution": "Confira o conector e a mangueira de ar entre o sensor e a borboleta. Limpar o sensor com limpa-contato próprio ajuda em alguns casos."
+  },
+  "P0103": {
+    "title": "Sensor de fluxo de ar (MAF), sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Sensor sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Vazamento ou duto de ar solto entre o sensor e a borboleta",
+      "Filtro de ar muito sujo"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falta de força ou hesitação",
+      "Marcha lenta irregular ou motor morrendo",
+      "Consumo maior"
+    ],
+    "solution": "Confira o conector e a mangueira de ar entre o sensor e a borboleta. Limpar o sensor com limpa-contato próprio ajuda em alguns casos."
+  },
+  "P0104": {
+    "title": "Sensor de fluxo de ar (MAF), sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Sensor sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Vazamento ou duto de ar solto entre o sensor e a borboleta",
+      "Filtro de ar muito sujo"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falta de força ou hesitação",
+      "Marcha lenta irregular ou motor morrendo",
+      "Consumo maior"
+    ],
+    "solution": "Confira o conector e a mangueira de ar entre o sensor e a borboleta. Limpar o sensor com limpa-contato próprio ajuda em alguns casos."
+  },
+  "P0105": {
+    "title": "Sensor de pressão do coletor (MAP), circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Mangueira de vácuo do sensor solta ou rachada",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor com defeito",
+      "Entrada de ar falsa no coletor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular",
+      "Falta de força e consumo maior"
+    ],
+    "solution": "Confira a mangueira de vácuo e o conector do sensor. Se estiverem bons, o sensor costuma ser trocado."
+  },
+  "P0106": {
+    "title": "Sensor de pressão do coletor (MAP), sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Mangueira de vácuo do sensor solta ou rachada",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor com defeito",
+      "Entrada de ar falsa no coletor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular",
+      "Falta de força e consumo maior"
+    ],
+    "solution": "Confira a mangueira de vácuo e o conector do sensor. Se estiverem bons, o sensor costuma ser trocado."
+  },
+  "P0107": {
+    "title": "Sensor de pressão do coletor (MAP), sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Mangueira de vácuo do sensor solta ou rachada",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor com defeito",
+      "Entrada de ar falsa no coletor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular",
+      "Falta de força e consumo maior"
+    ],
+    "solution": "Confira a mangueira de vácuo e o conector do sensor. Se estiverem bons, o sensor costuma ser trocado."
+  },
+  "P0108": {
+    "title": "Sensor de pressão do coletor (MAP), sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Mangueira de vácuo do sensor solta ou rachada",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor com defeito",
+      "Entrada de ar falsa no coletor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular",
+      "Falta de força e consumo maior"
+    ],
+    "solution": "Confira a mangueira de vácuo e o conector do sensor. Se estiverem bons, o sensor costuma ser trocado."
+  },
+  "P0109": {
+    "title": "Sensor de pressão do coletor (MAP), sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Mangueira de vácuo do sensor solta ou rachada",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor com defeito",
+      "Entrada de ar falsa no coletor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular",
+      "Falta de força e consumo maior"
+    ],
+    "solution": "Confira a mangueira de vácuo e o conector do sensor. Se estiverem bons, o sensor costuma ser trocado."
+  },
+  "P0110": {
+    "title": "Sensor de temperatura do ar de admissão, circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Conector solto ou desconectado, ou fio rompido",
+      "Sensor com defeito",
+      "Fio de sinal em curto com o terra ou com tensão"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Em geral quase não se nota",
+      "Consumo um pouco maior"
+    ],
+    "solution": "Verifique o conector do sensor, perto da caixa do filtro de ar ou no coletor. Costuma ser mau contato; sensor novo é barato."
+  },
+  "P0111": {
+    "title": "Sensor de temperatura do ar de admissão, sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Conector solto ou desconectado, ou fio rompido",
+      "Sensor com defeito",
+      "Fio de sinal em curto com o terra ou com tensão"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Em geral quase não se nota",
+      "Consumo um pouco maior"
+    ],
+    "solution": "Verifique o conector do sensor, perto da caixa do filtro de ar ou no coletor. Costuma ser mau contato; sensor novo é barato."
+  },
+  "P0112": {
+    "title": "Sensor de temperatura do ar de admissão, sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Conector solto ou desconectado, ou fio rompido",
+      "Sensor com defeito",
+      "Fio de sinal em curto com o terra ou com tensão"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Em geral quase não se nota",
+      "Consumo um pouco maior"
+    ],
+    "solution": "Verifique o conector do sensor, perto da caixa do filtro de ar ou no coletor. Costuma ser mau contato; sensor novo é barato."
+  },
+  "P0114": {
+    "title": "Sensor de temperatura do ar de admissão, sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Conector solto ou desconectado, ou fio rompido",
+      "Sensor com defeito",
+      "Fio de sinal em curto com o terra ou com tensão"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Em geral quase não se nota",
+      "Consumo um pouco maior"
+    ],
+    "solution": "Verifique o conector do sensor, perto da caixa do filtro de ar ou no coletor. Costuma ser mau contato; sensor novo é barato."
+  },
+  "P0115": {
+    "title": "Sensor de temperatura do líquido de arrefecimento, circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Conector ou chicote com mau contato, em curto ou aberto",
+      "Sensor com defeito ou com líquido dentro",
+      "Nível baixo do líquido de arrefecimento ou ar no sistema"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Ventoinha ligada o tempo todo ou que não liga",
+      "Partida a frio difícil",
+      "Ponteiro de temperatura estranho"
+    ],
+    "solution": "Inspecione o conector e o chicote e confira o nível do líquido. Como esse sensor pode esconder um superaquecimento real, vigie o ponteiro de temperatura."
+  },
+  "P0116": {
+    "title": "Sensor de temperatura do líquido de arrefecimento, sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Conector ou chicote com mau contato, em curto ou aberto",
+      "Sensor com defeito ou com líquido dentro",
+      "Nível baixo do líquido de arrefecimento ou ar no sistema"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Ventoinha ligada o tempo todo ou que não liga",
+      "Partida a frio difícil",
+      "Ponteiro de temperatura estranho"
+    ],
+    "solution": "Inspecione o conector e o chicote e confira o nível do líquido. Como esse sensor pode esconder um superaquecimento real, vigie o ponteiro de temperatura."
+  },
+  "P0118": {
+    "title": "Sensor de temperatura do líquido de arrefecimento, sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Conector ou chicote com mau contato, em curto ou aberto",
+      "Sensor com defeito ou com líquido dentro",
+      "Nível baixo do líquido de arrefecimento ou ar no sistema"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Ventoinha ligada o tempo todo ou que não liga",
+      "Partida a frio difícil",
+      "Ponteiro de temperatura estranho"
+    ],
+    "solution": "Inspecione o conector e o chicote e confira o nível do líquido. Como esse sensor pode esconder um superaquecimento real, vigie o ponteiro de temperatura."
+  },
+  "P0119": {
+    "title": "Sensor de temperatura do líquido de arrefecimento, sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Conector ou chicote com mau contato, em curto ou aberto",
+      "Sensor com defeito ou com líquido dentro",
+      "Nível baixo do líquido de arrefecimento ou ar no sistema"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Ventoinha ligada o tempo todo ou que não liga",
+      "Partida a frio difícil",
+      "Ponteiro de temperatura estranho"
+    ],
+    "solution": "Inspecione o conector e o chicote e confira o nível do líquido. Como esse sensor pode esconder um superaquecimento real, vigie o ponteiro de temperatura."
+  },
+  "P0120": {
+    "title": "Sensor de posição da borboleta (TPS), circuito com defeito",
+    "severity": "attention",
+    "causes": [
+      "Corpo de borboleta sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor de posição com defeito",
+      "Entrada de ar falsa"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Aceleração falhando ou irregular",
+      "Marcha lenta instável",
+      "O carro pode entrar em modo de emergência"
+    ],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Falha no sensor da borboleta pode limitar a potência: evite rodar longe."
+  },
+  "P0121": {
+    "title": "Sensor de posição da borboleta (TPS), sinal fora da faixa",
+    "severity": "attention",
+    "causes": [
+      "Corpo de borboleta sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor de posição com defeito",
+      "Entrada de ar falsa"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Aceleração falhando ou irregular",
+      "Marcha lenta instável",
+      "O carro pode entrar em modo de emergência"
+    ],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Falha no sensor da borboleta pode limitar a potência: evite rodar longe."
+  },
+  "P0122": {
+    "title": "Sensor de posição da borboleta (TPS), sinal baixo",
+    "severity": "attention",
+    "causes": [
+      "Corpo de borboleta sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor de posição com defeito",
+      "Entrada de ar falsa"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Aceleração falhando ou irregular",
+      "Marcha lenta instável",
+      "O carro pode entrar em modo de emergência"
+    ],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Falha no sensor da borboleta pode limitar a potência: evite rodar longe."
+  },
+  "P0123": {
+    "title": "Sensor de posição da borboleta (TPS), sinal alto",
+    "severity": "attention",
+    "causes": [
+      "Corpo de borboleta sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor de posição com defeito",
+      "Entrada de ar falsa"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Aceleração falhando ou irregular",
+      "Marcha lenta instável",
+      "O carro pode entrar em modo de emergência"
+    ],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Falha no sensor da borboleta pode limitar a potência: evite rodar longe."
+  },
+  "P0124": {
+    "title": "Sensor de posição da borboleta (TPS), sinal intermitente",
+    "severity": "attention",
+    "causes": [
+      "Corpo de borboleta sujo ou com defeito",
+      "Conector ou chicote corroído, solto ou aberto",
+      "Sensor de posição com defeito",
+      "Entrada de ar falsa"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Aceleração falhando ou irregular",
+      "Marcha lenta instável",
+      "O carro pode entrar em modo de emergência"
+    ],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Falha no sensor da borboleta pode limitar a potência: evite rodar longe."
+  },
+  "P0130": {
+    "title": "Sensor de oxigênio, circuito com defeito (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Fiação ou conector do sensor com defeito (aberto, em curto ou corroído)",
+      "Sensor de oxigênio com defeito",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor antes de trocá-lo. Procure vazamentos no escapamento."
+  },
+  "P0131": {
+    "title": "Sensor de oxigênio, tensão baixa (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Sensor contaminado ou envelhecido",
+      "Fio de sinal em curto com o terra",
+      "Mistura realmente pobre (entrada de ar, pressão de combustível baixa)",
+      "Vazamento de escapamento antes do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure entradas de ar e vazamentos no escape. Se a mistura estiver certa, o sensor é o suspeito."
+  },
+  "P0132": {
+    "title": "Sensor de oxigênio, tensão alta (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com alimentação ou bateria",
+      "Sensor com defeito internamente",
+      "Mistura realmente rica (bicos, válvula de purga, pressão de combustível alta)",
+      "Sensor contaminado por óleo ou líquido de arrefecimento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o chicote e verifique se o motor não está rico. Se a fiação estiver boa, o sensor costuma ser trocado."
+  },
+  "P0134": {
+    "title": "Sensor de oxigênio, sem atividade detectada (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Sensor desconectado ou fio aberto",
+      "Sensor morto ou muito envelhecido",
+      "Aquecedor do sensor sem funcionar",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o conector e o fusível do aquecedor. Sem sinal nenhum, o sensor normalmente precisa ser trocado."
+  },
+  "P0135": {
+    "title": "Sensor de oxigênio, aquecedor, circuito com defeito (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Fusível, relé ou fio de comando do aquecedor aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Monitor do catalisador não completa a prontidão"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0136": {
+    "title": "Sensor de oxigênio, circuito com defeito (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Fiação ou conector do sensor com defeito (aberto, em curto ou corroído)",
+      "Sensor de oxigênio com defeito",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor antes de trocá-lo. Procure vazamentos no escapamento."
+  },
+  "P0137": {
+    "title": "Sensor de oxigênio, tensão baixa (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Sensor contaminado ou envelhecido",
+      "Fio de sinal em curto com o terra",
+      "Mistura realmente pobre (entrada de ar, pressão de combustível baixa)",
+      "Vazamento de escapamento antes do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure entradas de ar e vazamentos no escape. Se a mistura estiver certa, o sensor é o suspeito."
+  },
+  "P0139": {
+    "title": "Sensor de oxigênio, resposta lenta (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Sensor envelhecido, com fuligem ou contaminado",
+      "Vazamento de escapamento antes do sensor",
+      "Aquecedor do sensor fraco",
+      "Falha de mistura (entrada de ar, injetores, pressão de combustível)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure vazamentos e confira a fiação. Sensor com muitos anos costuma ser trocado; use peça de especificação correta."
+  },
+  "P013A": {
+    "title": "Sensor de oxigênio, sem atividade detectada (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Sensor desconectado ou fio aberto",
+      "Sensor morto ou muito envelhecido",
+      "Aquecedor do sensor sem funcionar",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o conector e o fusível do aquecedor. Sem sinal nenhum, o sensor normalmente precisa ser trocado."
+  },
+  "P013B": {
+    "title": "Sensor de oxigênio, aquecedor, circuito com defeito (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Fusível, relé ou fio de comando do aquecedor aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Monitor do catalisador não completa a prontidão"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0142": {
+    "title": "Sensor de oxigênio, circuito com defeito (banco 1, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Fiação ou conector do sensor com defeito (aberto, em curto ou corroído)",
+      "Sensor de oxigênio com defeito",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor antes de trocá-lo. Procure vazamentos no escapamento."
+  },
+  "P0143": {
+    "title": "Sensor de oxigênio, tensão baixa (banco 1, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Sensor contaminado ou envelhecido",
+      "Fio de sinal em curto com o terra",
+      "Mistura realmente pobre (entrada de ar, pressão de combustível baixa)",
+      "Vazamento de escapamento antes do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure entradas de ar e vazamentos no escape. Se a mistura estiver certa, o sensor é o suspeito."
+  },
+  "P0144": {
+    "title": "Sensor de oxigênio, tensão alta (banco 1, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com alimentação ou bateria",
+      "Sensor com defeito internamente",
+      "Mistura realmente rica (bicos, válvula de purga, pressão de combustível alta)",
+      "Sensor contaminado por óleo ou líquido de arrefecimento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o chicote e verifique se o motor não está rico. Se a fiação estiver boa, o sensor costuma ser trocado."
+  },
+  "P0145": {
+    "title": "Sensor de oxigênio, resposta lenta (banco 1, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Sensor envelhecido, com fuligem ou contaminado",
+      "Vazamento de escapamento antes do sensor",
+      "Aquecedor do sensor fraco",
+      "Falha de mistura (entrada de ar, injetores, pressão de combustível)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure vazamentos e confira a fiação. Sensor com muitos anos costuma ser trocado; use peça de especificação correta."
+  },
+  "P0146": {
+    "title": "Sensor de oxigênio, sem atividade detectada (banco 1, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Sensor desconectado ou fio aberto",
+      "Sensor morto ou muito envelhecido",
+      "Aquecedor do sensor sem funcionar",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o conector e o fusível do aquecedor. Sem sinal nenhum, o sensor normalmente precisa ser trocado."
+  },
+  "P0147": {
+    "title": "Sensor de oxigênio, aquecedor, circuito com defeito (banco 1, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Fusível, relé ou fio de comando do aquecedor aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Monitor do catalisador não completa a prontidão"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0150": {
+    "title": "Sensor de oxigênio, circuito com defeito (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Fiação ou conector do sensor com defeito (aberto, em curto ou corroído)",
+      "Sensor de oxigênio com defeito",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor antes de trocá-lo. Procure vazamentos no escapamento."
+  },
+  "P0151": {
+    "title": "Sensor de oxigênio, tensão baixa (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Sensor contaminado ou envelhecido",
+      "Fio de sinal em curto com o terra",
+      "Mistura realmente pobre (entrada de ar, pressão de combustível baixa)",
+      "Vazamento de escapamento antes do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure entradas de ar e vazamentos no escape. Se a mistura estiver certa, o sensor é o suspeito."
+  },
+  "P0152": {
+    "title": "Sensor de oxigênio, tensão alta (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com alimentação ou bateria",
+      "Sensor com defeito internamente",
+      "Mistura realmente rica (bicos, válvula de purga, pressão de combustível alta)",
+      "Sensor contaminado por óleo ou líquido de arrefecimento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o chicote e verifique se o motor não está rico. Se a fiação estiver boa, o sensor costuma ser trocado."
+  },
+  "P0153": {
+    "title": "Sensor de oxigênio, resposta lenta (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Sensor envelhecido, com fuligem ou contaminado",
+      "Vazamento de escapamento antes do sensor",
+      "Aquecedor do sensor fraco",
+      "Falha de mistura (entrada de ar, injetores, pressão de combustível)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure vazamentos e confira a fiação. Sensor com muitos anos costuma ser trocado; use peça de especificação correta."
+  },
+  "P0154": {
+    "title": "Sensor de oxigênio, sem atividade detectada (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Sensor desconectado ou fio aberto",
+      "Sensor morto ou muito envelhecido",
+      "Aquecedor do sensor sem funcionar",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o conector e o fusível do aquecedor. Sem sinal nenhum, o sensor normalmente precisa ser trocado."
+  },
+  "P0155": {
+    "title": "Sensor de oxigênio, aquecedor, circuito com defeito (banco 2, sensor 1)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Fusível, relé ou fio de comando do aquecedor aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Monitor do catalisador não completa a prontidão"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0156": {
+    "title": "Sensor de oxigênio, circuito com defeito (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Fiação ou conector do sensor com defeito (aberto, em curto ou corroído)",
+      "Sensor de oxigênio com defeito",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor antes de trocá-lo. Procure vazamentos no escapamento."
+  },
+  "P0157": {
+    "title": "Sensor de oxigênio, tensão baixa (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Sensor contaminado ou envelhecido",
+      "Fio de sinal em curto com o terra",
+      "Mistura realmente pobre (entrada de ar, pressão de combustível baixa)",
+      "Vazamento de escapamento antes do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure entradas de ar e vazamentos no escape. Se a mistura estiver certa, o sensor é o suspeito."
+  },
+  "P0158": {
+    "title": "Sensor de oxigênio, tensão alta (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com alimentação ou bateria",
+      "Sensor com defeito internamente",
+      "Mistura realmente rica (bicos, válvula de purga, pressão de combustível alta)",
+      "Sensor contaminado por óleo ou líquido de arrefecimento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o chicote e verifique se o motor não está rico. Se a fiação estiver boa, o sensor costuma ser trocado."
+  },
+  "P0159": {
+    "title": "Sensor de oxigênio, resposta lenta (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Sensor envelhecido, com fuligem ou contaminado",
+      "Vazamento de escapamento antes do sensor",
+      "Aquecedor do sensor fraco",
+      "Falha de mistura (entrada de ar, injetores, pressão de combustível)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure vazamentos e confira a fiação. Sensor com muitos anos costuma ser trocado; use peça de especificação correta."
+  },
+  "P015A": {
+    "title": "Sensor de oxigênio, sem atividade detectada (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Sensor desconectado ou fio aberto",
+      "Sensor morto ou muito envelhecido",
+      "Aquecedor do sensor sem funcionar",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o conector e o fusível do aquecedor. Sem sinal nenhum, o sensor normalmente precisa ser trocado."
+  },
+  "P015B": {
+    "title": "Sensor de oxigênio, aquecedor, circuito com defeito (banco 2, sensor 2)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Fusível, relé ou fio de comando do aquecedor aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Monitor do catalisador não completa a prontidão"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0162": {
+    "title": "Sensor de oxigênio, circuito com defeito (banco 2, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Fiação ou conector do sensor com defeito (aberto, em curto ou corroído)",
+      "Sensor de oxigênio com defeito",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Inspecione a fiação e o conector do sensor antes de trocá-lo. Procure vazamentos no escapamento."
+  },
+  "P0163": {
+    "title": "Sensor de oxigênio, tensão baixa (banco 2, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Sensor contaminado ou envelhecido",
+      "Fio de sinal em curto com o terra",
+      "Mistura realmente pobre (entrada de ar, pressão de combustível baixa)",
+      "Vazamento de escapamento antes do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure entradas de ar e vazamentos no escape. Se a mistura estiver certa, o sensor é o suspeito."
+  },
+  "P0164": {
+    "title": "Sensor de oxigênio, tensão alta (banco 2, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Fio de sinal em curto com alimentação ou bateria",
+      "Sensor com defeito internamente",
+      "Mistura realmente rica (bicos, válvula de purga, pressão de combustível alta)",
+      "Sensor contaminado por óleo ou líquido de arrefecimento"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o chicote e verifique se o motor não está rico. Se a fiação estiver boa, o sensor costuma ser trocado."
+  },
+  "P0165": {
+    "title": "Sensor de oxigênio, resposta lenta (banco 2, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Sensor envelhecido, com fuligem ou contaminado",
+      "Vazamento de escapamento antes do sensor",
+      "Aquecedor do sensor fraco",
+      "Falha de mistura (entrada de ar, injetores, pressão de combustível)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Procure vazamentos e confira a fiação. Sensor com muitos anos costuma ser trocado; use peça de especificação correta."
+  },
+  "P0166": {
+    "title": "Sensor de oxigênio, sem atividade detectada (banco 2, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Sensor desconectado ou fio aberto",
+      "Sensor morto ou muito envelhecido",
+      "Aquecedor do sensor sem funcionar",
+      "Vazamento de escapamento perto do sensor"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Emissões mais altas; pode reprovar na inspeção"
+    ],
+    "solution": "Confira o conector e o fusível do aquecedor. Sem sinal nenhum, o sensor normalmente precisa ser trocado."
+  },
+  "P0167": {
+    "title": "Sensor de oxigênio, aquecedor, circuito com defeito (banco 2, sensor 3)",
+    "severity": "attention",
+    "causes": [
+      "Resistência de aquecimento do sensor queimada (troca do sensor)",
+      "Fusível, relé ou fio de comando do aquecedor aberto",
+      "Curto no aquecedor (corrente alta demais)",
+      "Conector corroído, resistência de contato"
+    ],
+    "symptoms": [
+      "Luz do motor acesa (em geral depois de dois ciclos de condução)",
+      "Consumo um pouco maior",
+      "Monitor do catalisador não completa a prontidão"
+    ],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor. Não costuma afetar a direção, mas impede a inspeção de emissões."
+  },
+  "P0201": {
+    "title": "Circuito do bico injetor, cilindro 1",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 1 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 1 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0202": {
+    "title": "Circuito do bico injetor, cilindro 2",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 2 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 2 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0203": {
+    "title": "Circuito do bico injetor, cilindro 3",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 3 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 3 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0204": {
+    "title": "Circuito do bico injetor, cilindro 4",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 4 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 4 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0205": {
+    "title": "Circuito do bico injetor, cilindro 5",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 5 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 5 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0206": {
+    "title": "Circuito do bico injetor, cilindro 6",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 6 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 6 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0207": {
+    "title": "Circuito do bico injetor, cilindro 7",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 7 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 7 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0208": {
+    "title": "Circuito do bico injetor, cilindro 8",
+    "severity": "attention",
+    "causes": [
+      "Bico injetor do cilindro 8 com defeito (bobina interna fora da especificação)",
+      "Conector ou chicote do bico corroído, solto ou aberto",
+      "Módulo do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Falha de ignição ou marcha lenta irregular",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Confira o conector e o chicote do bico do cilindro 8 e meça a resistência da bobina do bico. Bico entupido ou com circuito aberto costuma ser trocado ou limpo em oficina."
+  },
+  "P0305": {
+    "title": "Falha de ignição no cilindro 5",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 5 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 5 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 5 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 5 (válvula, anéis, junta do cabeçote) ou entrada de ar local"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 5 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0306": {
+    "title": "Falha de ignição no cilindro 6",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 6 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 6 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 6 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 6 (válvula, anéis, junta do cabeçote) ou entrada de ar local"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 6 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0307": {
+    "title": "Falha de ignição no cilindro 7",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 7 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 7 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 7 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 7 (válvula, anéis, junta do cabeçote) ou entrada de ar local"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 7 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0308": {
+    "title": "Falha de ignição no cilindro 8",
+    "severity": "stop",
+    "causes": [
+      "Bobina do cilindro 8 com defeito (bobina, conector, terra)",
+      "Vela do cilindro 8 desgastada, suja, trincada ou com folga errada",
+      "Bico do cilindro 8 entupido ou vazando, ou seu comando",
+      "Compressão baixa no cilindro 8 (válvula, anéis, junta do cabeçote) ou entrada de ar local"
+    ],
+    "symptoms": [
+      "Luz do motor acesa; piscando quando a falha pode danificar o catalisador",
+      "Marcha lenta irregular, tranco, vibração",
+      "Perda de força e consumo maior"
+    ],
+    "solution": "Troque a bobina do cilindro 8 de lugar com a de outro cilindro: se o código seguir a bobina, ela é a culpada. Depois confira a vela. Com a luz piscando, evite rodar: o catalisador pode ser danificado."
+  },
+  "P0351": {
+    "title": "Bobina de ignição A, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina A com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina A e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0352": {
+    "title": "Bobina de ignição B, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina B com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina B e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0353": {
+    "title": "Bobina de ignição C, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina C com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina C e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0354": {
+    "title": "Bobina de ignição D, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina D com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina D e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0355": {
+    "title": "Bobina de ignição E, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina E com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina E e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0356": {
+    "title": "Bobina de ignição F, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina F com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina F e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0357": {
+    "title": "Bobina de ignição G, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina G com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina G e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  },
+  "P0358": {
+    "title": "Bobina de ignição H, circuito primário/secundário",
+    "severity": "attention",
+    "causes": [
+      "Bobina H com defeito",
+      "Conector ou chicote da bobina corroído, solto ou aberto",
+      "Alimentação ou terra da bobina ruim",
+      "Módulo de ignição ou do motor com defeito (menos comum)"
+    ],
+    "symptoms": [
+      "Luz do motor acesa",
+      "Marcha lenta irregular e tranco",
+      "Falha de ignição no cilindro ligado à bobina"
+    ],
+    "solution": "Verifique o conector e o chicote da bobina H e troque-a de lugar com outra para confirmar. Bobina ruim causa falha de ignição e pode estragar o catalisador."
+  }
+}
