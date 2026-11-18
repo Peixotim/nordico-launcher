@@ -31,8 +31,11 @@ interface ObdRepository {
     val state: StateFlow<ObdState>
     val telemetry: StateFlow<VehicleTelemetry>
 
-    /** Códigos de falha; `null` enquanto não foram lidos. Somente leitura. */
+    /** Códigos de falha; `null` enquanto não foram lidos. */
     val faults: StateFlow<List<Dtc>?>
+
+    /** Andamento e resultado de "apagar falhas" (modo 04). */
+    val clearState: StateFlow<ClearState>
 
     /** Dispositivos Bluetooth já pareados (vazio sem permissão ou sem Bluetooth). */
     fun bondedAdapters(): List<ObdAdapter>
@@ -40,6 +43,12 @@ interface ObdRepository {
     fun select(address: String)
 
     fun readFaults()
+
+    /** Apaga **todas** as falhas, só com o carro parado e conectado. O resultado vem em [clearState]. */
+    fun clearFaults()
+
+    /** Esconde o resultado de [clearFaults]. */
+    fun dismissClearResult()
 }
 
 /** Sem adaptador: o estado do flavor `device` até existir um adaptador selecionado. */
@@ -47,7 +56,15 @@ class NoAdapterObdRepository : ObdRepository {
     override val state: StateFlow<ObdState> = MutableStateFlow(ObdState.NoAdapter)
     override val telemetry: StateFlow<VehicleTelemetry> = MutableStateFlow(VehicleTelemetry())
     override val faults: StateFlow<List<Dtc>?> = MutableStateFlow(null)
+    private val _clear = MutableStateFlow<ClearState>(ClearState.Idle)
+    override val clearState: StateFlow<ClearState> = _clear
     override fun bondedAdapters(): List<ObdAdapter> = emptyList()
     override fun select(address: String) = Unit
     override fun readFaults() = Unit
+    override fun clearFaults() {
+        _clear.value = ClearState.Done(ClearOutcome.Blocked(ClearBlock.NotConnected))
+    }
+    override fun dismissClearResult() {
+        _clear.value = ClearState.Idle
+    }
 }
