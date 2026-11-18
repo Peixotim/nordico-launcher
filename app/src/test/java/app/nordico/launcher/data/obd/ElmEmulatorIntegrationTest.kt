@@ -44,4 +44,29 @@ class ElmEmulatorIntegrationTest {
         }
         assertEquals(true, true)
     }
+
+    @Test fun real_emulator_clears_the_codes() = runBlocking {
+        val (host, port) = target()
+        val transport = TcpTransport(host, port)
+        transport.open()
+        try {
+            val session = ObdSession(transport)
+            assertTrue(session.init() is ObdResult.Ok)
+            // Trade-off: o cenário `car` do emulador não tem códigos armazenados, então isto confere o `04` e a
+            // resposta CAN real (`44`), não a remoção de códigos de verdade.
+            val before = session.readFaults()
+            println("faults before -> $before")
+            assertTrue("before=$before", before is ObdResult.Ok)
+
+            val reply = session.clearFaults()
+            println("clear -> $reply")
+            assertEquals(ClearReply.Accepted, reply)
+
+            val after = session.readFaults()
+            println("faults after -> $after")
+            assertEquals(ObdResult.Ok(emptyList<Dtc>()), after)
+        } finally {
+            transport.close()
+        }
+    }
 }
