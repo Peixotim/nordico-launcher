@@ -155,8 +155,10 @@ def cmd_show(a):
         print("== %s: %s" % (code, e["title"]["en"]))
         if a.full:
             print("   descrição:", " ".join(e.get("description", {}).get("en", "").split()))
-        for c in e.get("common_causes", []):
+        for c in e.get("common_causes", [])[: 3 if a.brief else None]:
             print("   causa [%s]: %s" % (c.get("likelihood"), c["label"]["en"]))
+        if a.brief:
+            continue
         for s in e.get("symptoms", []):
             print("   sintoma:", s["en"])
         flags = e.get("flags", {})
@@ -165,6 +167,7 @@ def cmd_show(a):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build")
@@ -178,6 +181,7 @@ def main():
     s.add_argument("codes", nargs="+")
     s.add_argument("--obdex", required=True)
     s.add_argument("--full", action="store_true", help="inclui a descrição longa")
+    s.add_argument("--brief", action="store_true", help="só título e as 3 causas principais")
     s.set_defaults(fn=cmd_show)
     a = p.parse_args()
     a.fn(a)
