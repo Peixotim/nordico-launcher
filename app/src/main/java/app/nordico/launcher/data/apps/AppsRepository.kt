@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 enum class AppSection { Mine, Car }
 
 /** Telas internas do launcher que aparecem na gaveta como apps. */
-enum class InternalRoute { Climate }
+enum class InternalRoute { Climate, Vehicle }
 
 data class AppEntry(
     val id: String,
