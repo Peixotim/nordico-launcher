@@ -69,7 +69,7 @@ fun HomeScreen(vm: AppViewModel, c: AppContainer, onClockLongPress: () -> Unit, 
         ) {
             Header(outside, status, climate, onClockLongPress) { vm.go(Screen.Climate) }
             MiniPlayerCard(miniCardState(access, np), c) { vm.go(Screen.NowPlaying) }
-            Tiles { vm.go(Screen.Apps) }
+            Tiles(onRadio = { vm.go(Screen.Radio) }, onVehicle = { vm.go(Screen.Vehicle) }) { vm.go(Screen.Apps) }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 VolumePanel(volume, c.volume::step, c.volume::toggleMute)
                 ScreenModeRow(prefs.screenMode, vm::setScreenMode) { vm.setScreenOff(true) }
@@ -176,17 +176,10 @@ private fun Context.startSafely(intent: Intent) {
 }
 
 @Composable
-private fun Tiles(onApps: () -> Unit) {
-    val context = LocalContext.current
+private fun Tiles(onRadio: () -> Unit, onVehicle: () -> Unit, onApps: () -> Unit) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Tile("call", "Telefone", Modifier.weight(1f)) {
-            try {
-                context.startActivity(Intent(Intent.ACTION_DIAL).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-            } catch (_: ActivityNotFoundException) {
-            }
-        }
-        // fase 3: abrir app do fabricante (pacote desconhecido até a central chegar)
-        Tile("radio", "Rádio", Modifier.weight(1f)) {}
+        Tile("radio", "Rádio", Modifier.weight(1f), onRadio)
+        Tile("speed", "Veículo", Modifier.weight(1f), onVehicle)
         // fase 3: abrir app do fabricante (pacote desconhecido até a central chegar)
         Tile("photo_camera", "Câmera", Modifier.weight(1f)) {}
         Tile("apps", "Apps", Modifier.weight(1f).sharedSheet(SharedKeys.SHEET_APPS), onApps)
