@@ -8,7 +8,7 @@ import app.nordico.launcher.data.obd.VehicleTelemetry
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-enum class ObdScenario { NoAdapter, Idle, Highway, Overheating, WeakBattery }
+enum class ObdScenario { NoAdapter, Idle, Highway, Overheating, WeakBattery, Faults }
 
 /** OBD simulado para a interface: cenários trocados pelo painel de simulação. */
 class SimObdRepository : ObdRepository {
@@ -32,6 +32,7 @@ class SimObdRepository : ObdRepository {
             ObdScenario.Highway -> IDLE.copy(speedKmh = 92, rpm = 2400, loadPct = 45, throttlePct = 28, intakeC = 34)
             ObdScenario.Overheating -> IDLE.copy(coolantC = 108, rpm = 900)
             ObdScenario.WeakBattery -> IDLE.copy(batteryV = 11.6)
+            ObdScenario.Faults -> IDLE.copy(milOn = true, faultCount = 2)
             ObdScenario.NoAdapter -> VehicleTelemetry()
         }
     }
@@ -44,13 +45,13 @@ class SimObdRepository : ObdRepository {
     }
 
     override fun readFaults() {
-        _faults.value = listOf(Dtc("P0133"))
+        _faults.value = listOf(Dtc("P0133"), Dtc("P0420"))
     }
 
     private companion object {
         val IDLE = VehicleTelemetry(
             speedKmh = 0, rpm = 800, coolantC = 88, intakeC = 31,
-            loadPct = 22, throttlePct = 14, fuelPct = 62, batteryV = 14.1,
+            loadPct = 22, throttlePct = 14, fuelPct = 62, batteryV = 14.1, milOn = false, faultCount = 0,
         )
     }
 }
