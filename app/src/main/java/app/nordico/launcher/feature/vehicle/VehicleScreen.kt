@@ -15,6 +15,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.produceState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
+import app.nordico.launcher.data.obd.ClearState
+import app.nordico.launcher.data.obd.DtcCatalog
+import app.nordico.launcher.data.obd.loadCatalog
+import app.nordico.launcher.data.prefs.Prefs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,14 +51,39 @@ import app.nordico.launcher.designsystem.pressClick
 
 private enum class VehicleSheet { None, Adapters, Faults }
 
-/** Painel do carro lido pelo OBD-II (spec 9.2). Somente leitura. */
+/** O catálogo tem alguns MB: carrega uma vez por processo, fora da thread principal. */
+private var catalogCache: DtcCatalog? = null
+
+/** Painel do carro lido pelo OBD-II (spec 9.2). Lê sempre; só escreve ao apagar falhas, a pedido do usuário. */
 @Composable
 fun VehicleScreen(c: AppContainer, selectedAdapter: String?, onBack: () -> Unit) {
     val n = LocalNordic.current
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val state by c.obd.state.collectAsStateWithLifecycle()
     val t by c.obd.telemetry.collectAsStateWithLifecycle()
     val faults by c.obd.faults.collectAsStateWithLifecycle()
+    val clear by c.obd.clearState.collectAsStateWithLifecycle()
+    val prefs by c.prefs.prefs.collectAsStateWithLifecycle(initialValue = Prefs())
     var sheet by remember { mutableStateOf(VehicleSheet.None) }
+    val catalog by produceState(catalogCache ?: DtcCatalog(emptyMap())) {
+        if (catalogCache == null) value = withContext(Dispatchers.IO) { loadCatalog(context) }.also { catalogCache = it }
+    }
+
+    // As marcas de códigos que sumiram do carro (foram apagados ou resolvidos) deixam de existir.
+    LaunchedEffect(faults) {
+        faults?.let { list ->
+            if (prefs.faultLog.prune(list.map { it.code }) != prefs.faultLog) c.prefs.updateFaultLog { it.prune(list.map { d -> d.code }) }
+        }
+    }
+    // Completa o histórico com o resultado. Bloqueio: nada foi enviado, então a tentativa é descartada.
+    // Trade-off: se a tela fechar no meio, a tentativa fica como "Attempt" no histórico, o que é intencional.
+    LaunchedEffect(clear) {
+        (clear as? ClearState.Done)?.let { done ->
+            val result = done.outcome.toResult()
+            c.prefs.updateFaultLog { if (result != null) it.finish(result) else it.discard() }
+        }
+    }
 
     fun chooseAdapter() {
         // Android 12+ exige BLUETOOTH_CONNECT para listar os pareados: pede e o usuário toca de novo.
@@ -81,7 +117,28 @@ fun VehicleScreen(c: AppContainer, selectedAdapter: String?, onBack: () -> Unit)
             },
             onDismiss = { sheet = VehicleSheet.None },
         )
-        FaultsSheet(sheet == VehicleSheet.Faults, faults, onRead = c.obd::readFaults, onDismiss = { sheet = VehicleSheet.None })
+        FaultsSheet(
+            visible = sheet == VehicleSheet.Faults,
+            faults = faults,
+            telemetry = t,
+            state = state,
+            catalog = catalog,
+            log = prefs.faultLog,
+            clearState = clear,
+            onRead = c.obd::readFaults,
+            onMark = { codes, marked ->
+                scope.launch { c.prefs.updateFaultLog { if (marked) it.mark(codes, System.currentTimeMillis()) else it.unmark(codes) } }
+            },
+            // O histórico é gravado antes de enviar o comando: uma queda no meio não perde o que existia.
+            onConfirmClear = { codes ->
+                scope.launch {
+                    c.prefs.updateFaultLog { it.begin(codes, System.currentTimeMillis()) }
+                    c.obd.clearFaults()
+                }
+            },
+            onDismissResult = c.obd::dismissClearResult,
+            onDismiss = { sheet = VehicleSheet.None },
+        )
     }
 }
 
