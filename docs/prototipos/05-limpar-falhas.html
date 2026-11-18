@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Protótipo 05: Falhas e limpar falhas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,-25..0&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #e9e9ee; color: #1d1d1f; padding: 20px 24px 40px; }
+  h1.t { font-size: 1.25rem; margin-bottom: .25rem; }
+  p.sub { color: #6e6e73; font-size: .9rem; margin-bottom: 1rem; max-width: 980px; line-height: 1.45; }
+  .bar { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; align-items: center; margin-bottom: 1rem; }
+  .grp { display: flex; gap: 4px; background: #d6d6dc; padding: 3px; border-radius: 10px; flex-wrap: wrap; }
+  .grp button { border: 0; background: none; padding: 7px 12px; border-radius: 8px; font: 600 .8rem system-ui; cursor: pointer; color: #1d1d1f; }
+  .grp button.on { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  .dev { background: #0b0b0c; padding: 14px; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.22); max-width: 1380px; }
+  .scr { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 6px; }
+
+  .hu { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; overflow: hidden;
+        font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: var(--bg); color: var(--label); }
+  .hu * { box-sizing: border-box; }
+  .hu[data-theme="light"] { --bg:#F2F2F7; --surface:#fff; --label:#000; --label-2:rgba(60,60,67,.6); --label-3:rgba(60,60,67,.3); --sep:rgba(60,60,67,.16);
+        --fill-3:rgba(118,118,128,.14); --fill-2:rgba(118,118,128,.22); --shadow:0 1px 2px rgba(0,0,0,.03),0 6px 20px rgba(0,0,0,.05); --accent:#F2620F; }
+  .hu[data-theme="dark"]  { --bg:#000; --surface:#1C1C1E; --label:#fff; --label-2:rgba(235,235,245,.6); --label-3:rgba(235,235,245,.3); --sep:rgba(84,84,88,.55);
+        --fill-3:rgba(118,118,128,.24); --fill-2:rgba(118,118,128,.34); --shadow:0 0 0 .5px rgba(255,255,255,.04); --accent:#FF7A2E; }
+  .hu { --danger:#FF3B30; --warm:#FF9F0A; --ok:#30D158; }
+  .ms { font-family: 'Material Symbols Rounded'; font-size: 24px; line-height: 1; font-feature-settings: 'liga'; font-variation-settings: 'FILL' 0,'wght' 400,'opsz' 24; white-space: nowrap; user-select: none; }
+  .ms.f { font-variation-settings: 'FILL' 1,'wght' 400,'opsz' 24; }
+  .card { background: var(--surface); border-radius: 26px; box-shadow: var(--shadow); }
+  .lbl { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--label-2); }
+
+  /* tela de fundo: Veículo simplificado */
+  .pg-top { height: 96px; display: flex; align-items: center; gap: 16px; padding: 0 28px; }
+  .back { width: 48px; height: 48px; border-radius: 50%; background: var(--fill-3); display: grid; place-items: center; }
+  .pg-top h1 { font-size: 34px; font-weight: 700; letter-spacing: -.025em; }
+  .btn { height: 38px; padding: 0 16px; border-radius: 19px; background: var(--fill-3); display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
+  .btn .ms { font-size: 20px; }
+  .pg-top .btn { margin-left: auto; }
+  .badge { min-width: 22px; height: 22px; border-radius: 11px; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; padding: 0 6px; }
+  .bgcard { position: absolute; left: 28px; right: 28px; top: 96px; bottom: 28px; border-radius: 30px; }
+
+  .scrim { position: absolute; inset: 0; background: rgba(0,0,0,.38); }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; height: 640px; border-radius: 34px 34px 0 0; background: var(--surface); padding: 14px 40px 0; display: flex; flex-direction: column; }
+  .grab { width: 44px; height: 5px; border-radius: 3px; background: var(--fill-2); margin: 0 auto 8px; flex: none; }
+  .s-head { display: flex; align-items: flex-end; gap: 16px; flex: none; }
+  .s-head h2 { font-size: 28px; font-weight: 700; letter-spacing: -.02em; }
+  .s-head .hint { font-size: 15px; color: var(--label-2); margin-top: 2px; }
+  .s-head .btn { margin-left: auto; }
+  .primary { flex: none; margin-top: 14px; height: 64px; border-radius: 22px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 20px; font-weight: 700; }
+  .primary .ms { font-size: 26px; }
+  .primary.off { background: var(--fill-3); color: var(--label-3); }
+  .why { flex: none; text-align: center; font-size: 14px; color: var(--label-2); margin-top: 8px; }
+  .list { flex: 1; overflow: hidden; margin-top: 10px; }
+  .fr { border-top: .5px solid var(--sep); }
+  .fr .top { display: flex; align-items: center; gap: 16px; height: 76px; }
+  .fr .chk { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--label-3); display: grid; place-items: center; flex: none; }
+  .fr .chk.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .fr .chk .ms { font-size: 20px; }
+  .fr .code { font-size: 22px; font-weight: 700; width: 92px; font-variant-numeric: tabular-nums; flex: none; }
+  .fr .tt { flex: 1; min-width: 0; }
+  .fr .tt b { display: block; font-size: 19px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fr .tt span { font-size: 14px; color: var(--label-2); }
+  .sev { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 14px; font-size: 13px; font-weight: 700; flex: none; }
+  .sev i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .sev.ok { color: var(--ok); background: color-mix(in srgb, var(--ok) 16%, transparent); }
+  .sev.at { color: var(--warm); background: color-mix(in srgb, var(--warm) 18%, transparent); }
+  .sev.st { color: var(--danger); background: color-mix(in srgb, var(--danger) 16%, transparent); }
+  .fixed { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--label-2); }
+  .fixed .ms { font-size: 18px; color: var(--ok); }
+  .fr .chev { color: var(--label-3); flex: none; }
+  .fr.fixedrow .code, .fr.fixedrow .tt b { color: var(--label-2); }
+  .det { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; padding: 2px 0 18px 108px; }
+  .det h4 { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--label-2); margin-bottom: 6px; }
+  .det ul { list-style: none; font-size: 16px; line-height: 1.4; }
+  .det li { padding-left: 16px; position: relative; } .det li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--label-3); }
+  .det p { font-size: 16px; line-height: 1.4; }
+  .det .act { grid-column: 1 / 3; display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+  .det .act .btn.off { color: var(--label-3); }
+  .det .note { font-size: 13px; color: var(--label-2); }
+  .tag { font-size: 12px; color: var(--label-2); margin-left: 8px; font-weight: 500; }
+
+  .selbar { flex: none; height: 76px; margin: 0 -40px; padding: 0 40px; border-top: .5px solid var(--sep); display: flex; align-items: center; gap: 16px; }
+  .selbar .btn { height: 48px; border-radius: 24px; padding: 0 22px; font-size: 17px; }
+  .selbar .btn.acc { background: var(--accent); color: #fff; }
+  .selbar .n { font-size: 15px; color: var(--label-2); margin-left: auto; }
+
+  /* confirmação e resultados */
+  .cf { flex: 1; padding-top: 12px; display: flex; flex-direction: column; }
+  .cf h2 { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .chips { display: flex; gap: 8px; margin: 12px 0 14px; flex-wrap: wrap; }
+  .chips span { height: 32px; padding: 0 12px; border-radius: 16px; background: var(--fill-3); font-weight: 700; font-size: 15px; display: inline-flex; align-items: center; font-variant-numeric: tabular-nums; }
+  .eff { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; font-size: 16px; line-height: 1.4; }
+  .eff h4 { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--label-2); margin-bottom: 6px; }
+  .eff li { list-style: none; padding-left: 26px; position: relative; margin-bottom: 6px; }
+  .eff li .ms { position: absolute; left: 0; top: 0; font-size: 20px; color: var(--label-2); }
+  .cf .btns { margin-top: auto; padding-bottom: 28px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 14px; }
+  .cf .btns div { height: 60px; border-radius: 20px; display: grid; place-items: center; font-size: 19px; font-weight: 700; background: var(--fill-3); }
+  .cf .btns .go { background: var(--accent); color: #fff; }
+  .res { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px; padding-bottom: 40px; }
+  .res .ms { font-size: 76px; }
+  .res h2 { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .res p { font-size: 17px; color: var(--label-2); max-width: 600px; line-height: 1.45; }
+  .res .btn { height: 52px; padding: 0 28px; border-radius: 26px; font-size: 18px; margin-top: 8px; }
+  .res .btn.acc { background: var(--accent); color: #fff; }
+  .spin { width: 64px; height: 64px; border-radius: 50%; border: 6px solid var(--fill-2); border-top-color: var(--accent); animation: sp 1s linear infinite; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+  .notes { max-width: 1380px; margin-top: 16px; font-size: .85rem; color: #4a4a4f; line-height: 1.5; }
+  .notes li { margin-left: 18px; }
+</style>
+</head>
+<body>
+<h1 class="t">Protótipo 05: falhas e limpar falhas</h1>
+<p class="sub">Folha de falhas do Veículo com descrição, gravidade, solução e vídeo; marcar como corrigida (só no app, com seleção múltipla); e apagar todas de verdade, com confirmação, bloqueios e resultado verificado. Escolha o estado abaixo.</p>
+<div class="bar">
+  <div class="grp" id="states"></div>
+  <div class="grp" id="themes"><button data-t="light" class="on">Dia</button><button data-t="dark">Noite</button></div>
+  <div class="grp" id="motion"><button data-m="0" class="on">Carro parado</button><button data-m="1">Em movimento</button></div>
+</div>
+<div class="dev"><div class="scr" id="scr"><div class="hu" id="hu" data-theme="light"></div></div></div>
+<ul class="notes">
+  <li><b>Apagar de verdade é só "todas"</b>: o protocolo OBD-II não apaga um código escolhido. "Marcar como corrigida" é só uma anotação no app e diz isso na tela.</li>
+  <li>O resultado só é "Falhas apagadas" depois de reler o carro. Se algo voltar, mostramos o que voltou.</li>
+  <li>Vermelho é só da gravidade "Pare e procure ajuda". O botão principal usa o destaque do app.</li>
+  <li>Em movimento: o botão de apagar e o vídeo ficam bloqueados, com o motivo escrito.</li>
+</ul>
+<script>
+var F = [
+  { code: 'P0420', title: 'Eficiência do catalisador abaixo do limite (banco 1)', sev: 'at', full: true,
+    causes: ['Catalisador envelhecido ou contaminado', 'Sensor de oxigênio traseiro lento ou sujo', 'Vazamento no escapamento antes do sensor traseiro'],
+    fix: 'Confira vazamentos no escape e o sensor traseiro antes de trocar o catalisador. Se a luz voltar logo após apagar, procure uma oficina.' },
+  { code: 'P0133', title: 'Sensor de oxigênio, resposta lenta (banco 1, sensor 1)', sev: 'at', full: true,
+    causes: ['Sensor de oxigênio dianteiro envelhecido', 'Vazamento de ar de admissão ou de escape', 'Fiação ou conector do sensor com mau contato'],
+    fix: 'Inspecione fiação e conector e procure vazamentos. Sensor envelhecido costuma ser trocado.' },
+  { code: 'P0303', title: 'Falha de ignição no cilindro 3', sev: 'st', full: true,
+    causes: ['Vela ou bobina do cilindro 3 com defeito', 'Injetor entupido', 'Compressão baixa'],
+    fix: 'Não force o motor. Falha de ignição pode danificar o catalisador. Procure uma oficina.' },
+  { code: 'P1456', title: 'Evaporative Emission Control System Leak Detected Fuel Tank System', sev: 'at', full: false, en: true }
+];
+var SEVL = { ok: 'Pode seguir', at: 'Atenção', st: 'Pare e procure ajuda' };
+var S = { theme: 'light', moving: false, state: 'list', open: 'P0420', fixed: {}, sel: {} };
+var STATES = [
+  ['list', 'Lista'], ['expanded', 'Linha aberta'], ['basic', 'Código sem descrição completa'], ['fixed', 'Marcada como corrigida'],
+  ['select', 'Selecionar'], ['confirm', 'Confirmar apagar'], ['clearing', 'Apagando'], ['cleared', 'Resultado: apagado'],
+  ['returned', 'Resultado: voltaram'], ['refused', 'Resultado: recusado'], ['unverified', 'Resultado: não confirmado'],
+  ['noresp', 'Resultado: sem resposta'], ['empty', 'Sem falhas']
+];
+function el(t, c, h) { return '<' + t + (c ? ' class="' + c + '"' : '') + '>' + (h || '') + '</' + t + '>'; }
+function ms(n, f) { return '<span class="ms' + (f ? ' f' : '') + '">' + n + '</span>'; }
+function sev(s) { return '<span class="sev ' + s + '"><i></i>' + SEVL[s] + '</span>'; }
+
+function bg(empty) {
+  return el('div', 'pg-top', '<div class="back">' + ms('chevron_left') + '</div><h1>Veículo</h1>' +
+    '<div class="btn">' + ms('report', S.state !== 'empty' && S.state !== 'cleared') + 'Falhas' + (S.state === 'empty' || S.state === 'cleared' ? '' : '<span class="badge">' + F.length + '</span>') + '</div>') +
+    el('div', 'card bgcard');
+}
+function rows(mode) {
+  return F.map(function (f, i) {
+    var isFixed = !!S.fixed[f.code], isOpen = mode === 'open' && S.open === f.code, selMode = mode === 'select';
+    var chk = selMode ? '<div class="chk' + (S.sel[f.code] ? ' on' : '') + '">' + (S.sel[f.code] ? ms('check', 1) : '') + '</div>' : '';
+    var sub = f.en ? 'Descrição completa não disponível no Nórdico<span class="tag">título em inglês</span>' : (isFixed ? '' : '');
+    var right = isFixed ? '<span class="fixed">' + ms('check_circle', 1) + 'Corrigida, aguardando apagar</span>' : sev(f.sev);
+    var top = '<div class="top">' + chk + '<div class="code">' + f.code + '</div><div class="tt"><b>' + f.title + '</b>' + (sub ? '<span>' + sub + '</span>' : '') + '</div>' + right +
+      (selMode ? '' : '<span class="ms chev">' + (isOpen ? 'expand_less' : 'expand_more') + '</span>') + '</div>';
+    var det = '';
+    if (isOpen) {
+      var video = S.moving ? '<div class="btn off">' + ms('smart_display') + 'Ver vídeo (carro parado)</div>' : '<div class="btn">' + ms('smart_display') + 'Ver vídeo</div>';
+      var fixedBtn = isFixed ? '<div class="btn">' + ms('undo') + 'Desmarcar</div>' : '<div class="btn">' + ms('task_alt') + 'Marcar como corrigida</div>';
+      if (f.full) {
+        det = '<div class="det"><div><h4>Causas prováveis</h4><ul>' + f.causes.map(function (c) { return '<li>' + c + '</li>'; }).join('') + '</ul></div>' +
+          '<div><h4>O que fazer</h4><p>' + f.fix + '</p></div><div class="act">' + video + fixedBtn + '<span class="note">Marcar é só no app. Não apaga nada no carro.</span></div></div>';
+      } else {
+        det = '<div class="det"><div><h4>O que é</h4><p>Código de fabricante (Honda). O Nórdico ainda não tem a descrição completa em português.</p></div>' +
+          '<div><h4>O que fazer</h4><p>Procure o código na internet junto com o modelo do carro ou leve a uma oficina.</p></div><div class="act">' + video + fixedBtn + '</div></div>';
+      }
+    }
+    return el('div', 'fr' + (isFixed ? ' fixedrow' : ''), top + det);
+  }).join('');
+}
+function head(count, hint, selecting) {
+  return el('div', 's-head', '<div><h2>Falhas registradas</h2><div class="hint">' + hint + '</div></div>' +
+    '<div class="btn">' + (selecting ? 'Cancelar' : ms('checklist') + 'Selecionar') + '</div>');
+}
+function clearBtn() {
+  if (S.moving) return el('div', 'primary off', ms('block') + 'Apagar todas as falhas') + el('div', 'why', 'Pare o carro para apagar falhas.');
+  return el('div', 'primary', ms('delete_sweep') + 'Apagar todas as falhas') + el('div', 'why', 'Apaga todas de uma vez. O carro não permite escolher uma só.');
+}
+function sheetList(mode) {
+  var n = F.length;
+  var selecting = mode === 'select';
+  var nsel = Object.keys(S.sel).length;
+  var bar = selecting ? el('div', 'selbar', '<div class="btn acc">' + ms('task_alt') + 'Marcar ' + nsel + ' como corrigidas</div><div class="btn">Desmarcar</div><span class="n">Só no app. Não apaga nada no carro.</span>') : '';
+  return head(n, n + ' falhas · luz do motor acesa', selecting) + (selecting ? '' : clearBtn()) + el('div', 'list', rows(mode)) + bar;
+}
+function sheetConfirm() {
+  return el('div', 'cf', '<h2>Apagar todas as falhas?</h2><div class="chips">' + F.map(function (f) { return '<span>' + f.code + '</span>'; }).join('') + '</div>' +
+    '<div class="eff"><div><h4>O que acontece</h4><ul>' +
+    '<li>' + ms('delete') + 'As ' + F.length + ' falhas são apagadas do carro.</li>' +
+    '<li>' + ms('photo_camera') + 'O registro do momento da falha (freeze frame) é perdido.</li>' +
+    '<li>' + ms('restart_alt') + 'Os monitores de prontidão são zerados. Precisam de alguns dias de uso para completar.</li>' +
+    '<li>' + ms('lightbulb') + 'Se a falha persistir, a luz do motor volta.</li></ul></div>' +
+    '<div><h4>Antes de apagar</h4><ul>' +
+    '<li>' + ms('local_parking') + 'Carro parado.</li>' +
+    '<li>' + ms('key') + 'Em muitos carros: motor desligado e chave na posição ligada.</li>' +
+    '<li>' + ms('history') + 'Guardamos os códigos e a data neste aparelho.</li></ul></div></div>' +
+    '<div class="btns"><div>Cancelar</div><div class="go">Apagar falhas</div></div>');
+}
+function res(icon, color, h, p, btn, acc) {
+  return el('div', 'res', '<span class="ms f" style="color:' + color + '">' + icon + '</span><h2>' + h + '</h2><p>' + p + '</p>' + (btn ? '<div class="btn' + (acc ? ' acc' : '') + '">' + btn + '</div>' : ''));
+}
+function render() {
+  var hu = document.getElementById('hu');
+  hu.setAttribute('data-theme', S.theme);
+  var st = S.state, body = '';
+  if (st === 'list') body = sheetList('list');
+  else if (st === 'expanded') { S.open = 'P0420'; body = sheetList('open'); }
+  else if (st === 'basic') { S.open = 'P1456'; body = sheetList('open'); }
+  else if (st === 'fixed') { S.fixed = { P0133: 1 }; S.open = 'P0420'; body = sheetList('open'); }
+  else if (st === 'select') { S.sel = { P0420: 1, P0133: 1 }; body = sheetList('select'); }
+  else if (st === 'confirm') body = sheetConfirm();
+  else if (st === 'clearing') body = el('div', 'res', '<div class="spin"></div><h2>Apagando falhas…</h2><p>Não desligue o adaptador. Isso leva alguns segundos.</p>');
+  else if (st === 'cleared') body = res('check_circle', 'var(--ok)', 'Falhas apagadas', 'O carro confirmou que não há falhas registradas. Os monitores de prontidão precisam de alguns dias de uso para completar.', 'Concluir', true);
+  else if (st === 'returned') body = res('error', 'var(--warm)', 'O carro ainda registra falhas', 'O comando foi aceito, mas P0420 continua registrado. A falha persiste ou é permanente. Corrija a causa e apague de novo.', 'Ver falhas', true);
+  else if (st === 'refused') body = res('key', 'var(--warm)', 'O carro recusou apagar', 'Desligue o motor, deixe a chave na posição ligada e tente de novo.', 'Entendi', true);
+  else if (st === 'unverified') body = res('help', 'var(--warm)', 'Comando aceito, mas não deu para conferir', 'Não consegui reler as falhas. Abra a lista de novo para ver o estado do carro.', 'Ver falhas', true);
+  else if (st === 'noresp') body = res('bluetooth_disabled', 'var(--danger)', 'O carro não respondeu', 'Confira a lista de falhas antes de tentar de novo. Nada foi reenviado.', 'Ver falhas', true);
+  else if (st === 'empty') body = head(0, 'Nenhuma falha registrada', false) + el('div', 'res', ms('check_circle', 1).replace('class="ms f"', 'class="ms f" style="color:var(--ok);font-size:76px"') + '<h2>Nenhuma falha registrada</h2><p>O carro não tem códigos armazenados. Histórico de limpezas disponível neste aparelho.</p>');
+  hu.innerHTML = bg() + '<div class="scrim"></div>' + el('div', 'sheet', '<div class="grab"></div>' + body);
+  fit();
+}
+function fit() { var scr = document.getElementById('scr'); document.getElementById('hu').style.transform = 'scale(' + (scr.clientWidth / 1280) + ')'; }
+var sb = document.getElementById('states');
+STATES.forEach(function (s, i) { var b = document.createElement('button'); b.dataset.s = s[0]; b.textContent = s[1]; if (!i) b.className = 'on'; sb.appendChild(b); });
+document.querySelectorAll('.grp').forEach(function (g) {
+  g.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    g.querySelectorAll('button').forEach(function (x) { x.classList.remove('on'); }); b.classList.add('on');
+    if (b.dataset.s) { S.state = b.dataset.s; S.fixed = {}; S.sel = {}; }
+    if (b.dataset.t) S.theme = b.dataset.t;
+    if (b.dataset.m) S.moving = b.dataset.m === '1';
+    render();
+  });
+});
+window.addEventListener('resize', fit);
+render();
+</script>
+</body>
+</html>
