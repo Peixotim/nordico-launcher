@@ -63,6 +63,11 @@ class AppContainer(context: Context) {
         )
     }
 
+    /** O emulador não usa Bluetooth: a permissão nunca é pedida. */
+    var requestBluetoothPermission: () -> Unit = {}
+
+    fun hasBluetoothPermission() = true
+
     fun onLocationPermissionGranted() = Unit
 
     fun onResume() = Unit
