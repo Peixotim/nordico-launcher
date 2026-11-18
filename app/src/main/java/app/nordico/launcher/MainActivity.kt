@@ -40,6 +40,8 @@ class MainActivity : ComponentActivity() {
             override fun handleOnBackPressed() = Unit
         })
         val container = (application as App).container
+        val askBluetooth = registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
+        container.requestBluetoothPermission = { askBluetooth.launch(android.Manifest.permission.BLUETOOTH_CONNECT) }
         val askLocation = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
             if (result.values.any { it }) container.onLocationPermissionGranted()
         }
