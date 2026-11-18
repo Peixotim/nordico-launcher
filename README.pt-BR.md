@@ -41,6 +41,11 @@ não precisa de root.
 | ![Tocando agora](docs/screenshots/now-playing.png) | ![Gaveta de apps](docs/screenshots/apps.png) |
 | ![Aviso do ar](docs/screenshots/hud-climate.png) | ![Modo de edição](docs/screenshots/apps-edit.png) |
 
+| Veículo | Rádio |
+|---|---|
+| ![Veículo](docs/screenshots/vehicle.png) | ![Rádio](docs/screenshots/radio.png) |
+| ![Códigos de falha](docs/screenshots/vehicle-faults.png) | |
+
 Os protótipos HTML que definiram o design ficam em [`docs/prototipos/`](docs/prototipos) e
 abrem direto no navegador.
 
@@ -55,7 +60,18 @@ abrem direto no navegador.
 - Modo da tela: Auto (segue o farol quando o carro informa; senão, das 18h às 6h), Dia ou Noite.
 - Botão para desligar a tela, que deixa só um relógio fraco.
 
+**Veículo (OBD-II, somente leitura)**
+- Velocidade com arco de rotação, temperatura do motor, tensão da bateria, combustível, carga, acelerador e ar de admissão, lidos de um adaptador ELM327 por Bluetooth.
+- Códigos de falha armazenados com descrição em português e selo com a contagem. Nunca apaga códigos nem escreve no carro.
+- Alertas de temperatura alta e tensão anormal da bateria, em um aviso sobre qualquer tela. Tocar nele abre o Veículo.
+- Lê só com o app visível, espera mais a cada falha e reconecta sozinho.
+
+**Rádio**
+- FM e AM com escala arrastável, botões de buscar e passo, e 18 memórias FM / 12 AM (toque para sintonizar, segure para salvar).
+- Na central real mostra o cartão "Rádio do fabricante" até a integração do sintonizador.
+
 **Tocando agora**
+- Barra de progresso arrastável com tempo decorrido e restante, e aleatório, repetir e curtir quando o app de música oferece.
 - O card cresce até a tela cheia com transição compartilhada, e a capa do álbum "voa" até o lugar.
 - O fundo desfocado sai da própria capa, sem custo de GPU: ela é reduzida para 32 px e esticada.
 
@@ -198,7 +214,8 @@ toque em "Permitir acesso à música" na tela inicial ou rode
 - [ ] Acabamento: mapa noturno mais claro, indicador 4G/5G independente do Wi-Fi, busca da gaveta zerada ao sair.
 
 **Fase 2: telas de sistema**
-- [ ] Tela de rádio por cima do rádio do fabricante.
+- [x] Telas de veículo (OBD-II) e rádio, com dados simulados e um emulador ELM327 para testes (`-PobdTcp=10.0.2.2:35000`).
+- [ ] Rádio por cima do rádio do fabricante (precisa da central).
 - [ ] Ajustes do Nórdico (cor de destaque, app de navegação, app de música).
 
 **Fase 3: integração com a central**
