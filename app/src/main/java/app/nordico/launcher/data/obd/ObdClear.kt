@@ -33,3 +33,39 @@ fun parseClear(raw: String): ClearReply {
         else -> ClearReply.Failed(e)
     }
 }
+
+/** Por que o app não envia o `04`. */
+enum class ClearBlock { NotConnected, Moving, NothingToClear }
+
+/** Resultado mostrado ao usuário depois de pedir para apagar (spec 8.2). */
+sealed interface ClearOutcome {
+    /** Aceito e a releitura veio vazia. */
+    data object Cleared : ClearOutcome
+
+    /** Aceito, mas a releitura ainda tem códigos (a falha persiste ou é permanente). */
+    data class Returned(val codes: List<Dtc>) : ClearOutcome
+    data class Refused(val nrc: Int) : ClearOutcome
+
+    /** Aceito, mas a releitura falhou. */
+    data object Unverified : ClearOutcome
+    data object NoResponse : ClearOutcome
+    data class Blocked(val reason: ClearBlock) : ClearOutcome
+}
+
+sealed interface ClearState {
+    data object Idle : ClearState
+    data object Clearing : ClearState
+    data class Done(val outcome: ClearOutcome) : ClearState
+}
+
+/**
+ * Guarda de segurança, usada pela interface e repetida pelo repositório: conectado, velocidade **lida** e
+ * igual a zero e algo para apagar. `null` = pode apagar.
+ */
+// Trade-off: não bloqueia por rotação; a ECU decide e uma recusa 0x22 é explicada ao usuário.
+fun clearGate(state: ObdState, t: VehicleTelemetry, faults: List<Dtc>?): ClearBlock? = when {
+    state !is ObdState.Connected -> ClearBlock.NotConnected
+    t.speedKmh != 0 -> ClearBlock.Moving
+    faults.isNullOrEmpty() && t.milOn != true && (t.faultCount ?: 0) == 0 -> ClearBlock.NothingToClear
+    else -> null
+}
