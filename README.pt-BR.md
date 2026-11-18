@@ -44,7 +44,8 @@ não precisa de root.
 | Veículo | Rádio |
 |---|---|
 | ![Veículo](docs/screenshots/vehicle.png) | ![Rádio](docs/screenshots/radio.png) |
-| ![Códigos de falha](docs/screenshots/vehicle-faults.png) | |
+| ![Códigos de falha](docs/screenshots/vehicle-faults.png) | ![Detalhe da falha](docs/screenshots/faults-detail.png) |
+| ![Apagar falhas](docs/screenshots/faults-clear.png) | |
 
 Os protótipos HTML que definiram o design ficam em [`docs/prototipos/`](docs/prototipos) e
 abrem direto no navegador.
@@ -60,9 +61,11 @@ abrem direto no navegador.
 - Modo da tela: Auto (segue o farol quando o carro informa; senão, das 18h às 6h), Dia ou Noite.
 - Botão para desligar a tela, que deixa só um relógio fraco.
 
-**Veículo (OBD-II, somente leitura)**
+**Veículo (OBD-II)**
 - Velocidade com arco de rotação, temperatura do motor, tensão da bateria, combustível, carga, acelerador e ar de admissão, lidos de um adaptador ELM327 por Bluetooth.
-- Códigos de falha armazenados com descrição em português e selo com a contagem. Nunca apaga códigos nem escreve no carro.
+- Códigos de falha armazenados com selo de contagem. Cada código tem título, gravidade, causas prováveis, o que fazer e link de vídeo, de um catálogo offline com ~9.600 códigos (cerca de 20 escritos por completo em português, o resto com título, crescendo em lotes).
+- **Apagar falhas**: "Apagar todas as falhas" envia o comando padrão do OBD-II (modo 04). É a única escrita que o app faz, e com proteções: só com o carro parado e conectado, depois de uma confirmação que explica os efeitos, sem reenvio automático, e só diz "apagado" depois de reler os códigos.
+- "Marcar como corrigida" (uma ou várias) é uma anotação no app. Não mexe no carro: o padrão OBD-II não apaga um código só, apenas todos.
 - Alertas de temperatura alta e tensão anormal da bateria, em um aviso sobre qualquer tela. Tocar nele abre o Veículo.
 - Lê só com o app visível, espera mais a cada falha e reconecta sozinho.
 
