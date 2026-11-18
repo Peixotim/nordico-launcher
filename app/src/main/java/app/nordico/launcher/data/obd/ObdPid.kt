@@ -10,6 +10,9 @@ enum class ObdPid(val id: Int, val bytes: Int) {
     Throttle(0x11, 1),
     Fuel(0x2F, 1),
     Voltage(0x42, 2),
+
+    /** PID 01: bit 7 do primeiro byte = luz do motor acesa; bits 0-6 = quantidade de falhas. */
+    Status(0x01, 4),
 }
 
 /** Converte os bytes de dados do PID para a unidade da tela (km/h, rpm, °C, %, V). */
@@ -22,5 +25,6 @@ fun ObdPid.decode(data: List<Int>): Double {
         ObdPid.Coolant, ObdPid.Intake -> a - 40.0
         ObdPid.Load, ObdPid.Throttle, ObdPid.Fuel -> a * 100.0 / 255.0
         ObdPid.Voltage -> (a * 256 + b) / 1000.0
+        ObdPid.Status -> a.toDouble()
     }
 }
