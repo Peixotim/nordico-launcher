@@ -13,6 +13,9 @@ data class VehicleTelemetry(
     val throttlePct: Int? = null,
     val fuelPct: Int? = null,
     val batteryV: Double? = null,
+    /** Luz do motor acesa e quantidade de falhas armazenadas (PID 01). */
+    val milOn: Boolean? = null,
+    val faultCount: Int? = null,
 )
 
 sealed interface ObdState {
