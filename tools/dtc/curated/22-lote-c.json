@@ -1,0 +1,163 @@
+{
+  "P0030": {
+    "title": "Controle do aquecedor do sensor de oxigênio, circuito (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": ["Fusível ou relé do aquecedor aberto", "Conector ou fio de comando do aquecedor com defeito", "Aquecedor do sensor queimado (troca do sensor)"],
+    "symptoms": ["Luz do motor acesa", "Consumo um pouco maior", "Monitor do catalisador não completa a prontidão"],
+    "solution": "Verifique o fusível e o conector do sensor. Aquecedor queimado exige trocar o sensor."
+  },
+  "P0031": {
+    "title": "Controle do aquecedor do sensor de oxigênio, circuito baixo (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": ["Fio do aquecedor em curto com o terra", "Resistência do aquecedor em curto", "Conector corroído"],
+    "symptoms": ["Luz do motor acesa", "Consumo um pouco maior"],
+    "solution": "Inspecione o chicote e o conector do sensor. Aquecedor em curto exige trocar o sensor."
+  },
+  "P0032": {
+    "title": "Controle do aquecedor do sensor de oxigênio, circuito alto (banco 1, sensor 1)",
+    "severity": "attention",
+    "causes": ["Fio do aquecedor em curto com positivo", "Módulo do motor com defeito (menos comum)", "Conector danificado"],
+    "symptoms": ["Luz do motor acesa", "Consumo um pouco maior"],
+    "solution": "Inspecione o chicote e o conector do sensor e procure fio roçado. Se tudo estiver bom, é preciso diagnóstico em oficina."
+  },
+  "P0036": {
+    "title": "Controle do aquecedor do sensor de oxigênio, circuito (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": ["Fusível ou relé do aquecedor aberto", "Conector ou fio de comando do aquecedor com defeito", "Aquecedor do sensor queimado (troca do sensor)"],
+    "symptoms": ["Luz do motor acesa", "Monitor do catalisador não completa a prontidão"],
+    "solution": "Verifique o fusível e o conector do sensor traseiro. Aquecedor queimado exige trocar o sensor."
+  },
+  "P0037": {
+    "title": "Controle do aquecedor do sensor de oxigênio, circuito baixo (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": ["Fio do aquecedor em curto com o terra", "Resistência do aquecedor em curto", "Conector corroído"],
+    "symptoms": ["Luz do motor acesa", "Monitor do catalisador não completa a prontidão"],
+    "solution": "Inspecione o chicote e o conector do sensor traseiro. Aquecedor em curto exige trocar o sensor."
+  },
+  "P0038": {
+    "title": "Controle do aquecedor do sensor de oxigênio, circuito alto (banco 1, sensor 2)",
+    "severity": "attention",
+    "causes": ["Fio do aquecedor em curto com positivo", "Módulo do motor com defeito (menos comum)", "Conector danificado"],
+    "symptoms": ["Luz do motor acesa", "Monitor do catalisador não completa a prontidão"],
+    "solution": "Inspecione o chicote e o conector do sensor traseiro e procure fio roçado."
+  },
+  "P0460": {
+    "title": "Sensor de nível de combustível, circuito",
+    "severity": "ok",
+    "causes": ["Boia ou sensor do tanque com defeito (trilha gasta)", "Conector ou fio do sensor com corrosão ou aberto", "Marcador do painel ou módulo com defeito (menos comum)"],
+    "symptoms": ["Marcador de combustível parado ou errado", "Luz do motor acesa"],
+    "solution": "Se o marcador está errado, o sensor da boia (dentro do tanque) é o suspeito: a troca exige abrir o tanque. Abasteça por quilometragem enquanto não resolver."
+  },
+  "P0461": {
+    "title": "Sensor de nível de combustível, fora da faixa",
+    "severity": "ok",
+    "causes": ["Boia presa ou com trilha gasta", "Conector ou fio do sensor com mau contato", "Combustível com resistência anormal"],
+    "symptoms": ["Marcador de combustível irregular ou que não acompanha o nível", "Luz do motor acesa"],
+    "solution": "A boia do tanque costuma ser a causa. Abasteça por quilometragem enquanto não resolver."
+  },
+  "P0462": {
+    "title": "Sensor de nível de combustível, sinal baixo",
+    "severity": "ok",
+    "causes": ["Fio de sinal em curto com o terra", "Sensor da boia com defeito", "Conector corroído"],
+    "symptoms": ["Marcador de combustível no vazio mesmo com tanque cheio", "Luz do motor acesa"],
+    "solution": "Verifique o conector do sensor. Abasteça por quilometragem enquanto não resolver."
+  },
+  "P0463": {
+    "title": "Sensor de nível de combustível, sinal alto",
+    "severity": "ok",
+    "causes": ["Fio de sinal ou terra aberto", "Sensor da boia com defeito", "Conector solto"],
+    "symptoms": ["Marcador de combustível no máximo mesmo com o tanque quase vazio", "Luz do motor acesa"],
+    "solution": "Verifique o conector do sensor. Abasteça por quilometragem enquanto não resolver, para não ser surpreendido por tanque seco."
+  },
+  "P0464": {
+    "title": "Sensor de nível de combustível, intermitente",
+    "severity": "ok",
+    "causes": ["Mau contato no conector do sensor", "Boia com trilha desgastada", "Fio roçando"],
+    "symptoms": ["Marcador de combustível oscilando", "Luz do motor acesa"],
+    "solution": "Confira o conector do sensor. Abasteça por quilometragem enquanto não resolver."
+  },
+  "P0020": {
+    "title": "Atuador do comando de válvulas A (banco 2), circuito",
+    "severity": "attention",
+    "causes": ["Bobina da válvula de controle de óleo aberta ou em curto", "Conector corroído, solto ou encharcado de óleo", "Chicote roçado ou rompido"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o conector da válvula de controle de óleo do comando do banco 2 e o chicote."
+  },
+  "P0021": {
+    "title": "Comando de válvulas A (banco 2), adiantado demais ou desempenho",
+    "severity": "attention",
+    "causes": ["Nível de óleo baixo, óleo velho com borra ou viscosidade errada", "Tela da válvula de controle de óleo entupida", "Válvula de controle de óleo emperrando"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o nível e a qualidade do óleo e troque se estiver velho. Se persistir, limpe ou troque a válvula de controle."
+  },
+  "P0022": {
+    "title": "Comando de válvulas A (banco 2), atrasado demais",
+    "severity": "attention",
+    "causes": ["Pressão ou nível de óleo baixos, óleo gasto", "Válvula de controle de óleo emperrada fechada ou com a tela bloqueada", "Fasador do comando com defeito ou preso na posição de repouso"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o nível e a qualidade do óleo e troque se necessário. Se persistir, verifique a válvula de controle de óleo."
+  },
+  "P0641": {
+    "title": "Alimentação de 5 V dos sensores, circuito A",
+    "severity": "attention",
+    "causes": ["Curto em um sensor que usa a mesma alimentação de 5 V", "Fiação roçada ou conector molhado", "Módulo do motor com defeito (menos comum)"],
+    "symptoms": ["Luz do motor acesa", "Vários códigos de sensores ao mesmo tempo", "Falta de força ou o carro não pega"],
+    "solution": "Quando vários sensores falham juntos, procure um sensor ou fio em curto que derrube a alimentação de 5 V. Desconectar sensores um a um ajuda a achar o culpado."
+  },
+  "P0651": {
+    "title": "Alimentação de 5 V dos sensores, circuito B",
+    "severity": "attention",
+    "causes": ["Curto em um sensor que usa a mesma alimentação de 5 V", "Fiação roçada ou conector molhado", "Módulo do motor com defeito (menos comum)"],
+    "symptoms": ["Luz do motor acesa", "Vários códigos de sensores ao mesmo tempo"],
+    "solution": "Procure um sensor ou fio em curto que derrube a alimentação de 5 V; desconectar sensores um a um ajuda a achar o culpado."
+  },
+  "P0685": {
+    "title": "Relé de alimentação do módulo do motor, circuito aberto",
+    "severity": "attention",
+    "causes": ["Relé principal com defeito", "Fusível ou fio de alimentação do relé aberto", "Conector corroído ou solto"],
+    "symptoms": ["Carro que não pega ou morre rodando", "Luz do motor acesa"],
+    "solution": "Teste o relé principal e os fusíveis do motor. Se o carro morre sem aviso, evite rodar até resolver."
+  },
+  "P0850": {
+    "title": "Interruptor de ponto morto/estacionamento (park/neutral), circuito",
+    "severity": "attention",
+    "causes": ["Interruptor de posição da alavanca (park/neutral) desregulado ou com defeito", "Cabo da alavanca fora de ajuste", "Conector ou fio do interruptor com defeito"],
+    "symptoms": ["Luz do motor acesa", "Carro que não dá partida na posição certa ou que dá partida engatado", "Luzes de ré e de partida inseguras"],
+    "solution": "Confira a regulagem do cabo e do interruptor da alavanca. É um serviço comum de oficina."
+  },
+  "P0604": {
+    "title": "Módulo de controle, erro de memória RAM",
+    "severity": "attention",
+    "causes": ["Tensão baixa ou quedas de tensão no módulo", "Terra ou alimentação do módulo ruim", "Defeito interno do módulo"],
+    "symptoms": ["Luz do motor acesa", "Falhas imprevisíveis ou carro que não pega"],
+    "solution": "Primeiro confira a bateria, os terminais e os terras. Se a alimentação está boa, é preciso diagnóstico profissional do módulo."
+  },
+  "P0605": {
+    "title": "Módulo de controle, erro de memória ROM",
+    "severity": "attention",
+    "causes": ["Software do módulo com defeito ou reprogramação com falha", "Tensão baixa durante a programação", "Defeito interno do módulo"],
+    "symptoms": ["Luz do motor acesa", "Carro pode não pegar ou entrar em modo de emergência"],
+    "solution": "Procure a concessionária: costuma exigir reprogramação ou troca do módulo."
+  },
+  "P0627": {
+    "title": "Controle da bomba de combustível, circuito aberto",
+    "severity": "attention",
+    "causes": ["Fusível ou relé da bomba de combustível com defeito", "Conector ou fio de comando aberto", "Módulo de controle da bomba com defeito"],
+    "symptoms": ["Carro que não pega ou morre rodando", "Luz do motor acesa"],
+    "solution": "Teste o fusível e o relé da bomba e ouça o zumbido ao ligar a chave. Se o carro morre, evite rodar."
+  },
+  "P0628": {
+    "title": "Controle da bomba de combustível, circuito baixo",
+    "severity": "attention",
+    "causes": ["Fio de comando em curto com o terra", "Bomba ou módulo da bomba com defeito", "Conector molhado ou corroído"],
+    "symptoms": ["Carro que não pega ou falha rodando", "Luz do motor acesa"],
+    "solution": "Inspecione o chicote e o conector da bomba de combustível. Se o carro falha em movimento, evite rodar."
+  },
+  "P0629": {
+    "title": "Controle da bomba de combustível, circuito alto",
+    "severity": "attention",
+    "causes": ["Fio de comando em curto com positivo", "Bomba ou módulo da bomba com defeito", "Relé preso ligado"],
+    "symptoms": ["Luz do motor acesa", "Bomba de combustível ligada o tempo todo"],
+    "solution": "Teste o relé da bomba e o chicote. Bomba ligada o tempo todo descarrega a bateria."
+  }
+}
