@@ -17,13 +17,13 @@ private val ALL_NO_DATA = mapOf(
     "ATI" to "ELM327 v1.5", "ATDPN" to "A6",
     "0100" to "41 00 BE 3F A8 13", "0120" to "NO DATA", "0140" to "NO DATA", "0160" to "NO DATA",
     "010D" to "NO DATA", "010C" to "NO DATA", "0105" to "NO DATA", "010F" to "NO DATA",
-    "0104" to "NO DATA", "0111" to "NO DATA", "0142" to "NO DATA", "012F" to "NO DATA",
+    "0104" to "NO DATA", "0111" to "NO DATA", "0142" to "NO DATA", "012F" to "NO DATA", "0101" to "NO DATA",
 )
 
 private val CAR = ALL_NO_DATA + mapOf(
     "010D" to "41 0D 3C", "010C" to "41 0C 1A F8", "0105" to "41 05 7B", "010F" to "41 0F 3C",
     "0104" to "41 04 FF", "0111" to "41 11 00", "0142" to "NO DATA", "012F" to "NO DATA",
-    "03" to "43 01 01 33 00 00 00",
+    "0101" to "41 01 82 07 E5 00", "03" to "43 01 01 33 00 00 00",
 )
 
 private val ADAPTER = ObdAdapter("OBDII", "00:1D:A5:68:98:8B")
@@ -64,6 +64,8 @@ class ElmObdRepositoryTest {
         assertEquals(20, t.intakeC)
         assertEquals(100, t.loadPct)
         assertEquals(0, t.throttlePct)
+        assertEquals(true, t.milOn)
+        assertEquals(2, t.faultCount)
     }
 
     @Test fun unsupported_pid_stays_null_and_stops_being_requested_after_three_no_data() = runTest {
