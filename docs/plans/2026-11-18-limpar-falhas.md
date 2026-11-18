@@ -269,7 +269,7 @@ Lotes (~50 códigos cada, em ordem de prioridade):
       fun unmark(codes: Collection<String>): FaultLog
       fun prune(present: Collection<String>): FaultLog           // descarta marcas de códigos ausentes
       fun begin(codes: List<String>, atMs: Long): FaultLog       // registra "Attempt" antes do envio
-      fun finish(atMs: Long, result: ClearResult): FaultLog      // completa o registro mais recente
+      fun finish(result: ClearResult): FaultLog      // completa o registro mais recente
       fun encode(): String
       companion object { fun decode(text: String?): FaultLog }
   }
