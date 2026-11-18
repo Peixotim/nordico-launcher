@@ -44,7 +44,8 @@ time and needs no root.
 | Vehicle | Radio |
 |---|---|
 | ![Vehicle](docs/screenshots/vehicle.png) | ![Radio](docs/screenshots/radio.png) |
-| ![Fault codes](docs/screenshots/vehicle-faults.png) | |
+| ![Fault codes](docs/screenshots/vehicle-faults.png) | ![Fault details](docs/screenshots/faults-detail.png) |
+| ![Clear faults](docs/screenshots/faults-clear.png) | |
 
 The original HTML prototypes that defined the design live in
 [`docs/prototipos/`](docs/prototipos) and open directly in a browser.
@@ -60,9 +61,11 @@ The original HTML prototypes that defined the design live in
 - Screen mode: Auto (follows the headlights when the car reports them, otherwise 18:00–06:00), Day or Night.
 - Screen-off button that leaves only a dim clock.
 
-**Vehicle (OBD-II, read-only)**
+**Vehicle (OBD-II)**
 - Speed with a rotation arc, coolant, battery voltage, fuel, engine load, throttle and intake air, read from an ELM327 adapter over Bluetooth.
-- Stored fault codes with Portuguese descriptions and a badge with the count. It never clears codes or writes to the car.
+- Stored fault codes with a count badge. Each code has a title, severity, probable causes, what to do and a video link, from an offline catalog of ~9,600 codes (about 20 written in full in Portuguese, the rest with a title, growing in batches).
+- **Clear codes**: "Clear all faults" sends the standard OBD-II clear command (mode 04). It is the only write the app ever makes, and it is guarded: only with the car stopped and connected, after a confirmation that explains the effects, never retried automatically, and reported as "cleared" only after reading the codes back.
+- "Mark as fixed" (single or multiple) is a note kept in the app. It does not touch the car: the OBD-II standard cannot clear a single code, only all of them.
 - Alerts for high coolant temperature and abnormal battery voltage, shown as a HUD on any screen. Tapping it opens Vehicle.
 - Reads only while the app is visible, backs off when the adapter is lost and reconnects on its own.
 
