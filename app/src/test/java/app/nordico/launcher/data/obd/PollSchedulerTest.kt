@@ -37,6 +37,7 @@ class PollSchedulerTest {
         assertEquals(1000L, POLL_INTERVALS.getValue(ObdPid.Load))
         assertEquals(1000L, POLL_INTERVALS.getValue(ObdPid.Throttle))
         assertEquals(2000L, POLL_INTERVALS.getValue(ObdPid.Coolant))
+        assertEquals(5000L, POLL_INTERVALS.getValue(ObdPid.Status))
     }
 
     @Test fun strike_counter_disables_after_three_no_data_in_a_row() {
