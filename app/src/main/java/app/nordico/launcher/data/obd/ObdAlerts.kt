@@ -33,6 +33,10 @@ fun alertFor(t: VehicleTelemetry, previous: Alert): Alert {
     }
 }
 
+/** Sem conexão com o adaptador não há alerta: a telemetria vazia seria lida como "leitura ausente". */
+fun alertFor(state: ObdState, t: VehicleTelemetry, previous: Alert): Alert =
+    if (state is ObdState.Connected) alertFor(t, previous) else Alert.None
+
 /** Mostra na entrada de um alerta, ao trocar de alerta e a cada minuto enquanto durar; nunca ao limpar. */
 fun shouldShowAlert(previous: Alert, current: Alert, lastShownMs: Long?, nowMs: Long): Boolean = when {
     current == Alert.None -> false
