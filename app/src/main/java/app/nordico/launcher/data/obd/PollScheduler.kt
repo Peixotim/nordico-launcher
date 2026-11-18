@@ -3,7 +3,7 @@ package app.nordico.launcher.data.obd
 /** Ordem de prioridade quando mais de um PID está vencido por igual. */
 private val PRIORITY = listOf(
     ObdPid.Speed, ObdPid.Rpm, ObdPid.Load, ObdPid.Throttle,
-    ObdPid.Coolant, ObdPid.Intake, ObdPid.Fuel, ObdPid.Voltage,
+    ObdPid.Coolant, ObdPid.Intake, ObdPid.Fuel, ObdPid.Voltage, ObdPid.Status,
 )
 
 /** Intervalo mínimo entre leituras de cada PID, em ms (spec 10.1). */
@@ -11,6 +11,7 @@ val POLL_INTERVALS: Map<ObdPid, Long> = mapOf(
     ObdPid.Speed to 250L, ObdPid.Rpm to 250L,
     ObdPid.Load to 1000L, ObdPid.Throttle to 1000L,
     ObdPid.Coolant to 2000L, ObdPid.Intake to 2000L, ObdPid.Fuel to 2000L, ObdPid.Voltage to 2000L,
+    ObdPid.Status to 5000L,
 )
 
 /** O PID mais atrasado entre os [active]; `null` se nenhum venceu ainda. */
