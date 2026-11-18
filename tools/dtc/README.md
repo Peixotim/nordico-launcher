@@ -55,4 +55,8 @@ Rules: orientation, never a closed diagnosis; when unsure use `attention`; `stop
 Without a reliable source, an entry does not go in. `build_catalog.py` fails on missing fields, bad codes
 and duplicates, and the `DtcCatalogFileTest` unit test checks the generated file.
 
+Families that follow a fixed SAE pattern (oxygen sensors, ignition coils, injector circuits, MAP/MAF/IAT/ECT/TPS
+sensors, per-cylinder misfires) are produced by `gen_families.py` into `curated/10-familias.json` from
+hand-reviewed templates. Codes that already have a hand-written entry are skipped. Run it before `build_catalog.py`.
+
 Licenses of the sources: see `THIRD_PARTY_NOTICES.md` at the repository root.
