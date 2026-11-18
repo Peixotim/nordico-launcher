@@ -26,3 +26,6 @@ fun sectionApps(apps: List<AppEntry>, hidden: Set<String>, query: String): AppSe
 
 /** A tela Clima aparece na gaveta como app do carro (só quando há dados do ar). */
 val CLIMATE_APP = AppEntry(id = "internal.climate", label = "Clima", section = AppSection.Car, glyph = "ac_unit", route = InternalRoute.Climate)
+
+/** A tela Veículo aparece na gaveta como app do carro (sempre; sem adaptador ela mostra como conectar). */
+val VEHICLE_APP = AppEntry(id = "internal.vehicle", label = "Veículo", section = AppSection.Car, glyph = "speed", route = InternalRoute.Vehicle)
