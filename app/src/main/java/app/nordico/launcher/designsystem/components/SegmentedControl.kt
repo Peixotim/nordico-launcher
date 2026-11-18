@@ -68,7 +68,7 @@ fun SegmentedControl(
                     horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Sym(glyph, size = 20.dp, tint = tint)
+                    if (glyph.isNotEmpty()) Sym(glyph, size = 20.dp, tint = tint)
                     NText(label, nordicText(15, FontWeight.Medium), color = tint)
                 }
             }
