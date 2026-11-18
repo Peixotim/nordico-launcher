@@ -66,4 +66,12 @@ class FaultLogTest {
         assertEquals(mapOf("P0420" to 5L), decoded.marks)
         assertEquals(listOf(ClearRecord(10, listOf("P0420"), ClearResult.Cleared)), decoded.history)
     }
+
+    @Test fun discard_removes_only_a_pending_attempt() {
+        val pending = FaultLog().begin(listOf("P0420"), 1)
+        assertEquals(FaultLog(), pending.discard())
+        val done = pending.finish(ClearResult.Cleared)
+        assertEquals(done, done.discard())
+        assertEquals(FaultLog(), FaultLog().discard())
+    }
 }
