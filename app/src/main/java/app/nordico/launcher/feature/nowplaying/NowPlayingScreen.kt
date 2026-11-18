@@ -2,6 +2,16 @@ package app.nordico.launcher.feature.nowplaying
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.input.pointer.pointerInput
+import app.nordico.launcher.data.media.MediaAction
+import app.nordico.launcher.data.media.seekTarget
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,7 +54,6 @@ import app.nordico.launcher.designsystem.Sym
 import app.nordico.launcher.designsystem.nordicText
 import app.nordico.launcher.designsystem.pressClick
 import app.nordico.launcher.feature.home.AlbumArt
-import app.nordico.launcher.feature.home.ProgressBar
 import app.nordico.launcher.feature.home.TransportControls
 import app.nordico.launcher.feature.home.VolumePanel
 import app.nordico.launcher.navigation.AppViewModel
@@ -59,6 +68,7 @@ fun NowPlayingScreen(vm: AppViewModel, c: AppContainer, onClose: () -> Unit) {
     val access by c.media.hasAccess.collectAsStateWithLifecycle()
     val volume by c.volume.state.collectAsStateWithLifecycle()
     val accent by vm.accent.collectAsStateWithLifecycle()
+    val actions by c.media.actions.collectAsStateWithLifecycle()
     val state = miniCardState(access, np)
     if (state !is MiniCardState.Playing) {
         LaunchedEffect(Unit) { onClose() }
@@ -92,7 +102,7 @@ fun NowPlayingScreen(vm: AppViewModel, c: AppContainer, onClose: () -> Unit) {
             }
             NText(state.title, nordicText(46, FontWeight.Bold, display = true, trackingEm = -0.03f), color = Color.White, modifier = Modifier.padding(top = 10.dp))
             NText(state.artist, nordicText(24), color = Color.White.copy(alpha = 0.62f), modifier = Modifier.padding(top = 6.dp))
-            ProgressBar(state.progress, Color.White.copy(alpha = 0.22f), Color.White, 7.dp, Modifier.padding(top = 40.dp))
+            SeekBar(np?.positionMs ?: 0L, np?.durationMs ?: 0L, c.media::seekTo, Modifier.padding(top = 40.dp))
             TransportControls(
                 state.playing,
                 c.media::previous,
@@ -104,6 +114,7 @@ fun NowPlayingScreen(vm: AppViewModel, c: AppContainer, onClose: () -> Unit) {
                 tint = Color.White,
                 modifier = Modifier.fillMaxWidth().padding(top = 26.dp),
             )
+            if (actions.isNotEmpty()) MediaActionRow(actions, c.media::perform, Modifier.padding(top = 18.dp))
             NordicTheme(dark = true, accent = accent) {
                 VolumePanel(volume, c.volume::step, c.volume::toggleMute, Modifier.padding(top = 30.dp))
             }
@@ -142,4 +153,66 @@ private fun BlurredBackdrop(art: ImageBitmap?) {
         filterQuality = FilterQuality.High,
         colorFilter = filter,
     )
+}
+
+/** Barra de progresso arrastável: a posição só é enviada ao soltar; durante o arraste mostra o tempo alvo. */
+@Composable
+private fun SeekBar(positionMs: Long, durationMs: Long, onSeek: (Long) -> Unit, modifier: Modifier = Modifier) {
+    var drag by remember { mutableStateOf<Float?>(null) }
+    val progress = if (durationMs > 0) (positionMs.toFloat() / durationMs).coerceIn(0f, 1f) else 0f
+    val shown = drag ?: progress
+    val shownMs = (shown * durationMs).toLong()
+    Column(modifier) {
+        BoxWithConstraints(
+            Modifier
+                .fillMaxWidth()
+                .height(26.dp)
+                .pointerInput(durationMs) {
+                    if (durationMs > 0) detectTapGestures { onSeek(seekTarget(it.x / size.width, durationMs)) }
+                }
+                .pointerInput(durationMs) {
+                    if (durationMs > 0) {
+                        detectHorizontalDragGestures(
+                            onDragStart = { drag = (it.x / size.width).coerceIn(0f, 1f) },
+                            onDragEnd = {
+                                drag?.let { f -> onSeek(seekTarget(f, durationMs)) }
+                                drag = null
+                            },
+                            onDragCancel = { drag = null },
+                            onHorizontalDrag = { change, _ -> drag = (change.position.x / size.width).coerceIn(0f, 1f) },
+                        )
+                    }
+                },
+            contentAlignment = Alignment.CenterStart,
+        ) {
+            Box(Modifier.fillMaxWidth().height(7.dp).clip(CircleShape).background(Color.White.copy(alpha = 0.22f))) {
+                Box(Modifier.fillMaxWidth(shown).fillMaxHeight().background(Color.White))
+            }
+            Box(Modifier.offset(x = (maxWidth - 26.dp) * shown).size(26.dp).shadow(6.dp, CircleShape).clip(CircleShape).background(Color.White))
+        }
+        Row(Modifier.fillMaxWidth().padding(top = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+            NText(formatElapsed(shownMs), nordicText(14, FontWeight.Medium, tnum = true), color = Color.White.copy(alpha = 0.6f))
+            NText("-" + formatElapsed(durationMs - shownMs), nordicText(14, FontWeight.Medium, tnum = true), color = Color.White.copy(alpha = 0.6f))
+        }
+    }
+}
+
+/** Aleatório, repetir e curtir: só aparecem quando o app de música oferece a ação. */
+@Composable
+private fun MediaActionRow(actions: List<MediaAction>, onPerform: (String) -> Unit, modifier: Modifier = Modifier) {
+    Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(28.dp, Alignment.CenterHorizontally)) {
+        actions.forEach { a ->
+            Box(
+                Modifier
+                    .size(64.dp)
+                    .pressClick { onPerform(a.id) }
+                    .clip(SquircleShape(20.dp))
+                    .background(if (a.active) Color.White.copy(alpha = 0.92f) else Color.White.copy(alpha = 0.14f))
+                    .semantics { contentDescription = a.label },
+                contentAlignment = Alignment.Center,
+            ) {
+                Sym(a.glyph, size = 30.dp, filled = a.active, tint = if (a.active) Color(0xFF0B2A52) else Color.White)
+            }
+        }
+    }
 }
