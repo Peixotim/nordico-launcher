@@ -22,6 +22,20 @@ class ObdAlertsTest {
         assertEquals(Alert.None, alertFor(t(coolant = null), Alert.None))
     }
 
+    @Test fun without_a_connection_there_is_no_alert() {
+        // Sem conexão o alerta anterior não pode ficar preso mostrando "— °C".
+        val hot = t(coolant = 110)
+        assertEquals(Alert.None, alertFor(ObdState.NoAdapter, hot, Alert.CoolantHigh))
+        assertEquals(Alert.None, alertFor(ObdState.Connecting, hot, Alert.CoolantHigh))
+        assertEquals(Alert.None, alertFor(ObdState.Lost, t(), Alert.BatteryLow))
+    }
+
+    @Test fun with_a_connection_the_telemetry_decides() {
+        val connected = ObdState.Connected("A6", "ELM327")
+        assertEquals(Alert.CoolantHigh, alertFor(connected, t(coolant = 110), Alert.None))
+        assertEquals(Alert.CoolantHigh, alertFor(connected, t(coolant = null), Alert.CoolantHigh))
+    }
+
     @Test fun low_battery_only_with_the_engine_running() {
         assertEquals(Alert.BatteryLow, alertFor(t(volts = 11.7, rpm = 800), Alert.None))
         assertEquals(Alert.None, alertFor(t(volts = 11.7, rpm = 0), Alert.None))
