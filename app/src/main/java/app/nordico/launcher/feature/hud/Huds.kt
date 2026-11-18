@@ -65,8 +65,8 @@ fun ClimateHud(visible: Boolean, state: ClimateState, onOpen: () -> Unit, modifi
 
 /** Alerta do carro (temperatura alta, bateria). Vermelho de sistema, nunca a cor de destaque. */
 @Composable
-fun AlertHud(visible: Boolean, text: String, modifier: Modifier = Modifier) {
-    Hud(visible, 60.dp, modifier) {
+fun AlertHud(visible: Boolean, text: String, onOpen: () -> Unit, modifier: Modifier = Modifier) {
+    Hud(visible, 60.dp, modifier, onClick = onOpen) {
         Sym("warning", size = 26.dp, filled = true, tint = FixedColors.Danger)
         NText(text, nordicText(22, FontWeight.SemiBold))
     }
