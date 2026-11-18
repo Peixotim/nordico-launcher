@@ -4,7 +4,7 @@
 
 **Architecture:** Continua `:app` com `sim`/`device`. O comando `04` entra em `ObdSession` (código puro) atrás de uma lista fixa de comandos permitidos. `ObdRepository` ganha `clearFaults()` e um `StateFlow` de estado. Catálogo de códigos e registro local (marcas e histórico) são classes puras com codec de texto. A interface reescreve a folha de falhas.
 
-**Tech Stack:** o mesmo da fase 2, mais `org.json:json` só em `testImplementation`.
+**Tech Stack:** o mesmo da fase 2, mais `org.json:json` só em `testImplementation`. Ferramenta de catálogo em Python 3 com `pyyaml` (fora do app).
 
 **Spec:** `docs/specs/2026-11-18-limpar-falhas-design.md`.
 
@@ -31,10 +31,12 @@
 
 ```
 data/obd/      ObdClear.kt  ObdSession.kt (altera)  ObdRepository.kt (altera)  ElmObdRepository.kt (altera)
-               DtcCatalog.kt  DtcDescriptions.kt (remove ao fim)
+               DtcCatalog.kt  DtcDescriptions.kt (remove)
+tools/dtc/     build_catalog.py  curated/  README.md
+THIRD_PARTY_NOTICES.md
 data/prefs/    FaultLog.kt  PrefsRepository.kt (altera)
 feature/vehicle/  FaultsLogic.kt  FaultRow.kt  FaultsSheet.kt (reescreve)  ClearConfirmSheet.kt  VehicleScreen.kt (altera)
-assets/dtc/    catalog.json
+assets/dtc/    catalog.json (gerado)
 app/src/sim/   SimObdRepository.kt (altera)
 docs/prototipos/ 05-limpar-falhas.html
 ```
@@ -177,10 +179,14 @@ Nenhum código de interface antes da aprovação desta task.
 
 ---
 
-### Task 5: Catálogo de códigos (conteúdo offline)
+### Task 5: Catálogo de códigos (conteúdo offline, três camadas)
+
+Ver spec 8.5. Dividida em 5a (leitura no app), 5b (pipeline) e 5c (traduções do tier 1).
+
+#### Task 5a: Catálogo no app
 
 **Files:**
-- Create: `data/obd/DtcCatalog.kt`, `app/src/main/assets/dtc/catalog.json`
+- Create: `data/obd/DtcCatalog.kt`
 - Modify: `app/build.gradle.kts`, `gradle/libs.versions.toml` (`testImplementation` de `org.json:json`)
 - Remove: `data/obd/DtcDescriptions.kt` e `DtcDescriptionsTest.kt`, depois de migrar quem os usa
 - Test: `data/obd/DtcCatalogTest.kt`
@@ -189,23 +195,60 @@ Nenhum código de interface antes da aprovação desta task.
 - Produces:
   ```kotlin
   enum class Severity { Ok, Attention, Stop }          // Pode seguir, Atenção, Pare e procure ajuda
-  data class DtcInfo(val code: String, val title: String, val severity: Severity,
-                     val causes: List<String>, val solution: String, val known: Boolean)
+  enum class Tier { Full, TitlePt, Basic }
+  data class DtcInfo(val code: String, val title: String, val titleLang: String, val severity: Severity,
+                     val causes: List<String>, val symptoms: List<String>, val solution: String,
+                     val category: String, val tier: Tier, val known: Boolean)
   class DtcCatalog(private val entries: Map<String, DtcInfo>) {
       fun lookup(code: String): DtcInfo           // nunca nulo; fallback por prefixo
+      val size: Int
       companion object { fun parse(json: String): DtcCatalog }
   }
+  fun loadCatalog(context: Context): DtcCatalog   // lê o asset uma vez, fora da thread principal
   ```
+- Formato do JSON: `{"version":1,"codes":{"P0420":{"t":"...","l":"pt","s":"attention","c":["..."],"y":["..."],"x":"...","g":"powertrain","r":1}}}` (chaves curtas para reduzir o arquivo; `c`, `y` e `x` ausentes nos tiers 2 e 3).
 
 - [ ] **Step 1: Testes que falham**
-  - `parse` de um JSON pequeno: título, gravidade, causas e solução lidos; código em minúsculas é achado.
-  - **Validação do arquivo real** (`catalog.json` carregado dos assets de teste): todo código casa `^[PCBU][0-3][0-9A-F]{3}$`, sem duplicatas, `title`/`solution` não vazios, ao menos uma causa, gravidade válida.
-  - `lookup("P0420")` conhecido = `known = true`; `lookup("P0999")` desconhecido = `known = false`, título "Descrição não disponível no Nórdico" e texto por categoria (P0/P2 padrão, P1/P3 fabricante, B carroceria, C chassi, U rede); gravidade do fallback = `Attention`.
+  - `parse` de um JSON pequeno: título, idioma, gravidade, causas, sintomas, solução e tier lidos; código em minúsculas é achado.
+  - `lookup("P0420")` conhecido = `known = true`; `lookup("P0999")` ausente = `known = false`, título "Descrição não disponível no Nórdico" e texto por categoria (P0/P2 padrão, P1/P3 fabricante, B carroceria, C chassi, U rede); gravidade do fallback = `Attention`.
+  - Entrada tier 2/3 sem causas devolve lista vazia e a solução genérica da categoria.
   - JSON malformado não lança: devolve catálogo vazio (só fallback).
-- [ ] **Step 2: Escrever o catálogo v1.** Escrito e revisado à mão, em português, com as causas e a solução como **orientação**, não diagnóstico, e gravidade conservadora (na dúvida, `Attention`; falha de ignição em vários cilindros e superaquecimento = `Stop`). Cobrir pelo menos: P0011, P0101, P0107, P0113, P0117, P0125, P0128, P0133, P0171, P0172, P0300–P0304, P0335, P0420, P0442, P0455, P0456, P0500, P0505, P0507, P0562, P0563, mais os P1xxx Honda que tiverem fonte conferida. Citar a fonte consultada para cada entrada no commit ou em comentário do PR; sem fonte confiável, a entrada não entra.
-- [ ] **Step 3: Implementar** `DtcCatalog` (parser com `org.json`) e um carregador `fun loadCatalog(context: Context): DtcCatalog` (lê o asset uma vez, fora da thread principal) em `device`/`sim` compartilhado via `main`. Migrar `VehicleScreen`/`Sheets` de `dtcDescription` para `lookup`. Apagar `DtcDescriptions.kt` e seu teste.
-- [ ] **Step 4:** Rodar `./gradlew testSimDebugUnitTest`. Expected: PASS.
-- [ ] **Step 5: Commit** um por arquivo.
+- [ ] **Step 2: Implementar** `DtcCatalog` (parser com `org.json`). Migrar `VehicleScreen`/`Sheets` de `dtcDescription` para `lookup`; apagar `DtcDescriptions.kt` e seu teste. Usar um `catalog.json` mínimo de exemplo até a 5b gerar o real.
+- [ ] **Step 3:** `./gradlew testSimDebugUnitTest`. Expected: PASS.
+- [ ] **Step 4: Commit** um por arquivo.
+
+#### Task 5b: Pipeline que gera o catálogo
+
+**Files:**
+- Create: `tools/dtc/build_catalog.py`, `tools/dtc/README.md`, `THIRD_PARTY_NOTICES.md`, `app/src/main/assets/dtc/catalog.json` (gerado)
+- Test: `app/src/test/.../DtcCatalogFileTest.kt` (valida o arquivo real)
+
+**Entradas (baixadas por quem roda, em pasta própria, nunca versionadas):** OBDex (`data/generic/*_enriched.yaml`), OBDIICodes (`Codigos-ptbr.json`), dtc-database (`data/source-data/honda_codes.txt`). Dependência só da ferramenta: `pyyaml`.
+
+- [ ] **Step 1:** Escrever `build_catalog.py`: lê as três fontes; une por código; atribui `tier` (3 = título em inglês, 2 = título em português da base MIT, 1 = existe em `curated/`); aplica `curated/*.json` por cima; define `category` pelo prefixo; severidade `attention` fora do tier 1 (do tier 1 vem da curadoria); escreve o `catalog.json` ordenado e minificado; imprime contagens por tier e por família; **falha** se um código for inválido, duplicado ou se faltar título.
+- [ ] **Step 2: Teste do arquivo real** (`DtcCatalogFileTest`, JVM): todo código casa `^[PCBU][0-3][0-9A-F]{3}$`, sem duplicatas, título não vazio, gravidade válida, tier válido; tier 1 tem ao menos uma causa e uma solução não vazias; o catálogo tem **mais de 9.000 entradas**; `P0420`, `P0171`, `P0300`, `P1456` presentes.
+- [ ] **Step 3:** `THIRD_PARTY_NOTICES.md` com origem e licença de cada fonte (CC0 e MIT, com o aviso de copyright exigido pelo MIT). Tamanho do `catalog.json` verificado (esperado 1 a 3 MB).
+- [ ] **Step 4:** `./gradlew testSimDebugUnitTest assembleDeviceDebug`; conferir o tamanho do APK. Expected: PASS.
+- [ ] **Step 5: Commit** um por arquivo; o `catalog.json` gerado em commit próprio.
+
+#### Task 5c: Traduções do tier 1 (lotes)
+
+**Files:**
+- Create: `tools/dtc/curated/NN-<família>.json` (um arquivo por lote), regenerar `catalog.json`
+
+Cada entrada: `title`, `severity`, `causes[]`, `symptoms[]`, `solution`, em português, **traduzida e revisada** a partir do OBDex (causas e sintomas) e acrescida de orientação prática. Regras: tom de orientação, nunca diagnóstico fechado; na dúvida, `attention`; **`stop`** só para o que é de segurança (falha de ignição em vários cilindros, superaquecimento, perda de pressão de óleo, falhas que podem danificar o catalisador ou o motor). Cada lote cita a fonte consultada no corpo do commit. Sem fonte confiável, a entrada não entra.
+
+Lotes (~50 códigos cada, em ordem de prioridade):
+1. Mistura e combustível: P0100–P0199 (MAF, MAP, IAT, ECT, TPS, O2, trims P0171/P0172/P0174/P0175).
+2. Ignição e falha de combustão: P0300–P0399 (P0300–P0304, bobinas, velas, detonação, CKP/CMP).
+3. Catalisador, EVAP e emissões: P0400–P0499 (P0420, P0430, P0440–P0457, EGR).
+4. Marcha lenta, velocidade e elétrica: P0500–P0699.
+5. Câmbio automático/CVT: P0700–P0899.
+6. VVT/VTEC e P2xxx comuns (P0010–P0030, P2xxx de oxigênio e acelerador eletrônico).
+7. Honda P1xxx (os 95 de `honda_codes.txt`, com fonte para cada um).
+
+- [ ] **Por lote:** escrever o JSON do lote; rodar `build_catalog.py`; rodar `./gradlew testSimDebugUnitTest` (o `DtcCatalogFileTest` valida); revisar uma amostra de 10 entradas lendo o texto; commit do lote e do `catalog.json` regenerado, em commits separados.
+- [ ] **Meta de aceite:** ao menos 300 códigos no tier 1; todos passam no teste do arquivo real.
 
 ---
 
