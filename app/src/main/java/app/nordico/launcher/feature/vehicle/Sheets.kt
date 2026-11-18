@@ -12,19 +12,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import app.nordico.launcher.data.obd.Dtc
 import app.nordico.launcher.data.obd.ObdAdapter
-import app.nordico.launcher.data.obd.dtcDescription
 import app.nordico.launcher.designsystem.LocalNordic
 import app.nordico.launcher.designsystem.NText
 import app.nordico.launcher.designsystem.Sym
@@ -92,31 +88,4 @@ fun AdapterSheet(visible: Boolean, adapters: List<ObdAdapter>, selected: String?
 
 private fun openBluetoothSettings(context: Context) {
     runCatching { context.startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
-}
-
-/** Códigos de falha armazenados. Somente leitura: não há botão de apagar (spec 5). */
-@Composable
-fun FaultsSheet(visible: Boolean, faults: List<Dtc>?, onRead: () -> Unit, onDismiss: () -> Unit) {
-    val n = LocalNordic.current
-    LaunchedEffect(visible) { if (visible) onRead() }
-    BottomSheet(visible, onDismiss) {
-        SheetTitle("Falhas registradas", "Somente leitura: o Nórdico não apaga códigos nem altera o carro.")
-        when {
-            faults == null -> NText("Lendo…", nordicText(17), color = n.label2, modifier = Modifier.padding(vertical = 14.dp))
-            faults.isEmpty() -> Column(
-                Modifier.fillMaxWidth().height(260.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
-            ) {
-                Sym("check_circle", size = 64.dp, filled = true, tint = androidx.compose.ui.graphics.Color(0xFF30D158))
-                NText("Nenhuma falha registrada", nordicText(22, FontWeight.SemiBold))
-            }
-            else -> faults.forEach { f ->
-                SheetRow(null) {
-                    NText(f.code, nordicText(22, FontWeight.Bold, tnum = true), modifier = Modifier.width(92.dp))
-                    NText(dtcDescription(f.code) ?: "Código sem descrição", nordicText(19, FontWeight.SemiBold), maxLines = 2)
-                }
-            }
-        }
-    }
 }
