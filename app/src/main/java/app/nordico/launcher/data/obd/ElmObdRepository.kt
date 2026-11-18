@@ -42,6 +42,8 @@ class ElmObdRepository(
     override val state: StateFlow<ObdState> = _state
     override val telemetry: StateFlow<VehicleTelemetry> = _telemetry
     override val faults: StateFlow<List<Dtc>?> = _faults
+    private val _clear = MutableStateFlow<ClearState>(ClearState.Idle)
+    override val clearState: StateFlow<ClearState> = _clear
 
     private val lock = Mutex()
     @Volatile private var session: ObdSession? = null
@@ -74,6 +76,49 @@ class ElmObdRepository(
         scope.launch {
             val result = lock.withLock { s.readFaults() }
             if (result is ObdResult.Ok) _faults.value = result.value
+        }
+    }
+
+    override fun clearFaults() {
+        val previous = _clear.value
+        if (previous == ClearState.Clearing) return
+        val s = session
+        val block = if (s == null) ClearBlock.NotConnected else clearGate(_state.value, _telemetry.value, _faults.value)
+        if (s == null || block != null) {
+            _clear.value = ClearState.Done(ClearOutcome.Blocked(block ?: ClearBlock.NotConnected))
+            return
+        }
+        // Marca "apagando" já aqui: um segundo toque antes da corrotina começar é ignorado.
+        if (!_clear.compareAndSet(previous, ClearState.Clearing)) return
+        scope.launch { _clear.value = ClearState.Done(runClear(s)) }
+    }
+
+    override fun dismissClearResult() {
+        if (_clear.value != ClearState.Clearing) _clear.value = ClearState.Idle
+    }
+
+    /**
+     * Tudo sob o mesmo [lock]: a leitura contínua fica parada do `04` até a releitura, para a ECU ainda
+     * reiniciando não gerar `NO DATA` que desativaria PIDs. Só diz "apagado" se a releitura vier vazia.
+     */
+    private suspend fun runClear(s: ObdSession): ClearOutcome = lock.withLock {
+        // Repete a guarda: a velocidade pode ter mudado enquanto esperava a vez.
+        clearGate(_state.value, _telemetry.value, _faults.value)?.let { return@withLock ClearOutcome.Blocked(it) }
+        when (val reply = s.clearFaults()) {
+            is ClearReply.Refused -> ClearOutcome.Refused(reply.nrc)
+            ClearReply.NoResponse, is ClearReply.Failed -> ClearOutcome.NoResponse
+            ClearReply.Accepted -> {
+                delay(CLEAR_SETTLE_MS)
+                val reread = s.readFaults()
+                (s.read(ObdPid.Status) as? ObdResult.Ok)?.let { _telemetry.value = _telemetry.value.with(ObdPid.Status, it.value) }
+                when {
+                    reread !is ObdResult.Ok -> ClearOutcome.Unverified
+                    else -> {
+                        _faults.value = reread.value
+                        if (reread.value.isEmpty()) ClearOutcome.Cleared else ClearOutcome.Returned(reread.value)
+                    }
+                }
+            }
         }
     }
 
