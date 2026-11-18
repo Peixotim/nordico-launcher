@@ -153,7 +153,8 @@ def cmd_show(a):
             print("== %s: não está no OBDex" % code)
             continue
         print("== %s: %s" % (code, e["title"]["en"]))
-        print("   descrição:", " ".join(e.get("description", {}).get("en", "").split()))
+        if a.full:
+            print("   descrição:", " ".join(e.get("description", {}).get("en", "").split()))
         for c in e.get("common_causes", []):
             print("   causa [%s]: %s" % (c.get("likelihood"), c["label"]["en"]))
         for s in e.get("symptoms", []):
@@ -176,6 +177,7 @@ def main():
     s = sub.add_parser("show")
     s.add_argument("codes", nargs="+")
     s.add_argument("--obdex", required=True)
+    s.add_argument("--full", action="store_true", help="inclui a descrição longa")
     s.set_defaults(fn=cmd_show)
     a = p.parse_args()
     a.fn(a)
