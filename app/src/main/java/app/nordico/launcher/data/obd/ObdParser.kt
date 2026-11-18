@@ -21,7 +21,7 @@ fun cleanReply(raw: String, echoOf: String? = null): List<String> {
         .filter { it.isNotEmpty() && it != echo && NOISE_PREFIXES.none { p -> it.startsWith(p) } }
 }
 
-private fun errorOf(line: String): ObdError = when (line) {
+internal fun errorOf(line: String): ObdError = when (line) {
     "NODATA" -> ObdError.NoData
     "UNABLETOCONNECT" -> ObdError.UnableToConnect
     "CANERROR", "BUSERROR", "FBERROR", "BUSBUSY" -> ObdError.CanError
