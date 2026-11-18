@@ -1,0 +1,415 @@
+{
+  "P0170": {
+    "title": "Correção de combustível (trim) fora do normal (banco 1)",
+    "severity": "attention",
+    "causes": ["Sensor de fluxo de ar sujo ou fora de calibração", "Entrada de ar falsa ou ventilação do cárter com vazamento", "Erro na quantidade injetada (bicos, pressão de combustível)"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular ou consumo maior"],
+    "solution": "Comece pelo sensor de fluxo de ar e por vazamentos de ar no coletor e nas mangueiras. Confira a pressão de combustível se persistir."
+  },
+  "P0173": {
+    "title": "Correção de combustível (trim) fora do normal (banco 2)",
+    "severity": "attention",
+    "causes": ["Sensor de fluxo de ar sujo ou com defeito", "Entrada de ar no banco 2 ou na ventilação do cárter", "Pressão de combustível ou bicos do banco 2"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular ou consumo maior"],
+    "solution": "Verifique vazamentos de ar do lado do banco 2 e o sensor de fluxo de ar. Confira a pressão de combustível se o código voltar."
+  },
+  "P0174": {
+    "title": "Mistura pobre demais (banco 2)",
+    "severity": "attention",
+    "causes": ["Entrada de ar depois do sensor de fluxo de ar no banco 2 (junta do coletor, mangueiras de vácuo)", "Ventilação do cárter (PCV) com vazamento", "Sensor de fluxo de ar sujo ou fora de calibração"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular ou falta de força"],
+    "solution": "Procure mangueiras soltas ou rachadas, confira a tampa do óleo e a ventilação do cárter e limpe o sensor de fluxo de ar. Se persistir, teste a pressão de combustível."
+  },
+  "P0175": {
+    "title": "Mistura rica demais (banco 2)",
+    "severity": "attention",
+    "causes": ["Válvula de purga presa aberta ou canister saturado", "Bicos do banco 2 vazando ou pingando", "Pressão de combustível alta (regulador, retorno obstruído)"],
+    "symptoms": ["Luz do motor acesa", "Consumo maior e cheiro de combustível", "Velas sujas de fuligem"],
+    "solution": "Verifique filtro de ar, velas e cheiro de gasolina no óleo. Mistura rica por muito tempo pode danificar o catalisador, então não deixe passar muito tempo sem diagnóstico."
+  },
+  "P0421": {
+    "title": "Eficiência do catalisador de aquecimento abaixo do limite (banco 1)",
+    "severity": "attention",
+    "causes": ["Catalisador próximo ao motor envelhecido, superaquecido ou com a camada descolada", "Falha de ignição ou mistura rica que danificou o catalisador antes", "Sensor depois do catalisador lento ou com defeito"],
+    "symptoms": ["Luz do motor acesa", "Reprovação em teste de emissões"],
+    "solution": "Corrija antes qualquer falha de ignição ou mistura errada e confira o sensor traseiro. Se o catalisador estiver mesmo gasto, a troca é em oficina."
+  },
+  "P0430": {
+    "title": "Eficiência do catalisador abaixo do limite (banco 2)",
+    "severity": "attention",
+    "causes": ["Catalisador envelhecido ou contaminado", "Catalisador superaquecido por falha de ignição ou mistura rica", "Sensor de oxigênio traseiro lento, sujo ou inadequado"],
+    "symptoms": ["Luz do motor acesa", "Reprovação em teste de emissões"],
+    "solution": "Confira vazamentos no escapamento e o sensor traseiro do banco 2 antes de trocar o catalisador. Corrija falhas de ignição primeiro."
+  },
+  "P0431": {
+    "title": "Eficiência do catalisador de aquecimento abaixo do limite (banco 2)",
+    "severity": "attention",
+    "causes": ["Catalisador próximo ao motor envelhecido ou com a camada descolada", "Falha de ignição ou mistura rica anterior", "Sensor depois do catalisador lento ou com defeito"],
+    "symptoms": ["Luz do motor acesa", "Reprovação em teste de emissões"],
+    "solution": "Corrija falhas de ignição ou de mistura e confira o sensor traseiro. Troca do catalisador é em oficina."
+  },
+  "P0440": {
+    "title": "Falha no sistema de emissões evaporativas (EVAP)",
+    "severity": "ok",
+    "causes": ["Tampa do tanque com vazamento, frouxa ou errada", "Válvula de purga vazando ou travando", "Mangueiras, canister ou válvula de ventilação rachados ou com vazamento"],
+    "symptoms": ["Luz do motor acesa", "Sem mudança na direção"],
+    "solution": "Comece pela tampa do tanque: feche até ouvir os cliques e confira a vedação. Depois verifique mangueiras e válvulas. Pode seguir viagem."
+  },
+  "P0441": {
+    "title": "EVAP: fluxo de purga incorreto",
+    "severity": "ok",
+    "causes": ["Válvula de purga presa aberta ou sem vedar", "Válvula de purga presa fechada, linha de purga obstruída, dobrada ou solta", "Bomba de detecção de vazamento com tolerância fora (alguns modelos)"],
+    "symptoms": ["Luz do motor acesa", "Às vezes dificuldade de partida depois de abastecer"],
+    "solution": "Confira a mangueira de purga e a válvula de purga (ouça o clique quando ela é acionada). Válvula presa costuma ser trocada. Pode seguir viagem."
+  },
+  "P0443": {
+    "title": "EVAP: circuito da válvula de purga",
+    "severity": "ok",
+    "causes": ["Conector da válvula de purga corroído, solto ou desconectado", "Bobina da válvula aberta ou em curto", "Fio de comando rompido ou roçado, ou falta de alimentação (fusível, relé)"],
+    "symptoms": ["Luz do motor acesa", "Sem mudança perceptível na direção"],
+    "solution": "Verifique o conector, o fusível e o fio da válvula de purga. Válvula com bobina aberta ou em curto deve ser trocada. Pode seguir viagem."
+  },
+  "P0446": {
+    "title": "EVAP: circuito de controle da ventilação",
+    "severity": "ok",
+    "causes": ["Válvula ou filtro de ventilação bloqueado por sujeira, poeira ou água", "Válvula de ventilação com defeito elétrico (bobina aberta ou em curto)", "Conector ou fio da válvula corroído ou aberto"],
+    "symptoms": ["Luz do motor acesa", "Às vezes dificuldade ao abastecer (a bomba desarma)"],
+    "solution": "Inspecione o conector e o filtro da válvula de ventilação, que fica perto do canister ou do tanque (parte de baixo do carro). Pode seguir viagem."
+  },
+  "P0447": {
+    "title": "EVAP: circuito de ventilação aberto",
+    "severity": "ok",
+    "causes": ["Conector da válvula de ventilação corroído ou solto (parte de baixo, sujeito a água)", "Bobina da válvula aberta", "Fio até o módulo ou alimentação aberto"],
+    "symptoms": ["Luz do motor acesa", "Sem mudança perceptível na direção"],
+    "solution": "Verifique o conector e o fio da válvula de ventilação. Se estiverem bons, a válvula costuma ser trocada. Pode seguir viagem."
+  },
+  "P0448": {
+    "title": "EVAP: circuito de ventilação em curto",
+    "severity": "ok",
+    "causes": ["Válvula de ventilação ou caminho de ventilação bloqueado por poeira, sujeira ou água", "Bobina da válvula em curto", "Fio de comando em curto com positivo"],
+    "symptoms": ["Luz do motor acesa", "Às vezes dificuldade ao abastecer"],
+    "solution": "Confira o fio e o conector da válvula de ventilação e se o caminho de ar não está bloqueado. Válvula em curto deve ser trocada. Pode seguir viagem."
+  },
+  "P0449": {
+    "title": "EVAP: válvula de ventilação, circuito aberto",
+    "severity": "ok",
+    "causes": ["Conector da válvula de ventilação (no canister ou no tanque) corroído ou solto", "Bobina da válvula aberta", "Alimentação (fusível) ou fio de comando aberto"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Verifique o conector, o fusível e o fio da válvula de ventilação. Pode seguir viagem."
+  },
+  "P0451": {
+    "title": "EVAP: sensor de pressão do tanque, fora da faixa",
+    "severity": "ok",
+    "causes": ["Sensor de pressão do tanque deslocado ou lento", "Linha de ventilação ou canister bloqueado (a pressão não alivia)", "Mangueira ou conexão do sensor com vazamento, dobrada ou entupida"],
+    "symptoms": ["Luz do motor acesa", "Sem mudança perceptível na direção"],
+    "solution": "Procure mangueiras dobradas ou soltas perto do sensor e do canister. Se tudo estiver bom, o sensor é trocado. Pode seguir viagem."
+  },
+  "P0452": {
+    "title": "EVAP: sensor de pressão do tanque, sinal baixo",
+    "severity": "ok",
+    "causes": ["Fio de sinal em curto com o terra ou conector corroído", "Sensor de pressão do tanque com defeito interno", "Referência de 5 V aberta ou em curto"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Inspecione o conector e o chicote do sensor. Sensor com defeito é trocado. Pode seguir viagem."
+  },
+  "P0453": {
+    "title": "EVAP: sensor de pressão do tanque, sinal alto",
+    "severity": "ok",
+    "causes": ["Fio de sinal ou de terra aberto, conector solto", "Sensor de pressão do tanque com defeito", "Sinal em curto com 5 V ou com a bateria"],
+    "symptoms": ["Luz do motor acesa"],
+    "solution": "Confira o conector e o fio de terra do sensor. Se estiverem bons, troque o sensor. Pode seguir viagem."
+  },
+  "P0457": {
+    "title": "EVAP: vazamento detectado (tampa do tanque solta ou ausente)",
+    "severity": "ok",
+    "causes": ["Tampa do tanque não fechada, sem cliques ou esquecida", "Vedação da tampa com defeito ou tampa fora do padrão", "Bocal do tanque com a superfície de vedação danificada"],
+    "symptoms": ["Luz do motor acesa, às vezes com aviso de verificar a tampa"],
+    "solution": "Feche a tampa do tanque até ouvir os cliques. Se a luz persistir depois de alguns dias, confira a borracha e troque a tampa por uma original."
+  },
+  "P0125": {
+    "title": "Temperatura do motor insuficiente para controle em circuito fechado",
+    "severity": "attention",
+    "causes": ["Termostato preso aberto (mais comum no frio)", "Sensor de temperatura lendo frio demais ou lento", "Nível baixo do líquido de arrefecimento ou ar perto do sensor"],
+    "symptoms": ["Luz do motor acesa", "Ponteiro de temperatura baixo", "Consumo maior"],
+    "solution": "Confira o nível do líquido e se o motor demora muito a esquentar. Termostato preso aberto é a causa mais comum e a troca é barata."
+  },
+  "P0126": {
+    "title": "Temperatura do motor insuficiente para funcionamento estável",
+    "severity": "attention",
+    "causes": ["Sensor de temperatura travado ou com defeito (a resistência não muda)", "Termostato preso aberto ou nível baixo do líquido", "Resistência de contato no conector ou no chicote"],
+    "symptoms": ["Luz do motor acesa", "Ponteiro de temperatura baixo ou parado"],
+    "solution": "Compare a temperatura do painel com a real. Se o motor esquenta normalmente, o sensor é o suspeito; se demora, o termostato."
+  },
+  "P0480": {
+    "title": "Circuito de controle da ventoinha 1",
+    "severity": "attention",
+    "causes": ["Relé da ventoinha (bobina aberta) ou módulo de controle com defeito", "Conector da ventoinha ou do relé corroído, com água ou pino solto", "Fio de comando aberto ou em curto com o terra"],
+    "symptoms": ["Luz do motor acesa", "Temperatura sobe no trânsito parado", "Ar-condicionado fraco com o carro parado"],
+    "solution": "Teste o relé e o fusível da ventoinha e veja se ela liga com o ar-condicionado ligado. Sem ventoinha o motor pode superaquecer no trânsito: vigie o ponteiro de temperatura."
+  },
+  "P0481": {
+    "title": "Circuito de controle da ventoinha 2",
+    "severity": "attention",
+    "causes": ["Relé da ventoinha 2 com defeito", "Corrosão ou água no relé ou no conector da ventoinha", "Fio de comando aberto ou em curto com o terra"],
+    "symptoms": ["Luz do motor acesa", "Temperatura sobe no trânsito parado"],
+    "solution": "Teste o relé, o fusível e o conector da ventoinha 2. Vigie o ponteiro de temperatura enquanto não resolver."
+  },
+  "P0500": {
+    "title": "Sensor de velocidade do veículo, circuito",
+    "severity": "attention",
+    "causes": ["Módulo do ABS ou sensor de velocidade de roda com defeito (origem do sinal)", "Sensor de velocidade de saída do câmbio com defeito ou sujo de limalha", "Fio ou conector aberto, em curto ou corroído"],
+    "symptoms": ["Luz do motor acesa", "Velocímetro parado ou errático", "Câmbio automático trocando marchas de forma estranha"],
+    "solution": "Confira o conector do sensor de velocidade e do ABS. Se o velocímetro e o ABS funcionam, o problema costuma ser o sensor do câmbio. Procure uma oficina se o velocímetro parar."
+  },
+  "P0501": {
+    "title": "Sensor de velocidade do veículo, fora da faixa",
+    "severity": "attention",
+    "causes": ["Sensor de velocidade de roda ou anel dentado danificado ou sujo", "Pneus de medida errada, relação do diferencial ou codificação diferente", "Sensor com sinal fraco ou anel dentado danificado"],
+    "symptoms": ["Luz do motor acesa", "Velocímetro com leitura estranha"],
+    "solution": "Confira o tamanho dos pneus e limpe o sensor e o anel dentado da roda. Sinal fraco costuma exigir troca do sensor."
+  },
+  "P0503": {
+    "title": "Sensor de velocidade do veículo, intermitente ou errático",
+    "severity": "attention",
+    "causes": ["Mau contato, fio roçado ou conector corroído", "Interferência por malha de blindagem danificada ou pela ignição", "Sensor com ímã enfraquecido ou anel dentado danificado"],
+    "symptoms": ["Luz do motor acesa", "Velocímetro oscilando", "Marchas do câmbio automático irregulares"],
+    "solution": "Inspecione o chicote e o conector do sensor, principalmente onde o fio se movimenta com a suspensão. Sensor intermitente costuma ser trocado."
+  },
+  "P0506": {
+    "title": "Marcha lenta mais baixa que o esperado",
+    "severity": "attention",
+    "causes": ["Sujeira no corpo de borboleta ou no canal de marcha lenta, ou válvula de marcha lenta com goma", "Carga extra: correia dos acessórios dura, câmbio ou conversor", "Admissão ou escape restritos (filtro de ar, catalisador)"],
+    "symptoms": ["Rotação de marcha lenta baixa", "Motor quase morrendo ao parar"],
+    "solution": "Limpe o corpo de borboleta e confira o filtro de ar. Em muitos carros é preciso reiniciar o aprendizado da marcha lenta depois da limpeza; consulte o manual ou uma oficina."
+  },
+  "P0507": {
+    "title": "Marcha lenta mais alta que o esperado",
+    "severity": "attention",
+    "causes": ["Entrada de ar falsa (mangueira de vácuo, junta do coletor, servo-freio)", "Ventilação do cárter com vazamento ou mal ligada", "Borboleta que não fecha por completo (sujeira, regulagem)"],
+    "symptoms": ["Rotação de marcha lenta alta", "Chiado do ar no cofre do motor"],
+    "solution": "Procure mangueiras soltas e limpe o corpo de borboleta. Com a borboleta limpa, pode ser preciso reiniciar o aprendizado da marcha lenta."
+  },
+  "P0560": {
+    "title": "Tensão do sistema fora do normal",
+    "severity": "attention",
+    "causes": ["Bateria fraca ou com defeito", "Alternador ou regulador carregando de menos ou de mais", "Carga com tensão errada (carga rápida ou chupeta em 24 V)"],
+    "symptoms": ["Luz da bateria acesa", "Dificuldade para dar partida", "Faróis fracos"],
+    "solution": "Meça a tensão da bateria com o motor ligado: o normal fica entre 13,8 e 14,5 V. Fora disso, teste o alternador e a bateria."
+  },
+  "P0561": {
+    "title": "Tensão do sistema instável",
+    "severity": "attention",
+    "causes": ["Fusível, relé ou linha de alimentação da ignição com queda de tensão", "Conector ou terra do módulo solto ou corroído", "Regulador de tensão oscilando"],
+    "symptoms": ["Luz do motor acesa", "Falhas intermitentes e códigos em vários módulos"],
+    "solution": "Limpe e aperte os terminais e os terras do motor e da bateria e meça a tensão com o motor ligado."
+  },
+  "P0563": {
+    "title": "Tensão do sistema alta",
+    "severity": "attention",
+    "causes": ["Regulador ou alternador carregando demais", "Chupeta em 24 V ou carregador rápido", "Bateria ausente ou com terminal ruim (picos de tensão)"],
+    "symptoms": ["Luz da bateria acesa", "Lâmpadas queimando cedo", "Bateria quente ou com cheiro"],
+    "solution": "Meça a tensão com o motor ligado: acima de 15 V há excesso de carga. Procure o alternador ou o regulador antes que a bateria seja danificada."
+  },
+  "P0571": {
+    "title": "Interruptor do freio, circuito",
+    "severity": "attention",
+    "causes": ["Interruptor da luz de freio desregulado", "Interruptor da luz de freio com defeito (contato gasto)", "Conector, fio ou fusível da luz de freio"],
+    "symptoms": ["Luz do motor acesa", "Luzes de freio que não acendem ou ficam acesas", "Piloto automático desativado"],
+    "solution": "Teste as luzes de freio: se não acendem, o carro está inseguro para os de trás e deve ser consertado logo. Confira a regulagem do interruptor no pedal."
+  },
+  "P0601": {
+    "title": "Memória interna do módulo, erro de verificação",
+    "severity": "attention",
+    "causes": ["Reprogramação interrompida ou com falha", "Software do módulo com defeito (pode haver atualização)", "Memória flash do módulo com defeito"],
+    "symptoms": ["Luz do motor acesa", "Carro pode não pegar ou entrar em modo de emergência"],
+    "solution": "Procure uma oficina ou a concessionária: costuma exigir reprogramação ou troca do módulo."
+  },
+  "P0602": {
+    "title": "Módulo de controle, erro de programação",
+    "severity": "attention",
+    "causes": ["Módulo trocado e não programado por completo", "Programação interrompida por queda de tensão ou perda de conexão", "Software, calibração ou configuração errada ou incompatível"],
+    "symptoms": ["Luz do motor acesa", "Carro pode não pegar"],
+    "solution": "Procure uma oficina com equipamento de programação: é preciso gravar o software correto no módulo."
+  },
+  "P0606": {
+    "title": "Módulo de controle, falha do processador",
+    "severity": "attention",
+    "causes": ["Software do módulo com defeito (pode haver atualização)", "Tensão baixa, quedas de tensão ou terra e alimentação ruins no módulo", "Defeito interno de hardware (processador, regulador, chip de saída)"],
+    "symptoms": ["Luz do motor acesa", "Falhas imprevisíveis, carro pode não pegar"],
+    "solution": "Primeiro confira a bateria, os terminais e os terras. Se a alimentação está boa, é preciso diagnóstico profissional do módulo."
+  },
+  "P0620": {
+    "title": "Circuito de controle do alternador",
+    "severity": "attention",
+    "causes": ["Conector ou fio entre o módulo e o alternador (corrosão, rompimento, roçado)", "Alternador ou regulador com defeito, incluindo a comunicação LIN", "Bateria descarregada ou com defeito, chupeta ou carregador ligado"],
+    "symptoms": ["Luz da bateria acesa", "Bateria descarregando"],
+    "solution": "Confira a fiação do alternador e meça a tensão de carga com o motor ligado. Alternador sem carregar deixa o carro parar quando a bateria acabar."
+  },
+  "P0336": {
+    "title": "Sensor de rotação do virabrequim, fora da faixa",
+    "severity": "attention",
+    "causes": ["Roda fônica danificada, empenada, solta ou com os dentes cheios de limalha", "Sinal do sensor fraco ou com ruído (folga, envelhecimento)", "Interferência, terra ruim ou blindagem danificada"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Falhas e perda de força"],
+    "solution": "Inspecione o sensor, o conector e a roda fônica. Em carros com serviço recente no motor, confira a folga do sensor."
+  },
+  "P0339": {
+    "title": "Sensor de rotação do virabrequim, intermitente",
+    "severity": "attention",
+    "causes": ["Mau contato ou corrosão no conector do sensor ou em um conector intermediário", "Sensor que falha quando está quente", "Montagem ou folga do sensor errada (suporte)"],
+    "symptoms": ["Motor morre e volta a pegar", "Conta-giros oscilando", "Luz do motor acesa"],
+    "solution": "Se o carro morre quente e volta depois de esfriar, o sensor é o suspeito principal. Verifique o conector e o chicote."
+  },
+  "P0341": {
+    "title": "Sensor do comando de válvulas (banco 1), fora da faixa",
+    "severity": "attention",
+    "causes": ["Sensor com pulsos de interferência ou sinal fraco, folga", "Roda fônica do comando danificada ou montada errada", "Conector ou fiação com defeito (corrosão, interferência)"],
+    "symptoms": ["Luz do motor acesa", "Partida mais demorada", "Perda de força"],
+    "solution": "Verifique o conector e a fiação do sensor. Se o carro teve serviço recente de correia ou corrente, confira o ponto de distribuição."
+  },
+  "P0344": {
+    "title": "Sensor do comando de válvulas (banco 1), intermitente",
+    "severity": "attention",
+    "causes": ["Umidade ou óleo dentro do sensor, falhando quando quente", "Mau contato ou corrosão no conector", "Roda fônica do comando danificada ou solta"],
+    "symptoms": ["Luz do motor acesa", "Falhas ocasionais e partida demorada"],
+    "solution": "Verifique o conector e a presença de óleo ou umidade no sensor. Sensor intermitente costuma ser trocado."
+  },
+  "P0010": {
+    "title": "Atuador do comando de válvulas A (banco 1), circuito",
+    "severity": "attention",
+    "causes": ["Bobina da válvula de controle de óleo aberta ou em curto", "Conector corroído, solto ou encharcado de óleo pela própria válvula", "Chicote roçado ou rompido"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o conector da válvula de controle de óleo do comando (VVT) e o chicote. Conector com óleo deve ser limpo ou trocado."
+  },
+  "P0011": {
+    "title": "Comando de válvulas A (banco 1), adiantado demais ou desempenho",
+    "severity": "attention",
+    "causes": ["Nível de óleo baixo, óleo velho com borra ou viscosidade errada", "Tela da válvula de controle de óleo entupida", "Válvula de controle de óleo emperrando mecanicamente"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força e consumo maior"],
+    "solution": "Confira o nível e a qualidade do óleo e troque se estiver velho. É a causa mais comum e a mais barata. Se persistir, limpe ou troque a válvula de controle."
+  },
+  "P0012": {
+    "title": "Comando de válvulas A (banco 1), atrasado demais",
+    "severity": "attention",
+    "causes": ["Pressão ou nível de óleo baixos, óleo gasto", "Válvula de controle de óleo emperrada fechada ou com a tela bloqueada", "Atuador (fasador) do comando com defeito ou preso na posição de repouso"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o nível e a qualidade do óleo e troque se necessário. Se persistir, verifique a válvula de controle de óleo."
+  },
+  "P0013": {
+    "title": "Atuador do comando de válvulas B (banco 1), circuito",
+    "severity": "attention",
+    "causes": ["Bobina da válvula de controle de óleo aberta ou em curto", "Conector corroído, solto ou encharcado de óleo", "Chicote roçado ou rompido"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o conector da válvula de controle de óleo do comando de escape e o chicote."
+  },
+  "P0014": {
+    "title": "Comando de válvulas B (banco 1), adiantado demais ou desempenho",
+    "severity": "attention",
+    "causes": ["Nível de óleo baixo, óleo velho com borra ou viscosidade errada", "Tela da válvula de controle de óleo entupida", "Válvula de controle de óleo emperrando mecanicamente"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular", "Perda de força"],
+    "solution": "Confira o nível e a qualidade do óleo e troque se estiver velho. Se persistir, limpe ou troque a válvula de controle."
+  },
+  "P0016": {
+    "title": "Posição do virabrequim e do comando de válvulas fora de sincronia (banco 1, sensor A)",
+    "severity": "stop",
+    "causes": ["Corrente de distribuição esticada ou correia ou corrente que pulou um dente", "Fasador do comando preso em um fim de curso, válvula de controle de óleo ou pressão de óleo com defeito", "Montagem errada depois da troca de correia ou corrente"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular e perda de força", "Barulho de corrente ou dificuldade de partida"],
+    "solution": "Não force o motor: ponto de distribuição fora de lugar pode danificar válvulas e pistões. Confira o nível de óleo e procure uma oficina para checar a distribuição."
+  },
+  "P0017": {
+    "title": "Posição do virabrequim e do comando de válvulas fora de sincronia (banco 1, sensor B)",
+    "severity": "stop",
+    "causes": ["Corrente de distribuição esticada ou correia ou corrente que pulou um dente", "Fasador do comando preso em um fim de curso, válvula de controle de óleo ou pressão de óleo com defeito", "Montagem errada depois da troca de correia ou corrente"],
+    "symptoms": ["Luz do motor acesa", "Marcha lenta irregular e perda de força"],
+    "solution": "Não force o motor: ponto de distribuição fora de lugar pode danificar o motor. Confira o nível de óleo e procure uma oficina para checar a distribuição."
+  },
+  "P0325": {
+    "title": "Sensor de detonação A, circuito",
+    "severity": "attention",
+    "causes": ["Fiação ou conector roçado, rompido ou corroído (o sensor costuma ficar sob o coletor)", "Sensor de detonação com defeito (piezo trincado, umidade, calor)", "Sensor solto ou com torque de aperto errado"],
+    "symptoms": ["Luz do motor acesa", "Perda de força", "Consumo maior"],
+    "solution": "Verifique o conector, o chicote e o aperto do sensor. Sem esse sensor o motor reduz a potência para se proteger: evite abusar até resolver."
+  },
+  "P0327": {
+    "title": "Sensor de detonação A, sinal baixo",
+    "severity": "attention",
+    "causes": ["Fio de sinal ou de retorno roçado em curto com o terra", "Umidade ou corrosão no conector ou no sensor", "Sensor com defeito interno"],
+    "symptoms": ["Luz do motor acesa", "Perda de força"],
+    "solution": "Inspecione o chicote e o conector do sensor de detonação e troque o sensor se necessário."
+  },
+  "P0328": {
+    "title": "Sensor de detonação A, sinal alto",
+    "severity": "attention",
+    "causes": ["Fio de sinal ou de retorno em curto com tensão positiva", "Corrosão ou umidade no conector", "Sensor com defeito interno"],
+    "symptoms": ["Luz do motor acesa", "Perda de força"],
+    "solution": "Inspecione o chicote e o conector do sensor de detonação e troque o sensor se necessário."
+  },
+  "P0330": {
+    "title": "Sensor de detonação B, circuito",
+    "severity": "attention",
+    "causes": ["Fiação ou conector roçado, rompido ou corroído", "Sensor de detonação com defeito", "Sensor solto ou com torque errado"],
+    "symptoms": ["Luz do motor acesa", "Perda de força"],
+    "solution": "Verifique o conector, o chicote e o aperto do sensor B. Evite abusar do motor até resolver."
+  },
+  "P0332": {
+    "title": "Sensor de detonação B, sinal baixo",
+    "severity": "attention",
+    "causes": ["Fio de sinal ou de retorno em curto com o terra", "Umidade ou corrosão no conector ou no sensor", "Sensor com defeito interno"],
+    "symptoms": ["Luz do motor acesa", "Perda de força"],
+    "solution": "Inspecione o chicote e o conector e troque o sensor se necessário."
+  },
+  "P0334": {
+    "title": "Sensor de detonação B, intermitente",
+    "severity": "attention",
+    "causes": ["Mau contato, pinos abertos ou corrosão no conector", "Fio roçando com o movimento ou o calor do motor", "Sensor solto ou com torque errado"],
+    "symptoms": ["Luz do motor acesa", "Falhas ocasionais"],
+    "solution": "Verifique o conector e o aperto do sensor e procure fio roçando em partes móveis."
+  },
+  "P0220": {
+    "title": "Sensor B da borboleta ou do pedal, circuito",
+    "severity": "attention",
+    "causes": ["Corpo de borboleta ou sensor B com defeito (trilha gasta)", "Fiação ou conector do corpo de borboleta (corrosão, rompimento)", "Referência de 5 V perturbada por curto em outro sensor"],
+    "symptoms": ["Luz do motor acesa", "Aceleração falhando", "O carro pode entrar em modo de emergência"],
+    "solution": "Limpe o corpo de borboleta com limpa-corpo próprio e confira o conector. Falha nesse sensor pode limitar a potência: evite rodar longe."
+  },
+  "P0222": {
+    "title": "Sensor B da borboleta ou do pedal, sinal baixo",
+    "severity": "attention",
+    "causes": ["Fio de sinal ou de 5 V aberto ou em curto com o terra", "Corpo de borboleta ou sensor B com defeito interno", "Referência de 5 V puxada para baixo por outro sensor"],
+    "symptoms": ["Luz do motor acesa", "Aceleração falhando", "Modo de emergência"],
+    "solution": "Confira o conector e o chicote do corpo de borboleta e limpe-o. Evite rodar longe se a potência estiver limitada."
+  },
+  "P0223": {
+    "title": "Sensor B da borboleta ou do pedal, sinal alto",
+    "severity": "attention",
+    "causes": ["Fio de terra do sensor aberto", "Sensor B ou corpo de borboleta com defeito", "Fio de sinal em curto com 5 V ou 12 V no chicote"],
+    "symptoms": ["Luz do motor acesa", "Aceleração falhando", "Modo de emergência"],
+    "solution": "Confira o conector e o fio de terra do corpo de borboleta. Evite rodar longe se a potência estiver limitada."
+  },
+  "P0530": {
+    "title": "Sensor de pressão do gás do ar-condicionado, circuito",
+    "severity": "ok",
+    "causes": ["Conector ou contatos corroídos ou soltos", "Sensor de pressão com defeito", "Fio aberto ou roçado"],
+    "symptoms": ["Luz do motor acesa", "Ar-condicionado que não liga ou desliga sozinho"],
+    "solution": "Verifique o conector do sensor, na linha de alta pressão do ar-condicionado. Pode seguir viagem, mas o ar-condicionado pode não funcionar."
+  },
+  "P0532": {
+    "title": "Sensor de pressão do gás do ar-condicionado, sinal baixo",
+    "severity": "ok",
+    "causes": ["Linha de sinal aberta ou em curto com o terra", "Sensor de pressão com defeito", "Conector corroído ou solto"],
+    "symptoms": ["Luz do motor acesa", "Ar-condicionado que não liga"],
+    "solution": "Confira o conector e o chicote do sensor. Sensor com defeito é trocado. O gás baixo também pode causar esse código: veja se o ar gela."
+  },
+  "P0533": {
+    "title": "Sensor de pressão do gás do ar-condicionado, sinal alto",
+    "severity": "ok",
+    "causes": ["Linha de sinal em curto com positivo (por exemplo, a referência de 5 V)", "Terra do sensor aberto", "Sensor com defeito interno"],
+    "symptoms": ["Luz do motor acesa", "Ar-condicionado que não liga"],
+    "solution": "Confira o conector e o fio de terra do sensor. Sensor com defeito é trocado."
+  },
+  "P0534": {
+    "title": "Perda de gás refrigerante do ar-condicionado",
+    "severity": "ok",
+    "causes": ["Vazamento de gás (condensador, juntas, retentor do compressor, válvulas de serviço)", "Sensor de pressão ou de temperatura fora de ajuste (leitura errada)", "Software ou calibração"],
+    "symptoms": ["Luz do motor acesa", "Ar-condicionado fraco ou que não gela"],
+    "solution": "Se o ar-condicionado não gela, é provável vazamento de gás: procure uma oficina de ar-condicionado para achar o vazamento e recarregar. Pode seguir viagem."
+  }
+}
