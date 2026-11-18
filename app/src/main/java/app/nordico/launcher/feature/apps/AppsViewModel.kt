@@ -22,7 +22,8 @@ class AppsViewModel(private val c: AppContainer) : ViewModel() {
     private val prefs: StateFlow<Prefs> = c.prefs.prefs.stateIn(viewModelScope, SharingStarted.Eagerly, Prefs())
 
     val sections: StateFlow<AppSections> = combine(c.apps.apps, c.vehicle.climate, prefs, _query) { apps, climate, p, q ->
-        sectionApps(if (climate != null) apps + CLIMATE_APP else apps, p.hiddenApps, q)
+        val internal = listOfNotNull(VEHICLE_APP, CLIMATE_APP.takeIf { climate != null })
+        sectionApps(apps + internal, p.hiddenApps, q)
     }.stateIn(viewModelScope, SharingStarted.Eagerly, AppSections(emptyList(), emptyList(), emptyList()))
 
     fun setQuery(q: String) {
