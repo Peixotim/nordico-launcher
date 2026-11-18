@@ -78,8 +78,8 @@ class AppViewModel(private val c: AppContainer) : ViewModel() {
             }
         }
         viewModelScope.launch {
-            combine(c.obd.telemetry, tick) { t, _ -> t }.collect { t ->
-                val next = alertFor(t, alert)
+            combine(c.obd.state, c.obd.telemetry, tick) { st, t, _ -> st to t }.collect { (st, t) ->
+                val next = alertFor(st, t, alert)
                 val now = SystemClock.elapsedRealtime()
                 if (next != Alert.None) _alertText.value = alertText(next, t)
                 if (shouldShowAlert(alert, next, alertShownAt, now)) {
