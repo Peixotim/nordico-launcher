@@ -101,15 +101,13 @@ The original HTML prototypes that defined the design live in
 │  designsystem/  tokens, Inter, Material Symbols, squircle, spring motion         │
 │  data/*  one interface per source: media, apps, audio, vehicle, status, location │
 └───────────────┬───────────────────────────────────────────────┬──────────────────┘
-        flavor `sim`                                     flavor `device`
-   simulated data + debug panel                 real Android APIs (MediaSession,
-   (runs in any emulator)                       LauncherApps, AudioManager,
-                                                LocationManager, ConnectivityManager)
+        real Android APIs (MediaSession, LauncherApps, AudioManager,
+        LocationManager, ConnectivityManager) + ELM327 over Bluetooth (OBD-II)
 ```
 
-- **Two build flavors.** `sim` runs anywhere with simulated media, climate, headlights and steering-wheel events, plus a debug panel (long-press the clock). `device` uses the real Android APIs. Each flavor has its own `AppContainer`, the only place where interfaces are bound to implementations (manual DI, no Hilt).
-- **Hardware stays behind interfaces.** Climate, headlights and outside temperature come from the car's CAN box, so `VehicleRepository` returns `null` on `device` until the head-unit integration lands (see the roadmap). The UI hides whatever the car doesn't report.
-- **Pure logic is kept out of the UI** and covered by JVM tests: volume scaling, climate panel rules, day/night resolution, formatting, app sections, HUD timers, media position.
+- **No mock data.** Every value on screen comes from the car (OBD-II adapter) or from the Android system. `AppContainer` is the only place where interfaces are bound to implementations (manual DI, no Hilt).
+- **Hardware stays behind interfaces.** Speed, RPM, temperatures, fuel, battery, fault codes and the outside temperature come from the OBD-II adapter. Climate and headlights are not in OBD-II: they come from the car's CAN box, so `VehicleRepository` returns `null` for them until the head-unit integration lands (see the roadmap). The UI hides whatever the car doesn't report.
+- **Pure logic is kept out of the UI** and covered by JVM tests: volume scaling, day/night resolution, formatting, app sections, HUD timers, media position.
 
 ## Tech stack
 
@@ -135,10 +133,7 @@ app/src/
 │   ├── navigation/              screens, app view model, shell, shared transitions
 │   ├── feature/                 home, map, nowplaying, climate, apps, hud
 │   └── data/                    contracts and pure rules per data source
-├── sim/                         simulated repositories + debug panel
-├── device/                      real Android implementations
-├── test/                        JVM unit tests
-└── testSim/                     tests for the simulated sources
+└── test/                        JVM unit tests
 docs/
 ├── specs/                       design spec (Portuguese)
 ├── plans/                       implementation plan (Portuguese)
@@ -160,9 +155,8 @@ git clone https://github.com/Peixotim/nordico-launcher.git
 cd nordico-launcher
 echo "sdk.dir=/path/to/Android/Sdk" > local.properties
 
-./gradlew testSimDebugUnitTest     # JVM tests
-./gradlew assembleSimDebug         # emulator build (simulated data)
-./gradlew assembleDeviceDebug      # head-unit build (real APIs)
+./gradlew testDebugUnitTest        # JVM tests
+./gradlew assembleRelease          # final APK: app/build/outputs/apk/release/app-release.apk
 ```
 
 ### Emulator that mimics the head unit
@@ -186,19 +180,17 @@ showDeviceFrame=no
 
 ```bash
 emulator -avd Central9 &
-./gradlew installSimDebug
-adb shell cmd role add-role-holder android.app.role.HOME app.nordico.launcher.sim
+./gradlew installDebug
+adb shell cmd role add-role-holder android.app.role.HOME app.nordico.launcher
 adb shell input keyevent KEYCODE_HOME
 ```
 
-In the `sim` build, **long-press the clock** to open the simulation panel: climate buttons
-(temperature, fan, AUTO, A/C, airflow, recirculation, defrost), steering-wheel volume,
-headlights on/off/no signal and "no climate data".
+The emulator has no car: the Vehicle screen shows "Connect the OBD adapter" and the climate UI stays hidden.
 
-### On a real head unit (`device` build)
+### On a real head unit
 
 ```bash
-./gradlew installDeviceDebug
+./gradlew installRelease
 adb shell cmd role add-role-holder android.app.role.HOME app.nordico.launcher
 ```
 
@@ -209,7 +201,7 @@ access" on the home screen, or run
 ## Roadmap
 
 **Phase 1: done**
-- Design system, home, now playing, climate, app drawer, HUDs, simulated and real data sources.
+- Design system, home, now playing, climate, app drawer, HUDs, real data sources.
 
 **Phase 1.5: no hardware needed**
 - [ ] HUDs drawn over other apps (volume and climate on top of Waze or Spotify).
@@ -217,7 +209,7 @@ access" on the home screen, or run
 - [ ] Polish: lighter night map style, 4G/5G indicator independent of Wi-Fi, search reset in the drawer.
 
 **Phase 2: system screens**
-- [x] Vehicle (OBD-II) and radio screens, with simulated data and an ELM327 emulator for tests (`-PobdTcp=10.0.2.2:35000`).
+- [x] Vehicle (OBD-II) screen with live data, fault codes and clearing; radio screen (needs the head unit).
 - [ ] Radio screen on top of the vendor radio (needs the head unit).
 - [ ] Nórdico settings (accent color, navigation app, music app).
 
@@ -229,7 +221,7 @@ access" on the home screen, or run
 
 ## Known limitations
 
-- Climate data is simulated until the head-unit integration exists. The `device` build hides the climate UI.
+- Climate and headlight data need the head-unit integration (not in OBD-II). Until then the climate UI is hidden.
 - The reverse camera stays with the vendor firmware on purpose: it is a safety feature and must appear instantly, even during boot.
 - Third-party navigation apps can't be embedded inside a regular launcher (only system apps can host other apps' windows), so "Where to?" opens the app full screen.
 - Changing the map style between day and night reloads it from the network (about 1–3 s).
@@ -239,7 +231,7 @@ access" on the home screen, or run
 Issues and pull requests are welcome. Please:
 - Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat(map): …`, `fix(audio): …`).
 - Keep pure logic out of composables and cover it with a JVM test.
-- Run `./gradlew testSimDebugUnitTest assembleDeviceDebug` before opening a PR.
+- Run `./gradlew testDebugUnitTest assembleRelease` before opening a PR.
 - Attach before/after screenshots for UI changes, in both day and night mode.
 
 ## Acknowledgements

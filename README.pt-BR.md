@@ -101,15 +101,13 @@ abrem direto no navegador.
 │  designsystem/  tokens, Inter, Material Symbols, squircle, animação com mola      │
 │  data/*  uma interface por fonte: mídia, apps, áudio, veículo, status, local      │
 └───────────────┬───────────────────────────────────────────────┬──────────────────┘
-        flavor `sim`                                     flavor `device`
-   dados simulados + painel de testes            APIs reais do Android (MediaSession,
-   (roda em qualquer emulador)                    LauncherApps, AudioManager,
-                                                  LocationManager, ConnectivityManager)
+        APIs reais do Android (MediaSession, LauncherApps, AudioManager,
+        LocationManager, ConnectivityManager) + ELM327 por Bluetooth (OBD-II)
 ```
 
-- **Duas variantes de build.** O `sim` roda em qualquer lugar com mídia, ar, farol e comandos de volante simulados, mais um painel de testes (toque longo no relógio). O `device` usa as APIs reais do Android. Cada variante tem o seu `AppContainer`, o único lugar onde as interfaces são ligadas às implementações (injeção manual, sem Hilt).
-- **O hardware fica atrás de interfaces.** Ar, farol e temperatura externa vêm da caixa CAN do carro, então no `device` o `VehicleRepository` devolve `null` até a integração com a central existir (veja o roteiro). A interface esconde o que o carro não informa.
-- **A lógica pura fica fora da interface** e é coberta por testes JVM: escala de volume, regras do painel do ar, resolução de dia/noite, formatação, seções de apps, tempos dos avisos e posição da música.
+- **Sem dados simulados.** Todo valor na tela vem do carro (adaptador OBD-II) ou do sistema Android. O `AppContainer` é o único lugar onde as interfaces são ligadas às implementações (injeção manual, sem Hilt).
+- **O hardware fica atrás de interfaces.** Velocidade, rotação, temperaturas, combustível, bateria, códigos de falha e temperatura externa vêm do adaptador OBD-II. Ar e farol não existem no OBD-II: vêm da caixa CAN do carro, então o `VehicleRepository` devolve `null` para eles até a integração com a central existir (veja o roteiro). A interface esconde o que o carro não informa.
+- **A lógica pura fica fora da interface** e é coberta por testes JVM: escala de volume, resolução de dia/noite, formatação, seções de apps, tempos dos avisos e posição da música.
 
 ## Stack
 
@@ -135,10 +133,7 @@ app/src/
 │   ├── navigation/              telas, view model do app, casca, transições
 │   ├── feature/                 home, map, nowplaying, climate, apps, hud
 │   └── data/                    contratos e regras puras por fonte de dados
-├── sim/                         repositórios simulados + painel de testes
-├── device/                      implementações reais do Android
-├── test/                        testes JVM
-└── testSim/                     testes das fontes simuladas
+└── test/                        testes JVM
 docs/
 ├── specs/                       spec de design
 ├── plans/                       plano de implementação
@@ -160,9 +155,8 @@ git clone https://github.com/Peixotim/nordico-launcher.git
 cd nordico-launcher
 echo "sdk.dir=/caminho/para/Android/Sdk" > local.properties
 
-./gradlew testSimDebugUnitTest     # testes JVM
-./gradlew assembleSimDebug         # build do emulador (dados simulados)
-./gradlew assembleDeviceDebug      # build da central (APIs reais)
+./gradlew testDebugUnitTest        # testes JVM
+./gradlew assembleRelease          # APK final: app/build/outputs/apk/release/app-release.apk
 ```
 
 ### Emulador que imita a central
@@ -186,19 +180,17 @@ showDeviceFrame=no
 
 ```bash
 emulator -avd Central9 &
-./gradlew installSimDebug
-adb shell cmd role add-role-holder android.app.role.HOME app.nordico.launcher.sim
+./gradlew installDebug
+adb shell cmd role add-role-holder android.app.role.HOME app.nordico.launcher
 adb shell input keyevent KEYCODE_HOME
 ```
 
-No build `sim`, **segure o relógio** para abrir o painel de simulação: botões do ar
-(temperatura, ventilação, AUTO, A/C, direção, recirculação, desembaçadores), volume do volante,
-farol ligado/desligado/sem sinal e "sem dados do ar".
+O emulador não tem carro: a tela Veículo mostra "Conecte o adaptador OBD" e a interface do ar fica escondida.
 
-### Numa central de verdade (build `device`)
+### Numa central de verdade
 
 ```bash
-./gradlew installDeviceDebug
+./gradlew installRelease
 adb shell cmd role add-role-holder android.app.role.HOME app.nordico.launcher
 ```
 
@@ -209,7 +201,7 @@ toque em "Permitir acesso à música" na tela inicial ou rode
 ## Roteiro
 
 **Fase 1: concluída**
-- Design system, tela inicial, tocando agora, clima, gaveta de apps, avisos, fontes de dados simuladas e reais.
+- Design system, tela inicial, tocando agora, clima, gaveta de apps, avisos, fontes de dados reais.
 
 **Fase 1.5: sem precisar da central**
 - [ ] Avisos desenhados por cima de outros apps (volume e ar em cima do Waze ou do Spotify).
@@ -217,7 +209,7 @@ toque em "Permitir acesso à música" na tela inicial ou rode
 - [ ] Acabamento: mapa noturno mais claro, indicador 4G/5G independente do Wi-Fi, busca da gaveta zerada ao sair.
 
 **Fase 2: telas de sistema**
-- [x] Telas de veículo (OBD-II) e rádio, com dados simulados e um emulador ELM327 para testes (`-PobdTcp=10.0.2.2:35000`).
+- [x] Tela de veículo (OBD-II) com dados ao vivo, códigos de falha e limpeza; tela de rádio (precisa da central).
 - [ ] Rádio por cima do rádio do fabricante (precisa da central).
 - [ ] Ajustes do Nórdico (cor de destaque, app de navegação, app de música).
 
@@ -229,7 +221,7 @@ toque em "Permitir acesso à música" na tela inicial ou rode
 
 ## Limitações conhecidas
 
-- Os dados do ar são simulados até existir a integração com a central. O build `device` esconde a interface do ar.
+- Os dados do ar e do farol dependem da integração com a central (não existem no OBD-II). Até lá a interface do ar fica escondida.
 - A câmera de ré fica com o firmware do fabricante de propósito: é item de segurança e precisa aparecer na hora, até durante o boot.
 - Um launcher comum não consegue embutir apps de navegação de terceiros (só apps de sistema podem hospedar janelas de outros apps), então o "Para onde?" abre o app em tela cheia.
 - Trocar o estilo do mapa entre dia e noite recarrega pela internet (cerca de 1 a 3 s).
@@ -239,7 +231,7 @@ toque em "Permitir acesso à música" na tela inicial ou rode
 Issues e pull requests são bem-vindos. Por favor:
 - Use [Conventional Commits](https://www.conventionalcommits.org/) (`feat(map): …`, `fix(audio): …`).
 - Mantenha a lógica pura fora dos composables e cubra com um teste JVM.
-- Rode `./gradlew testSimDebugUnitTest assembleDeviceDebug` antes de abrir o PR.
+- Rode `./gradlew testDebugUnitTest assembleRelease` antes de abrir o PR.
 - Para mudanças de interface, anexe prints de antes e depois, nos modos dia e noite.
 
 ## Agradecimentos
