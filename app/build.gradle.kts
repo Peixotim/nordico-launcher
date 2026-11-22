@@ -12,25 +12,19 @@ android {
         minSdk = 34
         targetSdk = 34
         versionCode = 1
-        versionName = "0.1"
+        versionName = "1.0"
     }
 
-    flavorDimensions += "target"
-    productFlavors {
-        create("sim") {
-            dimension = "target"
-            applicationIdSuffix = ".sim"
-            // -PobdTcp=10.0.2.2:35000 liga o protocolo OBD real a um simulador de ELM327 no PC.
-            buildConfigField("String", "OBD_TCP", "\"${project.findProperty("obdTcp") ?: ""}\"")
-        }
-        create("device") {
-            dimension = "target"
+    buildTypes {
+        release {
+            // ponytail: assinado com a chave debug para instalar na central via adb sem keystore próprio;
+            // trocar por uma signingConfig própria se o APK for distribuído.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
     buildFeatures {
         compose = true
-        buildConfig = true
     }
 
     compileOptions {

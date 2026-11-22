@@ -66,7 +66,6 @@ fun AppShell(vm: AppViewModel, c: AppContainer) {
     val screen by vm.screen.collectAsStateWithLifecycle()
     val off by vm.screenOff.collectAsStateWithLifecycle()
 
-    var devOpen by remember { mutableStateOf(false) }
     val mapHolder = rememberMapHolder()
 
     BackHandler(enabled = screen != Screen.Home) { vm.go(Screen.Home) }
@@ -83,21 +82,20 @@ fun AppShell(vm: AppViewModel, c: AppContainer) {
                         LocalSharedScope provides this@SharedTransitionLayout,
                         LocalAnimatedScope provides this,
                     ) {
-                        ScreenContent(s, vm, c, mapHolder) { if (c.devPanel != null) devOpen = true }
+                        ScreenContent(s, vm, c, mapHolder)
                     }
                 }
             }
             Huds(vm, c)
-            if (devOpen) c.devPanel?.invoke { devOpen = false }
             ScreenOffOverlay(off) { vm.setScreenOff(false) }
         }
     }
 }
 
 @Composable
-private fun ScreenContent(s: Screen, vm: AppViewModel, c: AppContainer, mapHolder: MapHolder, onClockLongPress: () -> Unit) {
+private fun ScreenContent(s: Screen, vm: AppViewModel, c: AppContainer, mapHolder: MapHolder) {
     when (s) {
-        Screen.Home -> HomeScreen(vm, c, onClockLongPress) {
+        Screen.Home -> HomeScreen(vm, c) {
             val context = LocalContext.current
             val dark by vm.dark.collectAsStateWithLifecycle()
             val location by c.location.location.collectAsStateWithLifecycle()

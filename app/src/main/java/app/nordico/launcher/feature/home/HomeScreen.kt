@@ -52,7 +52,7 @@ import kotlin.math.roundToInt
 
 /** Início: mapa à esquerda; coluna direita com cabeçalho, música, atalhos e painel A (protótipo 03). */
 @Composable
-fun HomeScreen(vm: AppViewModel, c: AppContainer, onClockLongPress: () -> Unit, mapSlot: @Composable () -> Unit) {
+fun HomeScreen(vm: AppViewModel, c: AppContainer, mapSlot: @Composable () -> Unit) {
     val np by c.media.nowPlaying.collectAsStateWithLifecycle()
     val access by c.media.hasAccess.collectAsStateWithLifecycle()
     val volume by c.volume.state.collectAsStateWithLifecycle()
@@ -67,7 +67,7 @@ fun HomeScreen(vm: AppViewModel, c: AppContainer, onClockLongPress: () -> Unit, 
             Modifier.offset(798.dp, 20.dp).width(460.dp).height(684.dp),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
-            Header(outside, status, climate, onClockLongPress) { vm.go(Screen.Climate) }
+            Header(outside, status, climate) { vm.go(Screen.Climate) }
             MiniPlayerCard(miniCardState(access, np), c) { vm.go(Screen.NowPlaying) }
             Tiles(onRadio = { vm.go(Screen.Radio) }, onVehicle = { vm.go(Screen.Vehicle) }) { vm.go(Screen.Apps) }
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -83,7 +83,6 @@ private fun Header(
     outside: Double?,
     status: StatusState,
     climate: ClimateState?,
-    onClockLongPress: () -> Unit,
     onOpenClimate: () -> Unit,
 ) {
     val c = LocalNordic.current
@@ -94,7 +93,7 @@ private fun Header(
                 formatClock(now.toLocalTime()),
                 nordicText(88, FontWeight.Light, display = true, trackingEm = -0.045f, tnum = true)
                     .copy(lineHeight = 80.sp, lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Center, LineHeightStyle.Trim.Both)),
-                modifier = Modifier.offset(x = (-4).dp).pointerInput(Unit) { detectTapGestures(onLongPress = { onClockLongPress() }) },
+                modifier = Modifier.offset(x = (-4).dp),
             )
             val temp = outside?.let { " · ${it.roundToInt()} °C" } ?: ""
             NText(formatDate(now.toLocalDate()) + temp, nordicText(17), color = c.label2, modifier = Modifier.padding(top = 10.dp))

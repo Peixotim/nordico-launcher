@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.compose.runtime.Composable
 import app.nordico.launcher.data.apps.AppsRepository
 import app.nordico.launcher.data.audio.VolumeRepository
 import app.nordico.launcher.data.location.LocationRepository
@@ -32,11 +31,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
-/** Flavor `device`: APIs reais do Android. */
+/** Liga cada interface à sua implementação real: APIs do Android e o adaptador OBD-II. */
 class AppContainer(context: Context) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
     private val deviceMedia = DeviceMediaRepository(context, scope)
@@ -49,13 +50,6 @@ class AppContainer(context: Context) {
     val status: StatusRepository = DeviceStatusRepository(context)
     val location: LocationRepository = deviceLocation
     val prefs = PrefsRepository(context)
-
-    /** Fase 3: caixa CAN. Até lá a central não informa nada do carro. */
-    val vehicle: VehicleRepository = object : VehicleRepository {
-        override val climate: StateFlow<ClimateState?> = MutableStateFlow(null)
-        override val headlightsOn: StateFlow<Boolean?> = MutableStateFlow(null)
-        override val outsideTemp: StateFlow<Double?> = MutableStateFlow(null)
-    }
 
     private val bluetooth: BluetoothAdapter? = context.getSystemService(BluetoothManager::class.java)?.adapter
     private val appContext = context
@@ -76,8 +70,10 @@ class AppContainer(context: Context) {
             .getOrDefault(emptyList())
     }
 
+    private val obdScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
     val obd: ObdRepository = ElmObdRepository(
-        scope = CoroutineScope(SupervisorJob() + Dispatchers.IO),
+        scope = obdScope,
         visible = AppVisibility.visible,
         adapters = ::bondedAdapters,
         selected = prefs.prefs.map { it.obdAdapter }.distinctUntilChanged(),
@@ -85,9 +81,18 @@ class AppContainer(context: Context) {
         transportFor = { address -> BluetoothSppTransport(bluetooth, address) },
     )
 
-    val radio: RadioRepository = DeviceRadioRepository()
+    /**
+     * Só a temperatura externa vem do OBD-II (PID 0x46). Ar-condicionado e faróis não existem no OBD-II:
+     * dependem da caixa CAN da central (fase 3) e ficam `null`, e a interface esconde o que o carro não informa.
+     */
+    val vehicle: VehicleRepository = object : VehicleRepository {
+        override val climate: StateFlow<ClimateState?> = MutableStateFlow(null)
+        override val headlightsOn: StateFlow<Boolean?> = MutableStateFlow(null)
+        override val outsideTemp: StateFlow<Double?> =
+            obd.telemetry.map { it.ambientC?.toDouble() }.stateIn(obdScope, SharingStarted.Eagerly, null)
+    }
 
-    val devPanel: (@Composable (onClose: () -> Unit) -> Unit)? = null
+    val radio: RadioRepository = DeviceRadioRepository()
 
     /** Chamado no onResume da MainActivity: o usuário pode ter acabado de conceder acesso à música. */
     fun onResume() = deviceMedia.checkAccess()

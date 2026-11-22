@@ -13,6 +13,7 @@ data class VehicleTelemetry(
     val throttlePct: Int? = null,
     val fuelPct: Int? = null,
     val batteryV: Double? = null,
+    val ambientC: Int? = null,
     /** Luz do motor acesa e quantidade de falhas armazenadas (PID 01). */
     val milOn: Boolean? = null,
     val faultCount: Int? = null,
@@ -49,22 +50,4 @@ interface ObdRepository {
 
     /** Esconde o resultado de [clearFaults]. */
     fun dismissClearResult()
-}
-
-/** Sem adaptador: o estado do flavor `device` até existir um adaptador selecionado. */
-class NoAdapterObdRepository : ObdRepository {
-    override val state: StateFlow<ObdState> = MutableStateFlow(ObdState.NoAdapter)
-    override val telemetry: StateFlow<VehicleTelemetry> = MutableStateFlow(VehicleTelemetry())
-    override val faults: StateFlow<List<Dtc>?> = MutableStateFlow(null)
-    private val _clear = MutableStateFlow<ClearState>(ClearState.Idle)
-    override val clearState: StateFlow<ClearState> = _clear
-    override fun bondedAdapters(): List<ObdAdapter> = emptyList()
-    override fun select(address: String) = Unit
-    override fun readFaults() = Unit
-    override fun clearFaults() {
-        _clear.value = ClearState.Done(ClearOutcome.Blocked(ClearBlock.NotConnected))
-    }
-    override fun dismissClearResult() {
-        _clear.value = ClearState.Idle
-    }
 }

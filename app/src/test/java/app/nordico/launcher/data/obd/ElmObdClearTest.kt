@@ -200,10 +200,4 @@ class ElmObdClearTest {
         r.repo.dismissClearResult()
         assertEquals(ClearState.Idle, r.repo.clearState.value)
     }
-
-    @Test fun without_an_adapter_clearing_is_blocked() = runTest {
-        val repo = NoAdapterObdRepository()
-        repo.clearFaults()
-        assertEquals(ClearState.Done(ClearOutcome.Blocked(ClearBlock.NotConnected)), repo.clearState.value)
-    }
 }
