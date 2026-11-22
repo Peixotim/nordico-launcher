@@ -15,6 +15,7 @@ class ObdParserTest {
         assertEquals(0.0, ObdPid.Throttle.decode(listOf(0x00)), 0.0)
         assertEquals(100.0, ObdPid.Fuel.decode(listOf(0xFF)), 0.0)
         assertEquals(14.5, ObdPid.Voltage.decode(listOf(0x38, 0xA4)), 0.0)
+        assertEquals(-5.0, ObdPid.Ambient.decode(listOf(0x23)), 0.0)
         assertEquals(130.0, ObdPid.Status.decode(listOf(0x82, 0x07, 0xE5, 0x00)), 0.0) // luz acesa + 2 falhas
     }
 

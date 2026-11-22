@@ -11,6 +11,9 @@ enum class ObdPid(val id: Int, val bytes: Int) {
     Fuel(0x2F, 1),
     Voltage(0x42, 2),
 
+    /** Temperatura do ar externo: a "externa" do Início e do Clima, direto do carro. */
+    Ambient(0x46, 1),
+
     /** PID 01: bit 7 do primeiro byte = luz do motor acesa; bits 0-6 = quantidade de falhas. */
     Status(0x01, 4),
 }
@@ -22,7 +25,7 @@ fun ObdPid.decode(data: List<Int>): Double {
     return when (this) {
         ObdPid.Speed -> a.toDouble()
         ObdPid.Rpm -> (a * 256 + b) / 4.0
-        ObdPid.Coolant, ObdPid.Intake -> a - 40.0
+        ObdPid.Coolant, ObdPid.Intake, ObdPid.Ambient -> a - 40.0
         ObdPid.Load, ObdPid.Throttle, ObdPid.Fuel -> a * 100.0 / 255.0
         ObdPid.Voltage -> (a * 256 + b) / 1000.0
         ObdPid.Status -> a.toDouble()
